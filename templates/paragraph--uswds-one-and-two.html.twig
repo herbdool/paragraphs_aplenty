@@ -1,0 +1,21 @@
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    'usa-grid-full',
+    'usa-section',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <div class="usa-width-one-third">
+        {{ content.field_uswds_text_left }}
+      </div>
+      <div class="usa-width-two-thirds">
+        {{ content.field_uswds_text_right }}
+      </div>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

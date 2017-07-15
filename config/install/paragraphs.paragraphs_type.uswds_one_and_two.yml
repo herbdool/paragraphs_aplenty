@@ -1,0 +1,7 @@
+uuid: 81c5fca9-7211-44cb-b712-59808dac3a9f
+langcode: en
+status: true
+dependencies: {  }
+id: uswds_one_and_two
+label: 'One-third and two-thirds'
+behavior_plugins: {  }

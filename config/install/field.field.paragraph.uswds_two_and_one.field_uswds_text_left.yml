@@ -1,0 +1,21 @@
+uuid: 70c24c2d-d219-4fc3-8cb7-e3b6c87be857
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_uswds_text_left
+    - paragraphs.paragraphs_type.uswds_two_and_one
+  module:
+    - text
+id: paragraph.uswds_two_and_one.field_uswds_text_left
+field_name: field_uswds_text_left
+entity_type: paragraph
+bundle: uswds_two_and_one
+label: 'Left text'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

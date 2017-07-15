@@ -1,0 +1,23 @@
+uuid: ea57ef47-c26b-4692-b2bd-9294aff1fa67
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_uswds_link
+    - paragraphs.paragraphs_type.uswds_hero_callout
+  module:
+    - link
+id: paragraph.uswds_hero_callout.field_uswds_link
+field_name: field_uswds_link
+entity_type: paragraph
+bundle: uswds_hero_callout
+label: Link
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

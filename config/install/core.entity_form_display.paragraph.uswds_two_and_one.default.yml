@@ -1,0 +1,35 @@
+uuid: 0f0213c2-9ddb-454c-aebf-37756a4f4184
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.uswds_two_and_one.field_uswds_text_left
+    - field.field.paragraph.uswds_two_and_one.field_uswds_text_right
+    - paragraphs.paragraphs_type.uswds_two_and_one
+  module:
+    - text
+id: paragraph.uswds_two_and_one.default
+targetEntityType: paragraph
+bundle: uswds_two_and_one
+mode: default
+content:
+  field_uswds_text_left:
+    weight: 0
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_uswds_text_right:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

@@ -1,0 +1,7 @@
+uuid: eeedd3e1-8aa3-4bc0-9c9a-5eb4d736016f
+langcode: en
+status: true
+dependencies: {  }
+id: uswds_hero
+label: Hero
+behavior_plugins: {  }

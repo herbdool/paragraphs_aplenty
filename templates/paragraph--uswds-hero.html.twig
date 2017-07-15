@@ -1,0 +1,17 @@
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    'usa-hero',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <div class="usa-grid">
+        {{ content.field_uswds_hero_callout.0 }}
+      </div>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

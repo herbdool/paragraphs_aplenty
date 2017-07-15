@@ -1,0 +1,19 @@
+uuid: 071f2e28-feea-4cdf-8766-58e66d86dc21
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_uswds_text_right
+field_name: field_uswds_text_right
+entity_type: paragraph
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

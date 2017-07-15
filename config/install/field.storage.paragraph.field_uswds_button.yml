@@ -1,0 +1,19 @@
+uuid: 583d847e-e615-4b83-a5d2-dd8a58a4c6da
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+id: paragraph.field_uswds_button
+field_name: field_uswds_button
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

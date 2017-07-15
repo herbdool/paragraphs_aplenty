@@ -1,0 +1,26 @@
+uuid: af904fe7-1a51-424a-bd3b-5ad31b341daf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.uswds_hero.field_uswds_hero_callout
+    - field.field.paragraph.uswds_hero.field_uswds_image
+    - paragraphs.paragraphs_type.uswds_hero
+  module:
+    - entity_reference_revisions
+id: paragraph.uswds_hero.default
+targetEntityType: paragraph
+bundle: uswds_hero
+mode: default
+content:
+  field_uswds_hero_callout:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_uswds_image: true

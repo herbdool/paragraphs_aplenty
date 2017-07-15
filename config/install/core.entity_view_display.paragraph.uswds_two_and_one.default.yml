@@ -1,0 +1,30 @@
+uuid: 996835fb-0054-4391-aaf3-dec88acc1b38
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.uswds_two_and_one.field_uswds_text_left
+    - field.field.paragraph.uswds_two_and_one.field_uswds_text_right
+    - paragraphs.paragraphs_type.uswds_two_and_one
+  module:
+    - text
+id: paragraph.uswds_two_and_one.default
+targetEntityType: paragraph
+bundle: uswds_two_and_one
+mode: default
+content:
+  field_uswds_text_left:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_uswds_text_right:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }

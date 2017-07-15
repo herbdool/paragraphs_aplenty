@@ -1,0 +1,41 @@
+uuid: ea2ff70e-50fb-48da-acc0-d6604240b00f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.uswds_hero.field_uswds_hero_callout
+    - field.field.paragraph.uswds_hero.field_uswds_image
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.uswds_hero
+  module:
+    - image
+    - paragraphs
+id: paragraph.uswds_hero.default
+targetEntityType: paragraph
+bundle: uswds_hero
+mode: default
+content:
+  field_uswds_hero_callout:
+    type: entity_reference_paragraphs
+    weight: 0
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_uswds_image:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true
