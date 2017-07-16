@@ -37,6 +37,16 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
 function uswds_paragraphs_preprocess_paragraph(&$variables) {
   $paragraph_type = $variables['paragraph']->bundle();
 
+  // Always set the USWDS-specific "uswds_grid_class" variable.
+  if (!isset($variables['uswds_grid_class'])) {
+    $variables['uswds_grid_class'] = FALSE;
+  }
+
+  // The "uswds_hero" Paragraph type should always be on the grid.
+  if ('uswds_hero' == $paragraph_type) {
+    $variables['uswds_grid_class'] = 'usa-grid';
+  }
+
   // We need to set the media_block class here, because we side-step the field
   // template in paragraph--uswds-media-block.html.twig.
   if ('uswds_media_block' == $paragraph_type) {

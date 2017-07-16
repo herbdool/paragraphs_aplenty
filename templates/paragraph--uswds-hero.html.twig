@@ -9,9 +9,17 @@
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <div class="usa-grid">
-        {{ content.field_uswds_hero_callout.0 }}
+
+      {% if uswds_grid_class %}
+      <div class="{{ uswds_grid_class }}">
+      {% endif %}
+
+      {{ content.field_uswds_hero_callout.0 }}
+
+      {% if uswds_grid_class %}
       </div>
+      {% endif %}
+
     {% endblock %}
   </div>
 {% endblock paragraph %}
