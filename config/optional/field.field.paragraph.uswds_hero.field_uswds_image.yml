@@ -7,13 +7,15 @@ dependencies:
     - paragraphs.paragraphs_type.uswds_hero
   module:
     - image
+_core:
+  default_config_hash: yGiVP7YtlBMhHOY4Lzsaoia_UGpr6MOgEwofntaatnk
 id: paragraph.uswds_hero.field_uswds_image
 field_name: field_uswds_image
 entity_type: paragraph
 bundle: uswds_hero
 label: 'Hero Background Image'
-description: ''
-required: true
+description: 'If an image is provided, it will be used as the background image for this hero.'
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

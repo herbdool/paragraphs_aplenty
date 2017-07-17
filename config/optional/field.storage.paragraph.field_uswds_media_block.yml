@@ -5,6 +5,8 @@ dependencies:
   module:
     - entity_reference_revisions
     - paragraphs
+_core:
+  default_config_hash: EQ7E7PsBXikLUTLM1beFQVfEdkjKt3i-S8LkSp9hLRI
 id: paragraph.field_uswds_media_block
 field_name: field_uswds_media_block
 entity_type: paragraph

@@ -1,20 +1,20 @@
-uuid: 62389748-0045-4d7c-a72a-184babe25200
+uuid: e2568fc3-5803-4511-adbe-2973f470efd6
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_uswds_button
-    - paragraphs.paragraphs_type.uswds_hero_callout
+    - paragraphs.paragraphs_type.uswds_hero
   module:
     - link
-id: paragraph.uswds_hero_callout.field_uswds_button
+id: paragraph.uswds_hero.field_uswds_button
 field_name: field_uswds_button
 entity_type: paragraph
-bundle: uswds_hero_callout
+bundle: uswds_hero
 label: Button
-description: ''
+description: 'If a button is provided, it will appear in this hero''s callout.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

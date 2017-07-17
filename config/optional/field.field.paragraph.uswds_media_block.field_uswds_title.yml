@@ -5,6 +5,8 @@ dependencies:
   config:
     - field.storage.paragraph.field_uswds_title
     - paragraphs.paragraphs_type.uswds_media_block
+_core:
+  default_config_hash: M2n9Yt-nD2x5a2JNIoFgYTiPOIOJxmhErPt3sTUR_Ac
 id: paragraph.uswds_media_block.field_uswds_title
 field_name: field_uswds_title
 entity_type: paragraph

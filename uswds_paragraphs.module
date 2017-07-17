@@ -13,9 +13,6 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
     'paragraph__uswds_hero' => [
       'base hook' => 'paragraph',
     ],
-    'paragraph__uswds_hero_callout' => [
-      'base hook' => 'paragraph',
-    ],
     'paragraph__uswds_graphic_list' => [
       'base hook' => 'paragraph',
     ],
@@ -105,7 +102,7 @@ function uswds_paragraphs_preprocess_field(&$variables) {
     // Choose appropriate classes for paragraph type and field.
     $classes = [
       // Paragraph type.
-      'uswds_hero_callout' => [
+      'uswds_hero' => [
         // Field name.
         'field_uswds_button' => [
           'usa-button',

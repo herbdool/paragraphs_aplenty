@@ -2,6 +2,8 @@ uuid: 211142ff-7362-4595-8a99-77df9eadcc34
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: 39lAnWAUuwu1Ekdyp5hf22cw6GwCJXFOk9RS90vuCEI
 id: uswds_graphic_list
 label: 'Graphic list'
 behavior_plugins: {  }

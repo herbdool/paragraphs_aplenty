@@ -1,7 +1,0 @@
-uuid: 2d3026c6-a011-4054-be33-8dd4a759435b
-langcode: en
-status: true
-dependencies: {  }
-id: uswds_hero_callout
-label: 'Hero Callout'
-behavior_plugins: {  }

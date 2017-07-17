@@ -8,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.uswds_media_block
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: I9bKw5Myq-ln5oXmWlPdZ4kWVaecOktexzSbFxZNvi8
 id: paragraph.uswds_graphic_list.field_uswds_media_block
 field_name: field_uswds_media_block
 entity_type: paragraph

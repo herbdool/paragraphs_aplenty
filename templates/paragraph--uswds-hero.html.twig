@@ -14,7 +14,13 @@
       <div class="{{ uswds_grid_class }}">
       {% endif %}
 
-      {{ content.field_uswds_hero_callout.0 }}
+      {% if paragraph.field_uswds_title.value %}
+      <div class="usa-hero-callout usa-section-dark">
+        <h2>{{ paragraph.field_uswds_title.value }}</h2>
+        {{ content.field_uswds_link }}
+        {{ content.field_uswds_button }}
+      </div>
+      {% endif %}
 
       {% if uswds_grid_class %}
       </div>

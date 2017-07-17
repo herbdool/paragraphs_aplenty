@@ -8,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.uswds_two_and_one
   module:
     - text
+_core:
+  default_config_hash: jXWCbFgB4-AQ-Dx6rS6YsFZMRi7vTE5wO-u8umxGc8g
 id: paragraph.uswds_two_and_one.default
 targetEntityType: paragraph
 bundle: uswds_two_and_one

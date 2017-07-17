@@ -7,6 +7,8 @@ dependencies:
     - paragraphs.paragraphs_type.uswds_media_block
   module:
     - image
+_core:
+  default_config_hash: DS0kWHjnlC61RaXuVnIBXWZsmoZZU5TA9a2sUf8dsvQ
 id: paragraph.uswds_media_block.field_uswds_image
 field_name: field_uswds_image
 entity_type: paragraph

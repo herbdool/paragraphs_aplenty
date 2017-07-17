@@ -7,6 +7,8 @@ dependencies:
     - paragraphs.paragraphs_type.uswds_graphic_list
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: myT0Fs83OJdz7AjCbDlVYOGLndp68VjNvGWilfYdfhc
 id: paragraph.uswds_graphic_list.default
 targetEntityType: paragraph
 bundle: uswds_graphic_list

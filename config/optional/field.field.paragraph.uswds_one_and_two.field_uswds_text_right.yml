@@ -7,6 +7,8 @@ dependencies:
     - paragraphs.paragraphs_type.uswds_one_and_two
   module:
     - text
+_core:
+  default_config_hash: agrRv4PHRAofx1JjILnmLS68doBt8bOHofpXcPDAeKM
 id: paragraph.uswds_one_and_two.field_uswds_text_right
 field_name: field_uswds_text_right
 entity_type: paragraph

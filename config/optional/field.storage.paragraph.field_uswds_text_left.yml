@@ -5,6 +5,8 @@ dependencies:
   module:
     - paragraphs
     - text
+_core:
+  default_config_hash: cWXDKoNEsSUYAQAOTNB6mxCIeksBetQi5f49ZTUZM1o
 id: paragraph.field_uswds_text_left
 field_name: field_uswds_text_left
 entity_type: paragraph

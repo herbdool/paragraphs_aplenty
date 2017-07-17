@@ -5,6 +5,8 @@ dependencies:
   module:
     - link
     - paragraphs
+_core:
+  default_config_hash: ppmKNSJnpV1Z4Y8fDWC2xq2cgQGTGUdNj0F_ox0HMNE
 id: paragraph.field_uswds_link
 field_name: field_uswds_link
 entity_type: paragraph

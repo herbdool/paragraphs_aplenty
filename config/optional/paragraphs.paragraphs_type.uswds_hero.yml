@@ -2,6 +2,8 @@ uuid: eeedd3e1-8aa3-4bc0-9c9a-5eb4d736016f
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: vQr70M6xLwXiR7XO14r2T9v7OSPwYjDbJ0lEgxGf-Q4
 id: uswds_hero
 label: Hero
 behavior_plugins: {  }

@@ -11,6 +11,8 @@ dependencies:
   module:
     - image
     - text
+_core:
+  default_config_hash: lVMRhHDbq84y5odihzgA4wo7ThSdgX2uCYppLJD388E
 id: paragraph.uswds_media_block.default
 targetEntityType: paragraph
 bundle: uswds_media_block
