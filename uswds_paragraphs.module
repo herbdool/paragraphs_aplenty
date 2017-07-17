@@ -45,6 +45,18 @@ function uswds_paragraphs_preprocess_paragraph(&$variables) {
   // The "uswds_hero" Paragraph type should always be on the grid.
   if ('uswds_hero' == $paragraph_type) {
     $variables['uswds_grid_class'] = 'usa-grid';
+    // We also need to set the inline CSS for the image.
+    if (!$variables['paragraph']->field_uswds_image->isEmpty()) {
+      $img = $variables['paragraph']->field_uswds_image->entity->url();
+      $css = ".paragraph--type--uswds-hero.usa-hero { background-image:url($img); }";
+      $variables['#attached']['html_head'][] = [
+        [
+          '#tag' => 'style',
+          '#value' => $css,
+        ],
+        'uswds-hero'
+      ];
+    }
   }
 
   // We need to set the media_block class here, because we side-step the field
