@@ -1,8 +1,0 @@
-uuid: fb527c20-e65b-4829-a8ab-d2e02aa911e6
-langcode: en
-status: true
-dependencies: {  }
-id: uswds_block_graphic_list
-label: 'Graphic list block'
-revision: 1
-description: 'A block for displaying a U.S. Web Design Standards "graphic list" component.'

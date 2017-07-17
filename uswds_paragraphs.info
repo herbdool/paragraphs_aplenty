@@ -1,0 +1,9 @@
+name = USWDS Paragraphs
+description = Several Paragraph types for use with the U.S. Web Design Standards.
+core = 7.x
+package = Paragraphs
+dependencies[] = bean
+dependencies[] = image
+dependencies[] = link
+dependencies[] = paragraphs
+dependencies[] = text

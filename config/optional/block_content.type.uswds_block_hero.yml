@@ -1,8 +1,0 @@
-uuid: bebbd69d-d76c-4a02-ba9a-91a90aef2553
-langcode: en
-status: true
-dependencies: {  }
-id: uswds_block_hero
-label: 'Hero block'
-revision: 1
-description: 'A block for displaying a U.S. Web Design Standards "hero" component.'

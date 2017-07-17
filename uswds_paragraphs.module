@@ -9,30 +9,31 @@
  * Implements hook_theme().
  */
 function uswds_paragraphs_theme($existing, $type, $theme, $path) {
-  return [
-    'paragraph__uswds_hero' => [
+  return array(
+    'paragraph__uswds_hero' => array(
       'base hook' => 'paragraph',
-    ],
-    'paragraph__uswds_graphic_list' => [
+    ),
+    'paragraph__uswds_graphic_list' => array(
       'base hook' => 'paragraph',
-    ],
-    'paragraph__uswds_media_block' => [
+    ),
+    'paragraph__uswds_media_block' => array(
       'base hook' => 'paragraph',
-    ],
-    'paragraph__uswds_one_and_two' => [
+    ),
+    'paragraph__uswds_one_and_two' => array(
       'base hook' => 'paragraph',
-    ],
-    'paragraph__uswds_two_and_one' => [
+    ),
+    'paragraph__uswds_two_and_one' => array(
       'base hook' => 'paragraph',
-    ],
-  ];
+    ),
+  );
 }
 
 /**
  * Implements hook_preprocess_paragraph().
  */
 function uswds_paragraphs_preprocess_paragraph(&$variables) {
-  $paragraph_type = $variables['paragraph']->bundle();
+  // TODO
+  //$paragraph_type = $variables['paragraph']->bundle();
 
   // Always set the USWDS-specific "uswds_grid_class" variable.
   if (!isset($variables['uswds_grid_class'])) {
@@ -67,7 +68,7 @@ function uswds_paragraphs_preprocess_paragraph(&$variables) {
     // Here we split the media blocks into pairs.
     $pairs = [];
     $pair = [];
-    $media_block_keys = \Drupal\Core\Render\Element::children($variables['content']['field_uswds_media_block'], TRUE);
+    $media_block_keys = element_children($variables['content']['field_uswds_media_block']);
     foreach ($media_block_keys as $key) {
       if (count($pair) < 2) {
         $pair[] = $variables['content']['field_uswds_media_block'][$key];
@@ -117,7 +118,8 @@ function uswds_paragraphs_preprocess_field(&$variables) {
 
     if (!empty($classes[$paragraph_type][$field_name])) {
       $class = ['class' => $classes[$paragraph_type][$field_name]];
-      $variables['items'][0]['content']['#url']->setOption('attributes', $class);
+      // TODO
+      //$variables['items'][0]['content']['#url']->setOption('attributes', $class);
     }
   }
 }

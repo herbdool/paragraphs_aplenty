@@ -1,9 +1,0 @@
-uuid: ce4d730b-b214-4500-bbca-311729856093
-langcode: en
-status: true
-dependencies: {  }
-_core:
-  default_config_hash: IomPvqcpmdmMzwj9BLIsezDvbvxpTzgnMHfs_QHFPJ0
-id: uswds_two_and_one
-label: 'Two-thirds and one-third'
-behavior_plugins: {  }
