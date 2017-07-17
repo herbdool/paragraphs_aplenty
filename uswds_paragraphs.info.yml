@@ -4,7 +4,7 @@ description: Several Paragraph types for use with the U.S. Web Design Standards.
 core: 8.x
 package: Paragraphs
 dependencies:
-  - paragraphs
-  - image
-  - link
-  - text
+  - drupal:paragraphs
+  - drupal:image
+  - drupal:link
+  - drupal:text
