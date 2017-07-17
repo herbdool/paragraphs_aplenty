@@ -1,0 +1,42 @@
+uuid: e2f1e4a6-e16a-4eff-903e-4b555132eea2
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.uswds_block_graphic_list
+    - field.storage.block_content.field_uswds_paragraph
+    - paragraphs.paragraphs_type.uswds_graphic_list
+  module:
+    - entity_reference_revisions
+id: block_content.uswds_block_graphic_list.field_uswds_paragraph
+field_name: field_uswds_paragraph
+entity_type: block_content
+bundle: uswds_block_graphic_list
+label: 'Graphic list'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      uswds_graphic_list: uswds_graphic_list
+    target_bundles_drag_drop:
+      uswds_graphic_list:
+        enabled: true
+        weight: 6
+      uswds_hero:
+        weight: 7
+        enabled: false
+      uswds_media_block:
+        weight: 8
+        enabled: false
+      uswds_one_and_two:
+        weight: 9
+        enabled: false
+      uswds_two_and_one:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions

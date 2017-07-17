@@ -1,0 +1,28 @@
+uuid: ca150dd7-05ea-4369-b62f-a3697f1426f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.uswds_block_hero
+    - field.field.block_content.uswds_block_hero.field_uswds_paragraph
+  module:
+    - paragraphs
+id: block_content.uswds_block_hero.default
+targetEntityType: block_content
+bundle: uswds_block_hero
+mode: default
+content:
+  field_uswds_paragraph:
+    weight: 0
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    type: entity_reference_paragraphs
+    region: content
+hidden:
+  info: true

@@ -1,0 +1,28 @@
+uuid: f21095fc-a9c6-4798-bb54-e33281a60a60
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.uswds_block_graphic_list
+    - field.field.block_content.uswds_block_graphic_list.field_uswds_paragraph
+  module:
+    - paragraphs
+id: block_content.uswds_block_graphic_list.default
+targetEntityType: block_content
+bundle: uswds_block_graphic_list
+mode: default
+content:
+  field_uswds_paragraph:
+    type: entity_reference_paragraphs
+    weight: 0
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  info: true
