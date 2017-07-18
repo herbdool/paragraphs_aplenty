@@ -9,117 +9,108 @@
  * Implements hook_theme().
  */
 function uswds_paragraphs_theme($existing, $type, $theme, $path) {
+
+  $common = array(
+    'path' => $path . '/templates',
+    'base hook' => 'paragraphs_item',
+  );
+
   return array(
-    'paragraph__uswds_hero' => array(
-      'base hook' => 'paragraph',
+    'paragraphs_item__uswds_hero' => $common + array(
+      'template' => 'paragraphs-item--uswds-hero',
     ),
-    'paragraph__uswds_graphic_list' => array(
-      'base hook' => 'paragraph',
+    'paragraphs_item__uswds_graphic_list' => $common + array(
+      'template' => 'paragraphs-item--uswds-graphic-list',
     ),
-    'paragraph__uswds_media_block' => array(
-      'base hook' => 'paragraph',
+    'paragraphs_item__uswds_media_block' => $common + array(
+      'template' => 'paragraphs-item--uswds-media-block',
     ),
-    'paragraph__uswds_one_and_two' => array(
-      'base hook' => 'paragraph',
+    'paragraphs_item__uswds_one_and_two' => $common + array(
+      'template' => 'paragraphs-item--uswds-one-and-two',
     ),
-    'paragraph__uswds_two_and_one' => array(
-      'base hook' => 'paragraph',
+    'paragraphs_item__uswds_two_and_one' => $common + array(
+      'template' => 'paragraphs-item--uswds-two-and-one',
     ),
   );
 }
 
-/**
- * Implements hook_preprocess_paragraph().
- */
-function uswds_paragraphs_preprocess_paragraph(&$variables) {
-  // TODO
-  //$paragraph_type = $variables['paragraph']->bundle();
+function uswds_paragraphs_preprocess_entity(&$variables) {
+  if ('paragraphs_item' == $variables['entity_type']) {
+    $paragraph = $variables['paragraphs_item'];
+    $bundle = $paragraph->bundle();
 
-  // Always set the USWDS-specific "uswds_grid_class" variable.
-  if (!isset($variables['uswds_grid_class'])) {
-    $variables['uswds_grid_class'] = FALSE;
-  }
-
-  // The "uswds_hero" Paragraph type should always be on the grid.
-  if ('uswds_hero' == $paragraph_type) {
-    $variables['uswds_grid_class'] = 'usa-grid';
-    // We also need to set the inline CSS for the image.
-    if (!$variables['paragraph']->field_uswds_image->isEmpty()) {
-      $img = $variables['paragraph']->field_uswds_image->entity->url();
-      $css = ".paragraph--type--uswds-hero.usa-hero { background-image:url($img); }";
-      $variables['#attached']['html_head'][] = [
-        [
-          '#tag' => 'style',
-          '#value' => $css,
-        ],
-        'uswds-hero'
-      ];
+    // Always set the USWDS-specific "uswds_grid_class" variable.
+    if (!isset($variables['uswds_grid_class'])) {
+      $variables['uswds_grid_class'] = FALSE;
     }
-  }
 
-  // We need to set the media_block class here, because we side-step the field
-  // template in paragraph--uswds-media-block.html.twig.
-  if ('uswds_media_block' == $paragraph_type) {
-    $variables['content']['field_uswds_image'][0]['#item_attributes']['class'][] = 'usa-media_block-img';
-  }
+    switch ($bundle) {
 
-  if ('uswds_graphic_list' == $paragraph_type) {
+      case 'uswds_one_and_two':
+      case 'uswds_two_and_one':
+        $variables['classes_array'][] = 'usa-section';
+        break;
 
-    // Here we split the media blocks into pairs.
-    $pairs = [];
-    $pair = [];
-    $media_block_keys = element_children($variables['content']['field_uswds_media_block']);
-    foreach ($media_block_keys as $key) {
-      if (count($pair) < 2) {
-        $pair[] = $variables['content']['field_uswds_media_block'][$key];
-      }
-      if (count($pair) == 2) {
-        $pairs[] = $pair;
+      case 'uswds_hero':
+        $variables['classes_array'][] = 'usa-hero';
+        // The "uswds_hero" Paragraph type should always be on the grid.
+        $variables['uswds_grid_class'] = 'usa-grid';
+        // Set the classes on the link and button.
+        if (!empty($paragraph->field_uswds_link)) {
+          $variables['content']['field_uswds_link'][0]['#element']['attributes']['class'] = 'usa-hero-link';
+        }
+        if (!empty($paragraph->field_uswds_button)) {
+          $variables['content']['field_uswds_button'][0]['#element']['attributes']['class'] = 'usa-button usa-button-big usa-button-secondary';
+        }
+        // We also need to set the inline CSS for the image.
+        if (!empty($paragraph->field_uswds_image)) {
+          $img = file_create_url($variables['content']['field_uswds_image'][0]['#item']['uri']);
+          // Convert the image to inline CSS only.
+          $variables['content']['field_uswds_image'] = array(
+            '#attached' => array(
+              'css' => array(
+                array(
+                  'data' => ".paragraphs-item-uswds-hero.usa-hero { background-image:url($img); }",
+                  'type' => 'inline',
+                ),
+              ),
+            ),
+          );
+        }
+        break;
+
+      case 'uswds_media_block':
+        $variables['classes_array'][] = 'usa-width-one-half';
+        $variables['classes_array'][] = 'usa-media_block';
+        $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'usa-media_block-img';
+        break;
+
+      case 'uswds_graphic_list':
+        $variables['classes_array'][] = 'usa-graphic_list';
+        $variables['classes_array'][] = 'usa-section';
+        // The "uswds_graphic_list" bundle should always be on the grid.
+        $variables['uswds_grid_class'] = 'usa-grid-full';
+        // Here we split the media blocks into pairs.
+        $pairs = [];
         $pair = [];
-      }
+        $media_block_keys = element_children($variables['content']['field_uswds_paragraphs']);
+        foreach ($media_block_keys as $key) {
+          if (count($pair) < 2) {
+            $pair[] = $variables['content']['field_uswds_paragraphs'][$key];
+          }
+          if (count($pair) == 2) {
+            $pairs[] = $pair;
+            $pair = [];
+          }
+        }
+        // Catch any stragglers.
+        if (!empty($pair)) {
+          $pairs[] = $pair;
+        }
+        $variables['graphic_list_rows'] = $pairs;
+        break;
+
     }
-    // Catch any stragglers.
-    if (!empty($pair)) {
-      $pairs[] = $pair;
-    }
-    $variables['graphic_list_rows'] = $pairs;
-  }
-}
 
-/**
- * Implements hook_preprocess_field().
- */
-function uswds_paragraphs_preprocess_field(&$variables) {
-  if (strpos($variables['field_name'], 'field_uswds_') !== 0) {
-    return;
-  }
-
-  $paragraph_type = $variables['element']['#bundle'];
-  $field_type = $variables['field_type'];
-  $field_name = $variables['field_name'];
-
-  if ('link' == $field_type) {
-
-    // Choose appropriate classes for paragraph type and field.
-    $classes = [
-      // Paragraph type.
-      'uswds_hero' => [
-        // Field name.
-        'field_uswds_button' => [
-          'usa-button',
-          'usa-button-big',
-          'usa-button-secondary',
-        ],
-        'field_uswds_link' => [
-          'usa-hero-link',
-        ],
-      ],
-    ];
-
-    if (!empty($classes[$paragraph_type][$field_name])) {
-      $class = ['class' => $classes[$paragraph_type][$field_name]];
-      // TODO
-      //$variables['items'][0]['content']['#url']->setOption('attributes', $class);
-    }
   }
 }
