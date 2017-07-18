@@ -67,6 +67,7 @@ function uswds_paragraphs_install() {
         'field_uswds_image' => array(
           'label' => 'Background image',
           'description' => 'If provided, this image will appear as the background for the hero.',
+          'min_resolution' => '2000x400',
         ),
         'field_uswds_link' => array(
           'label' => 'Callout link',
@@ -88,6 +89,7 @@ function uswds_paragraphs_install() {
         'field_uswds_image' => array(
           'label' => 'Image',
           'description' => '',
+          'min_resolution' => '',
         ),
         'field_uswds_text_right' => array(
           'label' => 'Body',
@@ -139,7 +141,7 @@ function uswds_paragraphs_install() {
         _uswds_paragraphs_add_title_field($bundle, $field_info['label'], $field_info['description']);
       }
       elseif ('field_uswds_image' == $field_name) {
-        _uswds_paragraphs_add_image_field($bundle, $field_info['label'], $field_info['description']);
+        _uswds_paragraphs_add_image_field($bundle, $field_info['label'], $field_info['description'], $field_info['min_resolution']);
       }
       elseif (in_array($field_name, array('field_uswds_link', 'field_uswds_button'))) {
         _uswds_paragraphs_add_link_field($field_name, $bundle, $field_info['label'], $field_info['description']);
@@ -211,7 +213,7 @@ function _uswds_paragraphs_add_paragraphs_field($bundle, $label, $description) {
       ),
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'type' => 'paragraphs_view',
           'settings' => array(
             'view_mode' => 'full',
@@ -309,7 +311,7 @@ function _uswds_paragraphs_add_title_field($bundle, $label, $description) {
 /**
  * Helper function to add an image field to a paragraph type.
  */
-function _uswds_paragraphs_add_image_field($bundle, $label, $description) {
+function _uswds_paragraphs_add_image_field($bundle, $label, $description, $min_resolution) {
 
   $field_name = 'field_uswds_image';
   $entity_type = 'paragraphs_item';
@@ -351,7 +353,7 @@ function _uswds_paragraphs_add_image_field($bundle, $label, $description) {
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
         'max_resolution' => '',
-        'min_resolution' => '2000x400',
+        'min_resolution' => $min_resolution,
         'alt_field' => 0,
         'title_field' => 0,
         'default_image' => 0,
@@ -362,7 +364,7 @@ function _uswds_paragraphs_add_image_field($bundle, $label, $description) {
           'label' => 'hidden',
           'type' => 'image',
           'settings' => array(
-            'image_style' => '',
+            'image_style' => 'thumbnail',
             'image_link' => '',
           ),
           'module' => 'image',
@@ -426,11 +428,11 @@ function _uswds_paragraphs_add_long_text_field($field_name, $bundle, $label, $de
       ),
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'type' => 'text_default',
           'settings' => array(),
           'module' => 'text',
-          'weight' => 3,
+          'weight' => 0,
         ),
         'paragraphs_editor_preview' => array(
           'type' => 'hidden',
@@ -521,7 +523,7 @@ function _uswds_paragraphs_add_link_field($field_name, $bundle, $label, $descrip
       ),
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'type' => 'link_default',
           'settings' => array(),
           'module' => 'link',
