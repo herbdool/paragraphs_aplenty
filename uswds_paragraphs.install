@@ -119,19 +119,6 @@ function uswds_paragraphs_install() {
         ),
       ),
     ),
-    'uswds_two_and_one' => array(
-      'label' => 'Two-thirds and then one-third',
-      'fields' => array(
-        'field_uswds_text_left' => array(
-          'label' => 'Left text',
-          'description' => 'This text will span the left two-thirds of this section.',
-        ),
-        'field_uswds_text_right' => array(
-          'label' => 'Right text',
-          'description' => 'This text will span the right one-third of this section.',
-        ),
-      ),
-    ),
   );
 
   foreach ($bundles as $bundle => $bundle_info) {

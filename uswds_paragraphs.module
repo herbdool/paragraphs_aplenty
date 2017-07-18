@@ -28,9 +28,6 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
     'paragraphs_item__uswds_one_and_two' => $common + array(
       'template' => 'paragraphs-item--uswds-one-and-two',
     ),
-    'paragraphs_item__uswds_two_and_one' => $common + array(
-      'template' => 'paragraphs-item--uswds-two-and-one',
-    ),
   );
 }
 
@@ -47,7 +44,6 @@ function uswds_paragraphs_preprocess_entity(&$variables) {
     switch ($bundle) {
 
       case 'uswds_one_and_two':
-      case 'uswds_two_and_one':
         $variables['classes_array'][] = 'usa-section';
         break;
 
