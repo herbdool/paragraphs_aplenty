@@ -60,13 +60,17 @@ function uswds_paragraphs_preprocess_entity(&$variables) {
         }
         // We also need to set the inline CSS for the image.
         if (!empty($paragraph->field_uswds_image)) {
+          // Make sure we have a unique ID, in case of multiple Heroes.
+          $identifier = 'uswds-hero-' . $variables['content']['field_uswds_image'][0]['#item']['fid'];
+          $variables['classes_array'][] = $identifier;
+          // Inline the CSS background image.
           $img = file_create_url($variables['content']['field_uswds_image'][0]['#item']['uri']);
-          // Convert the image to inline CSS only.
+          $css = ".$identifier.paragraphs-item-uswds-hero.usa-hero { background-image:url($img); }";
           $variables['content']['field_uswds_image'] = array(
             '#attached' => array(
               'css' => array(
                 array(
-                  'data' => ".paragraphs-item-uswds-hero.usa-hero { background-image:url($img); }",
+                  'data' => $css,
                   'type' => 'inline',
                 ),
               ),
