@@ -25,92 +25,215 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
     'paragraphs_item__uswds_media_block' => $common + array(
       'template' => 'paragraphs-item--uswds-media-block',
     ),
-    'paragraphs_item__uswds_one_and_two' => $common + array(
-      'template' => 'paragraphs-item--uswds-one-and-two',
+    'paragraphs_item__uswds_grid' => $common + array(
+      'template' => 'paragraphs-item--uswds-grid',
+    ),
+    'paragraphs_item__uswds_column' => $common + array(
+      'template' => 'paragraphs-item--uswds-column',
     ),
   );
 }
 
+/**
+ * Implements hook_preprocess.entity().
+ */
 function uswds_paragraphs_preprocess_entity(&$variables) {
   if ('paragraphs_item' == $variables['entity_type']) {
-    $paragraph = $variables['paragraphs_item'];
-    $bundle = $paragraph->bundle();
-
     // Always set the USWDS-specific "uswds_grid_class" variable.
     if (!isset($variables['uswds_grid_class'])) {
       $variables['uswds_grid_class'] = FALSE;
     }
 
-    switch ($bundle) {
-
-      case 'uswds_one_and_two':
-        $variables['classes_array'][] = 'usa-section';
-        break;
-
-      case 'uswds_hero':
-        $variables['classes_array'][] = 'usa-hero';
-        // The "uswds_hero" Paragraph type should always be on the grid.
-        $variables['uswds_grid_class'] = 'usa-grid';
-        // Set the classes on the link and button.
-        if (!empty($paragraph->field_uswds_link)) {
-          $variables['content']['field_uswds_link'][0]['#element']['attributes']['class'] = 'usa-hero-link';
-        }
-        if (!empty($paragraph->field_uswds_button)) {
-          $variables['content']['field_uswds_button'][0]['#element']['attributes']['class'] = 'usa-button usa-button-big usa-button-secondary';
-        }
-        // We also need to set the inline CSS for the image.
-        if (!empty($paragraph->field_uswds_image)) {
-          // Make sure we have a unique ID, in case of multiple Heroes.
-          $identifier = 'uswds-hero-' . $variables['content']['field_uswds_image'][0]['#item']['fid'];
-          $variables['classes_array'][] = $identifier;
-          // Inline the CSS background image.
-          $img = file_create_url($variables['content']['field_uswds_image'][0]['#item']['uri']);
-          $css = ".$identifier.paragraphs-item-uswds-hero.usa-hero { background-image:url($img); }";
-          $variables['content']['field_uswds_image'] = array(
-            '#attached' => array(
-              'css' => array(
-                array(
-                  'data' => $css,
-                  'type' => 'inline',
-                ),
-              ),
-            ),
-          );
-        }
-        break;
-
-      case 'uswds_media_block':
-        $variables['classes_array'][] = 'usa-width-one-half';
-        $variables['classes_array'][] = 'usa-media_block';
-        $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'usa-media_block-img';
-        break;
-
-      case 'uswds_graphic_list':
-        $variables['classes_array'][] = 'usa-graphic_list';
-        $variables['classes_array'][] = 'usa-section';
-        // The "uswds_graphic_list" bundle should always be on the grid.
-        $variables['uswds_grid_class'] = 'usa-grid-full';
-        // Here we split the media blocks into pairs.
-        $pairs = [];
-        $pair = [];
-        $media_block_keys = element_children($variables['content']['field_uswds_paragraphs']);
-        foreach ($media_block_keys as $key) {
-          if (count($pair) < 2) {
-            $pair[] = $variables['content']['field_uswds_paragraphs'][$key];
-          }
-          if (count($pair) == 2) {
-            $pairs[] = $pair;
-            $pair = [];
-          }
-        }
-        // Catch any stragglers.
-        if (!empty($pair)) {
-          $pairs[] = $pair;
-        }
-        $variables['graphic_list_rows'] = $pairs;
-        break;
-
+    // Do any extra preprocessing.
+    $bundle = $variables['paragraphs_item']->bundle();
+    $func = '_uswds_paragraphs_preprocess_' . $bundle;
+    if (function_exists($func)) {
+      $func($variables);
     }
-
   }
+}
+
+/**
+ * Preprocessing code for the Graphic List bundle.
+ */
+function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
+  $variables['classes_array'][] = 'usa-graphic_list';
+  $variables['classes_array'][] = 'usa-section';
+  // The "uswds_graphic_list" bundle should always be on the grid.
+  $variables['uswds_grid_class'] = 'usa-grid-full';
+  // Here we split the media blocks into pairs.
+  $pairs = [];
+  $pair = [];
+  $media_block_keys = element_children($variables['content']['field_uswds_paragraphs']);
+  foreach ($media_block_keys as $key) {
+    if (count($pair) < 2) {
+      $pair[] = $variables['content']['field_uswds_paragraphs'][$key];
+    }
+    if (count($pair) == 2) {
+      $pairs[] = $pair;
+      $pair = [];
+    }
+  }
+  // Catch any stragglers.
+  if (!empty($pair)) {
+    $pairs[] = $pair;
+  }
+  $variables['graphic_list_rows'] = $pairs;
+}
+
+/**
+ * Preprocessing code for the Media Block bundle.
+ */
+function _uswds_paragraphs_preprocess_uswds_media_block(&$variables) {
+  $variables['classes_array'][] = 'usa-width-one-half';
+  $variables['classes_array'][] = 'usa-media_block';
+  $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'usa-media_block-img';
+}
+
+/**
+ * Preprocessing code for the Hero bundle.
+ */
+function _uswds_paragraphs_preprocess_uswds_hero(&$variables) {
+  $variables['classes_array'][] = 'usa-hero';
+  // The "uswds_hero" Paragraph type should always be on the grid.
+  $variables['uswds_grid_class'] = 'usa-grid';
+  // Set the classes on the link and button.
+  $paragraph = $variables['paragraphs_item'];
+  if (!empty($paragraph->field_uswds_link)) {
+    $variables['content']['field_uswds_link'][0]['#element']['attributes']['class'] = 'usa-hero-link';
+  }
+  if (!empty($paragraph->field_uswds_button)) {
+    $variables['content']['field_uswds_button'][0]['#element']['attributes']['class'] = 'usa-button usa-button-big usa-button-secondary';
+  }
+  // We also need to set the inline CSS for the image.
+  if (!empty($paragraph->field_uswds_image)) {
+    // Make sure we have a unique ID, in case of multiple Heroes.
+    $identifier = 'uswds-hero-' . $variables['content']['field_uswds_image'][0]['#item']['fid'];
+    $variables['classes_array'][] = $identifier;
+    // Inline the CSS background image.
+    $img = file_create_url($variables['content']['field_uswds_image'][0]['#item']['uri']);
+    $css = ".$identifier.paragraphs-item-uswds-hero.usa-hero { background-image:url($img); }";
+    $variables['content']['field_uswds_image'] = array(
+      '#attached' => array(
+        'css' => array(
+          array(
+            'data' => $css,
+            'type' => 'inline',
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/**
+ * Helper function to convert a fraction into a USWDS class.
+ *
+ * @param int $numerator
+ *   The top part of the fraction.
+ *
+ * @param int $denominator
+ *   The bottom part of the fraction.
+ */
+function _uswds_paragraphs_fraction_to_class($numerator, $denominator) {
+  if ($numerator == $denominator) {
+    return 'usa-width-one-whole';
+  }
+  // We could do a lot of fancy math here. But we won't.
+  $classes = [
+    // Denominators first.
+    2 => [
+      // Then numerators.
+      1 => 'usa-width-one-half',
+    ],
+    3 => [
+      1 => 'usa-width-one-third',
+      2 => 'usa-width-two-thirds',
+    ],
+    4 => [
+      1 => 'usa-width-one-fourth',
+      2 => 'usa-width-one-half',
+      3 => 'usa-width-three-fourths',
+    ],
+    6 => [
+      1 => 'usa-width-one-sixth',
+      2 => 'usa-width-one-third',
+      3 => 'usa-width-one-half',
+      4 => 'usa-width-two-thirds',
+      5 => 'usa-width-five-sixths',
+    ],
+    12 => [
+      1 => 'usa-width-one-twelfth',
+      2 => 'usa-width-one-sixth',
+      3 => 'usa-width-one-fourth',
+      4 => 'usa-width-one-third',
+      5 => 'usa-width-five-twelfths',
+      6 => 'usa-width-one-half',
+      7 => 'usa-width-seven-twelfths',
+      8 => 'usa-width-two-thirds',
+      9 => 'usa-width-three-fourths',
+      10 => 'usa-width-five-sixths',
+      11 => 'usa-width-eleven-twelfths',
+    ],
+  ];
+  if (!empty($classes[$denominator][$numerator])) {
+    return $classes[$denominator][$numerator];
+  }
+  // If still here, it is some weird non-supported fraction.
+  return 'usa-width-one-whole';
+}
+
+/**
+ * Preprocessing code for the Grid bundle.
+ */
+function _uswds_paragraphs_preprocess_uswds_grid(&$variables) {
+  $variables['uswds_grid_class'] = 'usa-grid-full';
+
+  $grid = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
+  $max_columns = (int)$grid->field_uswds_grid_column_width->value();
+  $columns = $grid->field_uswds_paragraphs;
+  $num_columns = count($columns);
+
+  // Drop excess columns.
+  if ($num_columns > $max_columns) {
+    for ($key = $max_columns; $key < $num_columns; $key++) {
+      unset($variables['content']['field_uswds_paragraphs'][$key]);
+    }
+    $num_columns = $max_columns;
+  }
+
+  $stretched_already = FALSE;
+  $available_space = $max_columns - $num_columns;
+  for ($key = 0; $key < $num_columns; $key++) {
+
+    // The numerator is normally 1.
+    $numerator = 1;
+    // But one column is allowed to stretch if configured to do so.
+    if (!$stretched_already) {
+      $stretch = $columns[$key]->field_uswds_grid_column_stretch->value();
+      // Also, the last column always stretches to fill available space.
+      $last_column = ($key + 1) == $num_columns;
+      if ($stretch || $last_column) {
+        $numerator += $available_space;
+        $stretched_already = TRUE;
+      }
+    }
+    // Finally communicate the class.
+    $class = _uswds_paragraphs_fraction_to_class($numerator, $max_columns);
+    $column_id = $columns[$key]->getIdentifier();
+    // @TODO: There is probably a better way to communicate this value to
+    // the uswds_column paragraph.
+    $variables['content']['field_uswds_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#uswds_width_class'] = $class;
+
+    // Copy them to another variable as a quick way to avoid printing
+    // the field wrapper.
+    $variables['uswds_columns'][] = $variables['content']['field_uswds_paragraphs'][$key];
+  }
+}
+
+/**
+ * Preprocessing code for the Column bundle.
+ */
+function _uswds_paragraphs_preprocess_uswds_column(&$variables) {
+  $variables['classes_array'][] = $variables['elements']['#uswds_width_class'];
 }

@@ -27,128 +27,266 @@ function _uswds_paragraphs_create_bundle($machine, $human) {
 }
 
 /**
- * Helper function to create a base field.
- *
- * @param array $info
- *   Array of info as passable to field_create_field().
- */
-function _uswds_paragraphs_create_field_base($info) {
-
-  $base = field_info_field($info['field_name']);
-  if (empty($base)) {
-    field_create_field($info);
-  }
-}
-
-/**
- * Helper function to create a field instance.
- *
- * @param array $info
- *   Array of info as passable to field_create_instance().
- */
-function _uswds_paragraphs_create_field_instance($info) {
-
-}
-
-
-/**
  * Implements hook_install().
  */
 function uswds_paragraphs_install() {
 
-  $bundles = array(
-    'uswds_hero' => array(
-      'label' => 'Hero',
-      'fields' => array(
-        'field_uswds_title' => array(
-          'label' => 'Callout title',
-          'description' => 'If provided, this title will appear at the top of the hero callout.',
-        ),
-        'field_uswds_image' => array(
-          'label' => 'Background image',
-          'description' => 'If provided, this image will appear as the background for the hero.',
-          'min_resolution' => '2000x400',
-        ),
-        'field_uswds_link' => array(
-          'label' => 'Callout link',
-          'description' => 'If provided, this link will appear inside the hero callout.',
-        ),
-        'field_uswds_button' => array(
-          'label' => 'Callout button',
-          'description' => 'If provided, this link will appear at the bottom of the hero callout, as a button.',
-        ),
-      ),
+  // Install the Hero paragraph type.
+  $bundle = 'uswds_hero';
+  _uswds_paragraphs_create_bundle($bundle, 'Hero');
+  _uswds_paragraphs_add_image_field('field_uswds_image', $bundle, array(
+    'label' => 'Hero background image',
+    'description' => 'If provided, this image will appear as the background for the hero.',
+    'settings' => array(
+      'min_resolution' => '2000x400',
     ),
-    'uswds_media_block' => array(
-      'label' => 'Media block',
-      'fields' => array(
-        'field_uswds_title' => array(
-          'label' => 'Title',
-          'description' => '',
-        ),
-        'field_uswds_image' => array(
-          'label' => 'Image',
-          'description' => '',
-          'min_resolution' => '',
-        ),
-        'field_uswds_text_right' => array(
-          'label' => 'Body',
-          'description' => '',
-        ),
-      ),
-    ),
-    'uswds_graphic_list' => array(
-      'label' => 'Graphic list',
-      'fields' => array(
-        'field_uswds_paragraphs' => array(
-          'label' => 'Media blocks',
-          'description' => '',
-        ),
-      ),
-    ),
-    'uswds_one_and_two' => array(
-      'label' => 'One-third and then two-thirds',
-      'fields' => array(
-        'field_uswds_text_left' => array(
-          'label' => 'Left text',
-          'description' => 'This text will span the left one-third of this section.',
-        ),
-        'field_uswds_text_right' => array(
-          'label' => 'Right text',
-          'description' => 'This text will span the right two-thirds of this section.',
-        ),
-      ),
-    ),
-  );
+  ));
+  _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
+    'label' => 'Hero callout title',
+    'description' => 'If provided, this title will appear at the top of the hero callout.',
+  ));
+  _uswds_paragraphs_add_link_field('field_uswds_link', $bundle, array(
+    'label' => 'Hero callout link',
+    'description' => 'If provided, this link will appear inside the hero callout.',
+  ));
+  _uswds_paragraphs_add_link_field('field_uswds_button', $bundle, array(
+    'label' => 'Hero callout button',
+    'description' => 'If provided, this link will appear at the bottom of the hero callout, as a button.',
+  ));
 
-  foreach ($bundles as $bundle => $bundle_info) {
-    _uswds_paragraphs_create_bundle($bundle, $bundle_info['label']);
-    foreach ($bundle_info['fields'] as $field_name => $field_info) {
-      if ('field_uswds_title' == $field_name) {
-        _uswds_paragraphs_add_title_field($bundle, $field_info['label'], $field_info['description']);
-      }
-      elseif ('field_uswds_image' == $field_name) {
-        _uswds_paragraphs_add_image_field($bundle, $field_info['label'], $field_info['description'], $field_info['min_resolution']);
-      }
-      elseif (in_array($field_name, array('field_uswds_link', 'field_uswds_button'))) {
-        _uswds_paragraphs_add_link_field($field_name, $bundle, $field_info['label'], $field_info['description']);
-      }
-      elseif (strpos($field_name, 'field_uswds_text_') === 0) {
-        _uswds_paragraphs_add_long_text_field($field_name, $bundle, $field_info['label'], $field_info['description']);
-      }
-      elseif ('field_uswds_paragraphs' == $field_name) {
-        _uswds_paragraphs_add_paragraphs_field($bundle, $field_info['label'], $field_info['description']);
-      }
-    }
+  // Install the Text paragraph type.
+  $bundle = 'uswds_text';
+  _uswds_paragraphs_create_bundle($bundle, 'Text');
+  _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
+    'label' => 'Text',
+    'required' => TRUE,
+  ));
+
+  // Install the Media Block paragraph type.
+  $bundle = 'uswds_media_block';
+  _uswds_paragraphs_create_bundle($bundle, 'Media block');
+  _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
+    'label' => 'Media block title',
+    'required' => TRUE,
+  ));
+  _uswds_paragraphs_add_image_field('field_uswds_image', $bundle, array(
+    'label' => 'Media block image',
+    'required' => TRUE,
+  ));
+  _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
+    'label' => 'Media block body',
+    'required' => TRUE,
+  ));
+
+  // Install the Graphic List paragraph type.
+  $bundle = 'uswds_graphic_list';
+  _uswds_paragraphs_create_bundle($bundle, 'Graphic list');
+  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
+    'label' => 'Media blocks',
+    'settings' => array(
+      'allowed_bundles' => array(
+        'uswds_media_block' => 'uswds_media_block',
+      ),
+      'title' => 'Media block',
+      'title_multiple' => 'Media blocks',
+    ),
+    'required' => TRUE,
+  ));
+
+  // Install the Column paragraph type.
+  $bundle = 'uswds_column';
+  _uswds_paragraphs_create_bundle($bundle, 'Column');
+  _uswds_paragraphs_add_boolean_field('field_uswds_column_stretch', $bundle, array(
+    'label' => 'Stretch to fill available space',
+    'description' => 'If this is checked, the column will stretch to fill any space available from missing columns.',
+  ));
+  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
+    'label' => 'Column Content',
+    'settings' => array(
+      'allowed_bundles' => array(
+        'uswds_text' => 'uswds_text',
+      ),
+      'title' => 'Column content',
+      'title_multiple' => 'Column content',
+    ),
+    'required' => TRUE,
+  ));
+
+  // Install the Grid (aka "Row of columns") paragraph type.
+  $bundle = 'uswds_grid';
+  _uswds_paragraphs_create_bundle($bundle, 'Row of columns');
+  _uswds_paragraphs_add_number_list_field('field_uswds_grid_column_width', $bundle, array(
+    'label' => 'Column Width',
+    'description' => 'This sets the width of the columns in this row.',
+    'required' => TRUE,
+    'default_value' => array(
+      array('value' => 2),
+    ),
+  ));
+  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
+    'label' => 'Columns',
+    'settings' => array(
+      'allowed_bundles' => array(
+        'uswds_column' => 'uswds_column',
+      ),
+      'title' => 'Column',
+      'title_multiple' => 'Columns',
+    ),
+    'required' => TRUE,
+  ));
+}
+
+/**
+ * Helper function to add a boolean field to a bundle.
+ */
+function _uswds_paragraphs_add_boolean_field($field_name, $bundle, $instance_overrides) {
+
+  $entity_type = 'paragraphs_item';
+
+  $existing = field_info_field($field_name);
+  if (empty($existing)) {
+    $field_info = array(
+      'translatable' => '0',
+      'entity_types' => array(),
+      'settings' => array(
+        'allowed_values' => array(
+          '',
+          '',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'field_name' => $field_name,
+      'type' => 'list_boolean',
+      'module' => 'list',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+    );
+    $field = field_create_field($field_info);
+  }
+  $existing = field_info_instance($entity_type, $field_name, $bundle);
+  if (empty($existing)) {
+    $field_info = array(
+      'label' => 'Replace me',
+      'widget' => array(
+        'weight' => '0',
+        'type' => 'options_onoff',
+        'module' => 'options',
+        'active' => 1,
+        'settings' => array(
+          'display_label' => 1,
+        ),
+      ),
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'type' => 'hidden',
+          'weight' => '1',
+          'settings' => array(),
+        ),
+        'paragraphs_editor_preview' => array(
+          'type' => 'hidden',
+          'label' => 'above',
+          'settings' => array(),
+          'weight' => 0,
+        ),
+      ),
+      'required' => FALSE,
+      'description' => '',
+      'default_value' => array(
+        array(
+          'value' => 0,
+        ),
+      ),
+      'field_name' => $field_name,
+      'entity_type' => $entity_type,
+      'bundle' => $bundle,
+    );
+    $field_info = array_replace_recursive($field_info, $instance_overrides);
+    field_create_instance($field_info);
+  }
+}
+
+/**
+ * Helper function to add a number list field to a bundle.
+ */
+function _uswds_paragraphs_add_number_list_field($field_name, $bundle, $instance_overrides) {
+
+  $entity_type = 'paragraphs_item';
+
+  $existing = field_info_field($field_name);
+  if (empty($existing)) {
+    $field_info = array(
+      'translatable' => '0',
+      'entity_types' => array(),
+      'settings' => array(
+        'allowed_values' => array(
+          // Hardcoding this, since this is the only number list field.
+          // But... @TODO: Make this configurable.
+          2 => '½ width',
+          3 => '⅓ width',
+          4 => '¼ width',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'field_name' => $field_name,
+      'type' => 'list_integer',
+      'module' => 'list',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+    );
+    $field = field_create_field($field_info);
+  }
+
+  $existing = field_info_instance($entity_type, $field_name, $bundle);
+  if (empty($existing)) {
+    $field_info = array(
+      'label' => 'Replace me',
+      'widget' => array(
+        'weight' => '0',
+        'type' => 'options_select',
+        'module' => 'options',
+        'active' => 1,
+        'settings' => array(),
+      ),
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'type' => 'hidden',
+          'weight' => '1',
+          'settings' => array(),
+        ),
+        'paragraphs_editor_preview' => array(
+          'type' => 'hidden',
+          'label' => 'above',
+          'settings' => array(),
+          'weight' => 0,
+        ),
+      ),
+      'required' => FALSE,
+      'description' => '',
+      'default_value' => array(),
+      'field_name' => $field_name,
+      'entity_type' => $entity_type,
+      'bundle' => $bundle,
+    );
+    $field_info = array_replace_recursive($field_info, $instance_overrides);
+    field_create_instance($field_info);
   }
 }
 
 /**
  * Helper function to add a title field to a bundle.
  */
-function _uswds_paragraphs_add_paragraphs_field($bundle, $label, $description) {
+function _uswds_paragraphs_add_paragraphs_field($field_name, $bundle, $instance_overrides) {
 
-  $field_name = 'field_uswds_paragraphs';
   $entity_type = 'paragraphs_item';
 
   $existing = field_info_field($field_name);
@@ -170,7 +308,7 @@ function _uswds_paragraphs_add_paragraphs_field($bundle, $label, $description) {
   $existing = field_info_instance($entity_type, $field_name, $bundle);
   if (empty($existing)) {
     $field_info = array(
-      'label' => $label,
+      'label' => 'Replace me',
       'widget' => array(
         'type' => 'paragraphs_embed',
         'module' => 'paragraphs',
@@ -178,23 +316,18 @@ function _uswds_paragraphs_add_paragraphs_field($bundle, $label, $description) {
         'settings' => array(),
       ),
       'settings' => array(
-        'title' => 'Media block',
-        'title_multiple' => 'Media blocks',
-        'default_edit_mode' => 'open',
+        'title' => 'Paragraph',
+        'title_multiple' => 'Paragraphs',
+        'default_edit_mode' => 'closed',
         'add_mode' => 'button',
-        'allowed_bundles' => array(
-          'uswds_graphic_list' => -1,
-          'uswds_hero' => -1,
-          'uswds_media_block' => 'uswds_media_block',
-          'uswds_one_and_two' => -1,
-          'uswds_two_and_one' => -1,
-        ),
+        'allowed_bundles' => array(),
         'bundle_weights' => array(
-          'uswds_graphic_list' => '2',
-          'uswds_hero' => '3',
-          'uswds_media_block' => '4',
-          'uswds_one_and_two' => '5',
-          'uswds_two_and_one' => '6',
+          'uswds_text' => '1',
+          'uswds_column' => '2',
+          'uswds_grid' => '3',
+          'uswds_graphic_list' => '4',
+          'uswds_hero' => '5',
+          'uswds_media_block' => '6',
         ),
         'user_register_form' => false,
       ),
@@ -215,24 +348,24 @@ function _uswds_paragraphs_add_paragraphs_field($bundle, $label, $description) {
           'weight' => 0,
         ),
       ),
-      'required' => 1,
-      'description' => $description,
+      'required' => FALSE,
+      'description' => '',
       'default_value' => NULL,
       'field_name' => $field_name,
       'entity_type' => $entity_type,
       'bundle' => $bundle,
     );
 
+    $field_info = array_replace_recursive($field_info, $instance_overrides);
     field_create_instance($field_info);
   }
 }
 
 /**
- * Helper function to add a title field to a bundle.
+ * Helper function to add a text field to a bundle.
  */
-function _uswds_paragraphs_add_title_field($bundle, $label, $description) {
+function _uswds_paragraphs_add_text_field($field_name, $bundle, $instance_overrides) {
 
-  $field_name = 'field_uswds_title';
   $entity_type = 'paragraphs_item';
 
   $existing = field_info_field($field_name);
@@ -255,7 +388,7 @@ function _uswds_paragraphs_add_title_field($bundle, $label, $description) {
   $existing = field_info_instance($entity_type, $field_name, $bundle);
   if (empty($existing)) {
     $field_info = array(
-      'label' => $label,
+      'label' => 'Replace me',
       'widget' => array(
         'weight' => '1',
         'type' => 'text_textfield',
@@ -284,13 +417,14 @@ function _uswds_paragraphs_add_title_field($bundle, $label, $description) {
           'weight' => 0,
         ),
       ),
-      'required' => 0,
-      'description' => $description,
+      'required' => FALSE,
+      'description' => '',
       'default_value' => NULL,
       'field_name' => $field_name,
       'entity_type' => $entity_type,
       'bundle' => $bundle,
     );
+    $field_info = array_replace_recursive($field_info, $instance_overrides);
     field_create_instance($field_info);
   }
 }
@@ -298,9 +432,8 @@ function _uswds_paragraphs_add_title_field($bundle, $label, $description) {
 /**
  * Helper function to add an image field to a paragraph type.
  */
-function _uswds_paragraphs_add_image_field($bundle, $label, $description, $min_resolution) {
+function _uswds_paragraphs_add_image_field($field_name, $bundle, $instance_overrides) {
 
-  $field_name = 'field_uswds_image';
   $entity_type = 'paragraphs_item';
 
   $existing = field_info_field($field_name);
@@ -325,7 +458,7 @@ function _uswds_paragraphs_add_image_field($bundle, $label, $description, $min_r
   $existing = field_info_instance($entity_type, $field_name, $bundle);
   if (empty($existing)) {
     $field_info = array(
-      'label' => $label,
+      'label' => 'Replace Me',
       'widget' => array(
         'type' => 'image_image',
         'module' => 'image',
@@ -340,7 +473,7 @@ function _uswds_paragraphs_add_image_field($bundle, $label, $description, $min_r
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
         'max_resolution' => '',
-        'min_resolution' => $min_resolution,
+        'min_resolution' => '',
         'alt_field' => 0,
         'title_field' => 0,
         'default_image' => 0,
@@ -364,12 +497,13 @@ function _uswds_paragraphs_add_image_field($bundle, $label, $description, $min_r
           'weight' => 0,
         ),
       ),
-      'required' => 0,
-      'description' => $description,
+      'required' => FALSE,
+      'description' => '',
       'field_name' => $field_name,
       'entity_type' => $entity_type,
       'bundle' => $bundle,
     );
+    $field_info = array_replace_recursive($field_info, $instance_overrides);
     field_create_instance($field_info);
   }
 }
@@ -377,7 +511,7 @@ function _uswds_paragraphs_add_image_field($bundle, $label, $description, $min_r
 /**
  * Helper function to add a long text field to a paragraph type.
  */
-function _uswds_paragraphs_add_long_text_field($field_name, $bundle, $label, $description) {
+function _uswds_paragraphs_add_text_long_field($field_name, $bundle, $instance_overrides) {
 
   $entity_type = 'paragraphs_item';
 
@@ -400,7 +534,7 @@ function _uswds_paragraphs_add_long_text_field($field_name, $bundle, $label, $de
   $existing = field_info_instance($entity_type, $field_name, $bundle);
   if (empty($existing)) {
     $field_info = array(
-      'label' => $label,
+      'label' => 'Replace me',
       'widget' => array(
         'type' => 'text_textarea',
         'module' => 'text',
@@ -428,20 +562,21 @@ function _uswds_paragraphs_add_long_text_field($field_name, $bundle, $label, $de
           'weight' => 0,
         ),
       ),
-      'required' => 0,
-      'description' => $description,
+      'required' => FALSE,
+      'description' => '',
       'default_value' => NULL,
       'field_name' => $field_name,
       'entity_type' => $entity_type,
       'bundle' => $bundle,
     );
+    $field_info = array_replace_recursive($field_info, $instance_overrides);
     field_create_instance($field_info);
   }
 }
 /**
  * Helper function to add a link field to a paragraph type.
  */
-function _uswds_paragraphs_add_link_field($field_name, $bundle, $label, $description) {
+function _uswds_paragraphs_add_link_field($field_name, $bundle, $instance_overrides) {
 
   $entity_type = 'paragraphs_item';
 
@@ -478,7 +613,7 @@ function _uswds_paragraphs_add_link_field($field_name, $bundle, $label, $descrip
   $existing = field_info_instance($entity_type, $field_name, $bundle);
   if (empty($existing)) {
     $field_info = array(
-      'label' => $label,
+      'label' => 'Replace me',
       'widget' => array(
         'type' => 'link_field',
         'module' => 'link',
@@ -523,13 +658,14 @@ function _uswds_paragraphs_add_link_field($field_name, $bundle, $label, $descrip
           'weight' => 0,
         ),
       ),
-      'required' => 0,
-      'description' => $description,
+      'required' => FALSE,
+      'description' => '',
       'default_value' => NULL,
       'field_name' => $field_name,
       'entity_type' => $entity_type,
       'bundle' => $bundle,
     );
+    $field_info = array_replace_recursive($field_info, $instance_overrides);
     field_create_instance($field_info);
   }
 }
