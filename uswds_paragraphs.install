@@ -134,6 +134,49 @@ function uswds_paragraphs_install() {
     ),
     'required' => TRUE,
   ));
+
+  // Install the Accordion Item paragraph type.
+  $bundle = 'uswds_accordion_item';
+  _uswds_paragraphs_create_bundle($bundle, 'Accordion Item');
+  _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
+    'label' => 'Accordion item title',
+    'required' => TRUE,
+  ));
+  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
+    'label' => 'Accordion Item Content',
+    'settings' => array(
+      'allowed_bundles' => array(
+        'uswds_text' => 'uswds_text',
+      ),
+      'title' => 'Accordion item content',
+      'title_multiple' => 'Accordion item content',
+    ),
+    'required' => TRUE,
+  ));
+
+  // Install the Accordion paragraph type.
+  $bundle = 'uswds_accordion';
+  _uswds_paragraphs_create_bundle($bundle, 'Accordion');
+  _uswds_paragraphs_add_boolean_field('field_uswds_accordion_bordered', $bundle, array(
+    'label' => 'Add border around items',
+  ));
+  _uswds_paragraphs_add_boolean_field('field_uswds_accordion_multi', $bundle, array(
+    'label' => 'Allow more than one item to expand at a time',
+  ));
+  _uswds_paragraphs_add_boolean_field('field_uswds_accordion_expand', $bundle, array(
+    'label' => 'Start expanded',
+  ));
+  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
+    'label' => 'Accordion Items',
+    'settings' => array(
+      'allowed_bundles' => array(
+        'uswds_accordion_item' => 'uswds_accordion_item',
+      ),
+      'title' => 'Accordion item',
+      'title_multiple' => 'Accordion items',
+    ),
+    'required' => TRUE,
+  ));
 }
 
 /**

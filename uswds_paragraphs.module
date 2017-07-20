@@ -31,6 +31,12 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
     'paragraphs_item__uswds_column' => $common + array(
       'template' => 'paragraphs-item--uswds-column',
     ),
+    'paragraphs_item__uswds_accordion' => $common + array(
+      'template' => 'paragraphs-item--uswds-accordion',
+    ),
+    'paragraphs_item__uswds_accordion_item' => $common + array(
+      'template' => 'paragraphs-item--uswds-accordion-item',
+    ),
   );
 }
 
@@ -236,4 +242,52 @@ function _uswds_paragraphs_preprocess_uswds_grid(&$variables) {
  */
 function _uswds_paragraphs_preprocess_uswds_column(&$variables) {
   $variables['classes_array'][] = $variables['elements']['#uswds_width_class'];
+}
+
+/**
+ * Preprocessing code for the Accordion bundle.
+ */
+function _uswds_paragraphs_preprocess_uswds_accordion(&$variables) {
+
+  $accordion = $variables['paragraphs_item'];
+  $accordion = entity_metadata_wrapper('paragraphs_item', $accordion);
+
+  if ($accordion->field_uswds_accordion_multi->value()) {
+    $variables['attributes_array']['aria-multiselectable'] = 'true';
+  }
+
+  if ($accordion->field_uswds_accordion_bordered->value()) {
+    $variables['classes_array'][] = 'usa-accordion-bordered';
+  }
+  else {
+    $variables['classes_array'][] = 'usa-accordion';
+  }
+
+  if ($accordion->field_uswds_accordion_expand->value()) {
+    // @TODO: Presumably there is a more proper way to communicate to the item?
+    $first_id = $accordion->field_uswds_paragraphs[0]->getIdentifier();
+    $variables['content']['field_uswds_paragraphs'][0]['entity']['paragraphs_item'][$first_id]['#uswds_expand'] = TRUE;
+  }
+
+  // Copy to a separate variable for easy rendering without field markup.
+  foreach (element_children($variables['content']['field_uswds_paragraphs']) as $key) {
+    $variables['uswds_accordion_items'][] = $variables['content']['field_uswds_paragraphs'][$key];
+  }
+}
+
+/**
+ * Preprocessing code for the Accordion Item bundle.
+ */
+function _uswds_paragraphs_preprocess_uswds_accordion_item(&$variables) {
+
+  $accordion_item = $variables['paragraphs_item'];
+  $accordion_item = entity_metadata_wrapper('paragraphs_item', $accordion_item);
+
+  $variables['accordion_title'] = $accordion_item->field_uswds_title->value();
+
+  $expanded = (!empty($variables['elements']['#uswds_expand']));
+  $variables['expanded'] = ($expanded) ? 'true' : 'false';
+
+  $controls = 'uswds-paragraph-' . $variables['paragraphs_item']->item_id;
+  $variables['controls'] = $controls;
 }
