@@ -4,7 +4,8 @@
     <?php print $accordion_title ?>
   </button>
   <div id="<?php print $controls ?>" class="usa-accordion-content">
-    <?php print render($content['field_uswds_paragraphs']) ?>
+    <?php hide($content['field_uswds_title']); ?>
+    <?php print render($content) ?>
   </div>
 
 </li>

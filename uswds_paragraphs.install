@@ -158,16 +158,8 @@ function uswds_paragraphs_install() {
     'label' => 'Accordion item title',
     'required' => TRUE,
   ));
-  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
-    'label' => 'Accordion Item Content',
-    'settings' => array(
-      'allowed_bundles' => array(
-        'uswds_text' => 'uswds_text',
-      ),
-      'title' => 'Accordion item content',
-      'title_multiple' => 'Accordion item content',
-    ),
-    'required' => TRUE,
+  _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
+    'label' => 'Accordion item content',
   ));
 
   // Install the Accordion paragraph type.
