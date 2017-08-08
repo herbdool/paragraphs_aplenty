@@ -244,6 +244,9 @@ function _uswds_paragraphs_preprocess_uswds_grid(&$variables) {
  * Preprocessing code for the Column bundle.
  */
 function _uswds_paragraphs_preprocess_uswds_column(&$variables) {
+  if (empty($variables['elements']['#uswds_width_class'])) {
+    $variables['elements']['#uswds_width_class'] = 'usa-width-one-whole';
+  }
   $variables['classes_array'][] = $variables['elements']['#uswds_width_class'];
 }
 
