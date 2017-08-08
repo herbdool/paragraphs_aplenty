@@ -37,6 +37,9 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
     'paragraphs_item__uswds_accordion_item' => $common + array(
       'template' => 'paragraphs-item--uswds-accordion-item',
     ),
+    'paragraphs_item__uswds_text' => $common + array(
+      'template' => 'paragraphs-item--uswds-text',
+    ),
   );
 }
 
@@ -290,4 +293,16 @@ function _uswds_paragraphs_preprocess_uswds_accordion_item(&$variables) {
 
   $controls = 'uswds-paragraph-' . $variables['paragraphs_item']->item_id;
   $variables['controls'] = $controls;
+}
+
+/**
+ * Preprocessing code for the Text bundle.
+ */
+function _uswds_paragraphs_preprocess_uswds_text(&$variables) {
+  $parent = $variables['paragraphs_item']->hostEntity();
+  if ($parent && !$parent instanceof ParagraphsItemEntity) {
+    // If this text paragraph is not in an entity, we'll need
+    // to add the grid class.
+    $variables['uswds_grid_class'] = 'usa-grid-full';
+  }
 }
