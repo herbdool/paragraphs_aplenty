@@ -96,33 +96,49 @@ function uswds_paragraphs_install() {
   // Install the Column paragraph type.
   $bundle = 'uswds_column';
   _uswds_paragraphs_create_bundle($bundle, 'Column');
-  _uswds_paragraphs_add_boolean_field('field_uswds_column_stretch', $bundle, array(
-    'label' => 'Stretch to fill available space',
-    'description' => 'If this is checked, the column will stretch to fill any space available from missing columns.',
-  ));
-  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
-    'label' => 'Column Content',
-    'settings' => array(
-      'allowed_bundles' => array(
-        'uswds_text' => 'uswds_text',
-      ),
-      'title' => 'Column content',
-      'title_multiple' => 'Column content',
-    ),
-    'required' => TRUE,
+  _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
+    'label' => 'Text',
   ));
 
   // Install the Grid (aka "Row of columns") paragraph type.
   $bundle = 'uswds_grid';
   _uswds_paragraphs_create_bundle($bundle, 'Row of columns');
-  _uswds_paragraphs_add_number_list_field('field_uswds_grid_column_width', $bundle, array(
-    'label' => 'Column Width',
-    'description' => 'This sets the width of the columns in this row.',
-    'required' => TRUE,
-    'default_value' => array(
-      array('value' => 2),
+  _uswds_paragraphs_add_number_list_field('field_uswds_grid_column_width', $bundle,
+    array(
+      'label' => 'Column width',
+      'description' => 'This sets the width of the columns in this row.',
+      'required' => TRUE,
+      'default_value' => array(
+        array('value' => 3),
+      ),
     ),
-  ));
+    array(
+      'settings' => array(
+        'allowed_values' => array(
+          2 => '½ width',
+          3 => '⅓ width',
+          4 => '¼ width',
+        ),
+      ),
+    )
+  );
+  _uswds_paragraphs_add_number_list_field('field_uswds_grid_column_stretch', $bundle,
+    array(
+      'label' => 'Column to stretch',
+      'default_value' => array(
+        array('value' => 1),
+      ),
+    ),
+    array(
+      'settings' => array(
+        'allowed_values' => array(
+          1 => 'First column',
+          2 => 'Second column',
+          3 => 'Third column',
+        ),
+      ),
+    )
+  );
   _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
     'label' => 'Columns',
     'settings' => array(
@@ -256,7 +272,7 @@ function _uswds_paragraphs_add_boolean_field($field_name, $bundle, $instance_ove
 /**
  * Helper function to add a number list field to a bundle.
  */
-function _uswds_paragraphs_add_number_list_field($field_name, $bundle, $instance_overrides) {
+function _uswds_paragraphs_add_number_list_field($field_name, $bundle, $instance_overrides, $base_overrides) {
 
   $entity_type = 'paragraphs_item';
 
@@ -266,13 +282,7 @@ function _uswds_paragraphs_add_number_list_field($field_name, $bundle, $instance
       'translatable' => '0',
       'entity_types' => array(),
       'settings' => array(
-        'allowed_values' => array(
-          // Hardcoding this, since this is the only number list field.
-          // But... @TODO: Make this configurable.
-          2 => '½ width',
-          3 => '⅓ width',
-          4 => '¼ width',
-        ),
+        'allowed_values' => array(),
         'allowed_values_function' => '',
       ),
       'field_name' => $field_name,
@@ -282,6 +292,7 @@ function _uswds_paragraphs_add_number_list_field($field_name, $bundle, $instance
       'locked' => '0',
       'cardinality' => '1',
     );
+    $field_info = array_replace_recursive($field_info, $base_overrides);
     $field = field_create_field($field_info);
   }
 
@@ -711,4 +722,35 @@ function _uswds_paragraphs_add_link_field($field_name, $bundle, $instance_overri
     $field_info = array_replace_recursive($field_info, $instance_overrides);
     field_create_instance($field_info);
   }
+}
+
+/**
+ * Add the new "Column to stretch" field on the "Row of columns" type.
+ */
+function uswds_paragraphs_update_7001() {
+  $bundle = 'uswds_grid';
+  _uswds_paragraphs_add_number_list_field('field_uswds_grid_column_stretch', $bundle,
+    array(
+      'label' => 'Column to stretch',
+      'default_value' => array(
+        array('value' => 1),
+      ),
+    ),
+    array(
+      'settings' => array(
+        'allowed_values' => array(
+          1 => 'First column',
+          2 => 'Second column',
+          3 => 'Third column',
+        ),
+      ),
+    )
+  );
+}
+
+/**
+ * Delete the now-unused "Stetch to fill space" field on the "Column" type.
+ */
+function uswds_paragraphs_update_7002() {
+  field_delete_field('field_uswds_column_stretch');
 }

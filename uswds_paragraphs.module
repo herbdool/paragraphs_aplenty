@@ -211,21 +211,15 @@ function _uswds_paragraphs_preprocess_uswds_grid(&$variables) {
     $num_columns = $max_columns;
   }
 
-  $stretched_already = FALSE;
+  $stretch = (int)$grid->field_uswds_grid_column_stretch->value();
   $available_space = $max_columns - $num_columns;
   for ($key = 0; $key < $num_columns; $key++) {
 
     // The numerator is normally 1.
     $numerator = 1;
     // But one column is allowed to stretch if configured to do so.
-    if (!$stretched_already) {
-      $stretch = $columns[$key]->field_uswds_grid_column_stretch->value();
-      // Also, the last column always stretches to fill available space.
-      $last_column = ($key + 1) == $num_columns;
-      if ($stretch || $last_column) {
-        $numerator += $available_space;
-        $stretched_already = TRUE;
-      }
+    if ($stretch && $stretch == $key + 1) {
+      $numerator += $available_space;
     }
     // Finally communicate the class.
     $class = _uswds_paragraphs_fraction_to_class($numerator, $max_columns);
