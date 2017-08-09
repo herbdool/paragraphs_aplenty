@@ -303,3 +303,63 @@ function _uswds_paragraphs_preprocess_uswds_text(&$variables) {
     $variables['uswds_grid_class'] = 'usa-grid-full';
   }
 }
+
+/**
+ * Helper function to get the required fields for each type.
+ *
+ * @return
+ *   A nested array of bundles to required field names.
+ */
+function _uswds_paragraphs_get_required_fields() {
+  return array(
+    'uswds_accordion' => array(
+      'field_uswds_accordion_expand',
+      'field_uswds_accordion_multi',
+      'field_uswds_accordion_bordered',
+      'field_uswds_paragraphs',
+    ),
+    'uswds_accordion_item' => array(
+      'field_uswds_title',
+    ),
+    'uswds_graphic_list' => array(
+      'field_uswds_paragraphs',
+    ),
+    'uswds_grid' => array(
+      'field_uswds_grid_column_width',
+      'field_uswds_grid_column_stretch',
+      'field_uswds_paragraphs',
+    ),
+    'uswds_hero' => array(
+      'field_uswds_image',
+      'field_uswds_title',
+      'field_uswds_link',
+      'field_uswds_button',
+    ),
+    'uswds_media_block' => array(
+      'field_uswds_title',
+      'field_uswds_image',
+      'field_uswds_body',
+    ),
+  );
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function uswds_paragraphs_form_field_ui_field_delete_form_alter(&$form) {
+  $entity_type = $form['entity_type']['#value'];
+  $bundle = $form['bundle']['#value'];
+  $field_name = $form['field_name']['#value'];
+  if ('paragraphs_item' != $entity_type) {
+    return;
+  }
+  $required = _uswds_paragraphs_get_required_fields();
+  if (empty($required[$bundle])) {
+    return;
+  }
+  if (!in_array($field_name, $required[$bundle])) {
+    return;
+  }
+  $form['uswds_paragraphs']['#markup'] = t('NOTE: This field is required by USWDS Paragraphs, and cannot be deleted.');
+  $form['actions']['submit']['#access'] = FALSE;
+}
