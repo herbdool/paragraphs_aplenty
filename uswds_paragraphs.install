@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Install/update code for the USWDS Paragraphs module.
+ * Install/update code for the Paragraphs Aplenty module.
  */
 
 /**
@@ -22,9 +22,11 @@ function _uswds_paragraphs_create_bundle($machine, $human) {
   $bundle = new stdClass();
   $bundle->name = $human;
   $bundle->label = $human;
+  $bundle->description = '';
   $bundle->bundle = $machine;
   $bundle->allow_unpublish = 1;
   $bundle->locked = 0;
+  $bundle->allow_unpublish = 1;
   paragraphs_bundle_save($bundle);
 }
 
@@ -51,6 +53,11 @@ function uswds_paragraphs_install() {
   ));
   _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
     'label' => 'Description',
+    'required' => FALSE,
+  ));
+  _uswds_paragraphs_add_link_field('field_uswds_link', $bundle, array(
+    'label' => 'Hero callout link',
+    'description' => 'If provided, this link will appear inside the hero callout.',
   ));
   _uswds_paragraphs_add_link_field('field_uswds_button', $bundle, array(
     'label' => 'Hero callout button',
@@ -65,7 +72,7 @@ function uswds_paragraphs_install() {
     'required' => TRUE,
   ));
 
-  // Install the Media Block paragraph type.
+  // Install the Image Block paragraph type.
   $bundle = 'uswds_media_block';
   _uswds_paragraphs_create_bundle($bundle, 'Media block');
   _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
@@ -118,9 +125,10 @@ function uswds_paragraphs_install() {
     array(
       'settings' => array(
         'allowed_values' => array(
-          2 => '½ width',
-          3 => '⅓ width',
-          4 => '¼ width',
+          2 => '½ width (2 columns)',
+          3 => '⅓ width (3 columns)',
+          4 => '¼ width (4 columns)',
+          6 => '⅙ width (6 columns)',
         ),
       ),
     )
@@ -128,6 +136,7 @@ function uswds_paragraphs_install() {
   _uswds_paragraphs_add_number_list_field('field_uswds_grid_column_stretch', $bundle,
     array(
       'label' => 'Column to stretch',
+      'description' => 'Choose which column to be wider. If the number of paragraphs is less than the set number of columns, then the column chosen here will stretch to fill the remainder.',
       'default_value' => array(
         array('value' => 1),
       ),
@@ -138,6 +147,8 @@ function uswds_paragraphs_install() {
           1 => 'First column',
           2 => 'Second column',
           3 => 'Third column',
+          4 => 'Fourth column',
+          5 => 'Fifth column',
         ),
       ),
     )
@@ -185,6 +196,21 @@ function uswds_paragraphs_install() {
       ),
       'title' => 'Accordion item',
       'title_multiple' => 'Accordion items',
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'paragraphs_jquery_ui_accordion_formatter',
+        'weight' => 4,
+        'settings' => array(
+          'bundle' => 'uswds_accordion_item',
+          'title' => 'field_uswds_title',
+          'content' => 'field_uswds_body',
+          'autoscroll' => 0,
+          'startclosed' => 1,
+        ),
+        'module' => 'paragraphs_jquery_ui_accordion',
+      ),
     ),
     'required' => TRUE,
   ));
@@ -720,32 +746,8 @@ function _uswds_paragraphs_add_link_field($field_name, $bundle, $instance_overri
 }
 
 /**
- * Add the new "Column to stretch" field on the "Row of columns" type.
+ * Implements hook_update_last_removed().
  */
-function uswds_paragraphs_update_7001() {
-  $bundle = 'uswds_grid';
-  _uswds_paragraphs_add_number_list_field('field_uswds_grid_column_stretch', $bundle,
-    array(
-      'label' => 'Column to stretch',
-      'default_value' => array(
-        array('value' => 1),
-      ),
-    ),
-    array(
-      'settings' => array(
-        'allowed_values' => array(
-          1 => 'First column',
-          2 => 'Second column',
-          3 => 'Third column',
-        ),
-      ),
-    )
-  );
-}
-
-/**
- * Delete the now-unused "Stetch to fill space" field on the "Column" type.
- */
-function uswds_paragraphs_update_7002() {
-  field_delete_field('field_uswds_column_stretch');
+function uswds_paragraphs_update_last_removed() {
+  return 7002;
 }

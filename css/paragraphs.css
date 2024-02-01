@@ -1,0 +1,72 @@
+/**
+ * @file
+ * Paragraphs Material
+ */
+
+/**
+ * Grid
+ */
+.usa-grid-full {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.usa-width-one-third {
+  width: 1fr;
+}
+.usa-width-two-thirds {
+  width: 2fr;
+  span: 2;
+}
+
+/**
+ * Hero
+ */
+
+.paragraphs-item-uswds-hero {
+  padding: 2rem;
+}
+.aplenty-hero-callout {
+  padding: 2rem;
+}
+.aplenty-section-dark {
+  background-color: #444b53;
+}
+.aplenty-section-dark h2,
+.aplenty-section-dark,
+.aplenty-section-dark a {
+  color: #fff;
+}
+@media (min-width: 34em) {
+  .aplenty-hero-callout {
+    max-width: 20rem;
+  }
+}
+
+
+/**
+ * Accordion
+ */
+
+ul.paragraphs-item-uswds-accordion {
+  padding: 0;
+}
+.ui-accordion-header {
+  background-color: #e5e5e6 !important;
+}
+.ui-accordion-header-active {
+  background-color: #0074bd !important;
+}
+
+/**
+ * Media block
+ */
+.paragraphs-item-uswds-media-block {
+  display: flex;
+  gap: 1rem;
+  padding: .5rem;
+}
+.paragraphs-item-uswds-media-block img {
+  height: fit-content;
+}

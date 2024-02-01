@@ -2,7 +2,7 @@
 
 /**
  * @file
- * USWDS Paragraphs module code.
+ * Paragraphs Aplenty module code.
  */
 
 /**
@@ -141,7 +141,7 @@ function _uswds_paragraphs_preprocess_uswds_hero(&$variables) {
 }
 
 /**
- * Helper function to convert a fraction into a USWDS class.
+ * Helper function to convert a fraction into a grid class.
  *
  * @param int $numerator
  *   The top part of the fraction.
@@ -310,7 +310,7 @@ function _uswds_paragraphs_preprocess_uswds_accordion_item(&$variables) {
 function _uswds_paragraphs_preprocess_uswds_text(&$variables) {
   $parent = $variables['paragraphs_item']->hostEntity();
   if ($parent && !$parent instanceof ParagraphsItemEntity) {
-    // If this text paragraph is not in an entity, we'll need
+    // If this text paragraph is not in an other paragraph, we'll need
     // to add the grid class.
     $variables['uswds_grid_class'] = 'row';
   }
@@ -373,6 +373,6 @@ function uswds_paragraphs_form_field_ui_field_delete_form_alter(&$form) {
   if (!in_array($field_name, $required[$bundle])) {
     return;
   }
-  $form['uswds_paragraphs']['#markup'] = t('NOTE: This field is required by USWDS Paragraphs, and cannot be deleted.');
+  $form['uswds_paragraphs']['#markup'] = t('NOTE: This field is required by Paragraphs Aplenty, and cannot be deleted.');
   $form['actions']['submit']['#access'] = FALSE;
 }

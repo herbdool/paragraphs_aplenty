@@ -2,7 +2,8 @@
   <div class="content container"<?php print backdrop_attributes($content_attributes); ?>>
 
     <?php if ($uswds_grid_class): ?>
-    <div class="<?php print $uswds_grid_class ?>">
+    <div class="container">
+      <div class="row">
     <?php endif; ?>
 
       <?php if (!empty($content['field_uswds_image'])): ?>
@@ -10,8 +11,8 @@
       <?php endif; ?>
 
       <?php if (!empty($content['field_uswds_title'])): ?>
-      <div class="aplenty-hero-callout aplenty-section">
-        <h2 class="aplenty-title"><?php print render($content['field_uswds_title']) ?></h2>
+      <div class="aplenty-hero-callout aplenty-section-dark">
+        <h2><?php print render($content['field_uswds_title']) ?></h2>
 
         <?php if (!empty($content['field_uswds_body'])): ?>
         <?php print render($content['field_uswds_body']) ?>
@@ -25,6 +26,7 @@
       <?php endif; ?>
 
     <?php if ($uswds_grid_class): ?>
+      </div>
     </div>
     <?php endif; ?>
 

@@ -1,5 +1,6 @@
 <?php if ($uswds_grid_class): ?>
-<div class="<?php print $uswds_grid_class ?>">
+<div class="container">
+  <div class="row">
 <?php endif; ?>
 
   <div class="<?php print implode(' ', $classes); ?>"<?php print backdrop_attributes($attributes); ?>>
@@ -11,5 +12,6 @@
   </div>
 
 <?php if ($uswds_grid_class): ?>
+  </div>
 </div>
 <?php endif; ?>
