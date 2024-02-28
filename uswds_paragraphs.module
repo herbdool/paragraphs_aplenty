@@ -53,6 +53,7 @@ function uswds_paragraphs_preprocess_paragraphs_item(&$variables) {
   }
   $path = backdrop_get_path('module', 'uswds_paragraphs');
   backdrop_add_css($path . '/css/uswds_paragraphs.css');
+  backdrop_add_js($path . '/js/uswds_paragraphs.js');
 
   // Do any extra preprocessing.
   $bundle = $variables['paragraphs_item']->bundle();
@@ -253,7 +254,10 @@ function _uswds_paragraphs_preprocess_uswds_accordion(&$variables) {
   $accordion = entity_metadata_wrapper('paragraphs_item', $accordion);
 
   if ($accordion->field_uswds_accordion_multi->value()) {
-    $variables['attributes_array']['aria-multiselectable'] = 'true';
+    $variables['classes'][] = 'aplenty-accordion-multi';
+  }
+  else {
+    $variables['classes'][] = 'aplenty-accordion-single';
   }
 
   $variables['classes'][] = 'aplenty-accordion';
