@@ -5,7 +5,7 @@
   <?php endif; ?>
 
     <?php foreach ($graphic_list_rows as $graphic_list_row): ?>
-    <div class="usa-graphic_list-row">
+    <div class="aplenty-graphic_list-row">
       <?php print render($graphic_list_row) ?>
     </div>
     <?php endforeach; ?>
@@ -21,8 +21,8 @@
     'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    'usa-graphic_list',
-    'usa-section',
+    'aplenty-graphic_list',
+    'aplenty-section',
   ]
 %}
 {% block paragraph %}
@@ -34,7 +34,7 @@
       {% endif %}
 
       {% for graphic_list_row in graphic_list_rows %}
-        <div class="usa-graphic_list-row">
+        <div class="aplenty-graphic_list-row">
           {{ graphic_list_row }}
         </div>
       {% endfor %}

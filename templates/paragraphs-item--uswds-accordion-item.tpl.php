@@ -3,7 +3,7 @@
   <summary>
     <?php print $accordion_title ?>
   </summary>
-  <div id="<?php print $controls ?>" class="usa-accordion-content">
+  <div id="<?php print $controls ?>" class="aplenty-accordion-content">
     <?php hide($content['field_uswds_title']); ?>
     <?php print render($content) ?>
   </div>

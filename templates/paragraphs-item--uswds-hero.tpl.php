@@ -10,7 +10,7 @@
       <?php endif; ?>
 
       <?php if (!empty($content['field_uswds_title'])): ?>
-      <div class="usa-hero-callout usa-section-dark">
+      <div class="aplenty-hero-callout aplenty-section-dark">
         <h2><?php print render($content['field_uswds_title']) ?></h2>
 
         <?php if (!empty($content['field_uswds_link'])): ?>

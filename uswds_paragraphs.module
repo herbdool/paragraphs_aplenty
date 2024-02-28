@@ -66,8 +66,8 @@ function uswds_paragraphs_preprocess_paragraphs_item(&$variables) {
  * Preprocessing code for the Graphic List bundle.
  */
 function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
-  $variables['classes'][] = 'usa-graphic_list';
-  $variables['classes'][] = 'usa-section';
+  $variables['classes'][] = 'aplenty-graphic_list';
+  $variables['classes'][] = 'aplenty-section';
   // The "uswds_graphic_list" bundle should always be on the grid.
   $variables['uswds_grid_class'] = 'row';
   // Here we split the media blocks into pairs.
@@ -95,24 +95,24 @@ function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
  */
 function _uswds_paragraphs_preprocess_uswds_media_block(&$variables) {
   $variables['classes'][] = 'col-md-6';
-  $variables['classes'][] = 'usa-media_block';
-  $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'usa-media_block-img';
+  $variables['classes'][] = 'aplenty-media_block';
+  $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'aplenty-media_block-img';
 }
 
 /**
  * Preprocessing code for the Hero bundle.
  */
 function _uswds_paragraphs_preprocess_uswds_hero(&$variables) {
-  $variables['classes'][] = 'usa-hero';
+  $variables['classes'][] = 'aplenty-hero';
   // The "uswds_hero" Paragraph type should always be on the grid.
   $variables['uswds_grid_class'] = 'row';
   // Set the classes on the link and button.
   $paragraph = $variables['paragraphs_item'];
   if (!empty($paragraph->field_uswds_link)) {
-    $variables['content']['field_uswds_link'][0]['#element']['attributes']['class'] = 'usa-hero-link';
+    $variables['content']['field_uswds_link'][0]['#element']['attributes']['class'] = 'aplenty-hero-link';
   }
   if (!empty($paragraph->field_uswds_button)) {
-    $variables['content']['field_uswds_button'][0]['#element']['attributes']['class'] = 'usa-button usa-button-big usa-button-secondary';
+    $variables['content']['field_uswds_button'][0]['#element']['attributes']['class'] = 'button aplenty-button-big button-secondary';
   }
   // We also need to set the inline CSS for the image.
   if (!empty($paragraph->field_uswds_image)) {
@@ -121,7 +121,7 @@ function _uswds_paragraphs_preprocess_uswds_hero(&$variables) {
     $variables['classes'][] = $identifier;
     // Inline the CSS background image.
     $img = file_create_url($variables['content']['field_uswds_image'][0]['#item']['uri']);
-    $css = ".$identifier.paragraphs-item-uswds-hero.usa-hero { background-image:url($img); }";
+    $css = ".$identifier.paragraphs-item-uswds-hero.aplenty-hero { background-image:url($img); }";
     $variables['content']['field_uswds_image'] = array(
       '#attached' => array(
         'css' => array(
@@ -146,7 +146,7 @@ function _uswds_paragraphs_preprocess_uswds_hero(&$variables) {
  */
 function _uswds_paragraphs_fraction_to_class($numerator, $denominator) {
   if ($numerator == $denominator) {
-    return 'usa-width-one-whole';
+    return 'col-md-12';
   }
   // We could do a lot of fancy math here. But we won't.
   $classes = [
@@ -239,7 +239,7 @@ function _uswds_paragraphs_preprocess_uswds_grid(&$variables) {
  */
 function _uswds_paragraphs_preprocess_uswds_column(&$variables) {
   if (empty($variables['elements']['#uswds_width_class'])) {
-    $variables['elements']['#uswds_width_class'] = 'usa-width-one-whole';
+    $variables['elements']['#uswds_width_class'] = 'col-md-12';
   }
   $variables['classes'][] = $variables['elements']['#uswds_width_class'];
 }
@@ -256,12 +256,12 @@ function _uswds_paragraphs_preprocess_uswds_accordion(&$variables) {
     $variables['attributes_array']['aria-multiselectable'] = 'true';
   }
 
-  $variables['classes'][] = 'usa-accordion';
+  $variables['classes'][] = 'aplenty-accordion';
   if ($accordion->field_uswds_accordion_bordered->value()) {
-    $variables['classes'][] = 'usa-accordion-border';
+    $variables['classes'][] = 'aplenty-accordion-border';
   }
   else {
-    $variables['classes'][] = 'usa-accordion-no-border';
+    $variables['classes'][] = 'aplenty-accordion-no-border';
   }
 
   if ($accordion->field_uswds_accordion_expand->value()) {
