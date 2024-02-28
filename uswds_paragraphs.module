@@ -69,7 +69,7 @@ function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
   $variables['classes'][] = 'usa-graphic_list';
   $variables['classes'][] = 'usa-section';
   // The "uswds_graphic_list" bundle should always be on the grid.
-  $variables['uswds_grid_class'] = 'usa-grid-full';
+  $variables['uswds_grid_class'] = 'row';
   // Here we split the media blocks into pairs.
   $pairs = [];
   $pair = [];
@@ -94,7 +94,7 @@ function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
  * Preprocessing code for the Media Block bundle.
  */
 function _uswds_paragraphs_preprocess_uswds_media_block(&$variables) {
-  $variables['classes'][] = 'usa-width-one-half';
+  $variables['classes'][] = 'col-md-6';
   $variables['classes'][] = 'usa-media_block';
   $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'usa-media_block-img';
 }
@@ -105,7 +105,7 @@ function _uswds_paragraphs_preprocess_uswds_media_block(&$variables) {
 function _uswds_paragraphs_preprocess_uswds_hero(&$variables) {
   $variables['classes'][] = 'usa-hero';
   // The "uswds_hero" Paragraph type should always be on the grid.
-  $variables['uswds_grid_class'] = 'usa-grid';
+  $variables['uswds_grid_class'] = 'row';
   // Set the classes on the link and button.
   $paragraph = $variables['paragraphs_item'];
   if (!empty($paragraph->field_uswds_link)) {
@@ -153,50 +153,50 @@ function _uswds_paragraphs_fraction_to_class($numerator, $denominator) {
     // Denominators first.
     2 => [
       // Then numerators.
-      1 => 'usa-width-one-half',
+      1 => 'col-md-6',
     ],
     3 => [
-      1 => 'usa-width-one-third',
-      2 => 'usa-width-two-thirds',
+      1 => 'col-md-4',
+      2 => 'col-md-8',
     ],
     4 => [
-      1 => 'usa-width-one-fourth',
-      2 => 'usa-width-one-half',
-      3 => 'usa-width-three-fourths',
+      1 => 'col-md-3',
+      2 => 'col-md-6',
+      3 => 'col-md-9',
     ],
     6 => [
-      1 => 'usa-width-one-sixth',
-      2 => 'usa-width-one-third',
-      3 => 'usa-width-one-half',
-      4 => 'usa-width-two-thirds',
-      5 => 'usa-width-five-sixths',
+      1 => 'col-md-2',
+      2 => 'col-md-4',
+      3 => 'col-md-6',
+      4 => 'col-md-8',
+      5 => 'col-md-10',
     ],
     12 => [
-      1 => 'usa-width-one-twelfth',
-      2 => 'usa-width-one-sixth',
-      3 => 'usa-width-one-fourth',
-      4 => 'usa-width-one-third',
-      5 => 'usa-width-five-twelfths',
-      6 => 'usa-width-one-half',
-      7 => 'usa-width-seven-twelfths',
-      8 => 'usa-width-two-thirds',
-      9 => 'usa-width-three-fourths',
-      10 => 'usa-width-five-sixths',
-      11 => 'usa-width-eleven-twelfths',
+      1 => 'col-md-1',
+      2 => 'col-md-2',
+      3 => 'col-md-3',
+      4 => 'col-md-4',
+      5 => 'col-md-5',
+      6 => 'col-md-6',
+      7 => 'col-md-7',
+      8 => 'col-md-8',
+      9 => 'col-md-9',
+      10 => 'col-md-10',
+      11 => 'col-md-11',
     ],
   ];
   if (!empty($classes[$denominator][$numerator])) {
     return $classes[$denominator][$numerator];
   }
   // If still here, it is some weird non-supported fraction.
-  return 'usa-width-one-whole';
+  return 'col-md-12';
 }
 
 /**
  * Preprocessing code for the Grid bundle.
  */
 function _uswds_paragraphs_preprocess_uswds_grid(&$variables) {
-  $variables['uswds_grid_class'] = 'usa-grid-full';
+  $variables['uswds_grid_class'] = 'row';
 
   $grid = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
   $max_columns = (int)$grid->field_uswds_grid_column_width->value();
@@ -302,7 +302,7 @@ function _uswds_paragraphs_preprocess_uswds_text(&$variables) {
   if ($parent && !$parent instanceof ParagraphsItemEntity) {
     // If this text paragraph is not in an entity, we'll need
     // to add the grid class.
-    $variables['uswds_grid_class'] = 'usa-grid-full';
+    $variables['uswds_grid_class'] = 'row';
   }
 }
 
