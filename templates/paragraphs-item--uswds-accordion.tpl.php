@@ -2,13 +2,13 @@
 <div class="<?php print $uswds_grid_class ?>">
 <?php endif; ?>
 
-  <ul class="<?php print $classes; ?>"<?php print $attributes; ?>>
-
+  <div class="<?php print implode(' ', $classes); ?>"<?php print backdrop_attributes($attributes); ?>>
+  <?php if ($uswds_accordion_items): ?>
     <?php foreach ($uswds_accordion_items as $accordion_item): ?>
     <?php print render($accordion_item); ?>
     <?php endforeach; ?>
-
-  </ul>
+  <?php endif; ?>
+  </div>
 
 <?php if ($uswds_grid_class): ?>
 </div>

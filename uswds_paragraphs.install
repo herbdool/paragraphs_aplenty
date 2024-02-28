@@ -21,7 +21,9 @@ function _uswds_paragraphs_create_bundle($machine, $human) {
 
   $bundle = new stdClass();
   $bundle->name = $human;
+  $bundle->label = $human;
   $bundle->bundle = $machine;
+  $bundle->allow_unpublish = 1;
   $bundle->locked = 0;
   paragraphs_bundle_save($bundle);
 }

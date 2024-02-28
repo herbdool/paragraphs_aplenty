@@ -1,6 +1,7 @@
 name = USWDS Paragraphs
 description = Several Paragraph types for use with the U.S. Web Design Standards.
-core = 7.x
+backdrop = 1.x
+type = module
 package = Paragraphs
 dependencies[] = image
 dependencies[] = link

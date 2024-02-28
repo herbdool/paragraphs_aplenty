@@ -1,4 +1,4 @@
-<div class="<?php print $classes; ?>"<?php print $attributes; ?>>
+<div class="<?php print implode(' ', $classes); ?>"<?php print backdrop_attributes($attributes); ?>>
 
   <?php if ($uswds_grid_class): ?>
   <div class="<?php print $uswds_grid_class ?>">

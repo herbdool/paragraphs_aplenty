@@ -1,0 +1,9 @@
+/**
+ * @file
+ * CSS
+ */
+
+.usa-accordion.usa-accordion-border {}
+.usa-accordion.usa-accordion-no-border details {
+  border: 0;
+}

@@ -1,11 +1,11 @@
-<li class="<?php print $classes; ?>"<?php print $attributes; ?>>
+<details class="<?php print implode(' ', $classes); ?>"<?php print backdrop_attributes($attributes); ?> <?php print $expanded; ?>>
 
-  <button class="usa-accordion-button" aria-expanded="<?php print $expanded ?>" aria-controls="<?php print $controls ?>">
+  <summary>
     <?php print $accordion_title ?>
-  </button>
+  </summary>
   <div id="<?php print $controls ?>" class="usa-accordion-content">
     <?php hide($content['field_uswds_title']); ?>
     <?php print render($content) ?>
   </div>
 
-</li>
+</details>

@@ -6,6 +6,7 @@ This module, when enabled, installs several Paragraph types that correspond to s
 
 * Hero with callout
 * Graphic list of media blocks
-* Two columns - one-third width and two-thirds width
+* Row of columns
+* Accordions
 
 After installation, feel free to alter the Paragraph types be adding fields or altering fields. However, try not to remove fields.
