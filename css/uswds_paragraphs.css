@@ -3,7 +3,89 @@
  * CSS
  */
 
-.aplenty-accordion.aplenty-accordion-border {}
+ /* Accordions */
 .aplenty-accordion.aplenty-accordion-no-border details {
   border: 0;
+}
+
+/* Heros */
+.aplenty-hero {
+  /* Positioning, width and transform is to make hero full width on smaller screens */
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  min-height: 30vh;
+  padding: 1.5rem 2rem 2rem;
+  margin: 0 0 2rem;
+  transform: translate(-50%, 0);
+  transition: min-height 0.25s;
+  will-change: min-height;
+  background-size: cover;
+}
+
+.aplenty-hero .aplenty-hero-callout {
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+.aplenty-hero .button {
+  font-size: 1rem;
+}
+
+@media (min-width: 25em) {
+  .aplenty-hero {
+    padding: 2rem 3rem 3rem;
+    font-size: 1.3em;
+  }
+}
+
+@media (min-width: 34em) {
+  .aplenty-hero {
+    font-size: 1.5em;
+  }
+}
+
+@media (min-width: 62em) {
+  .aplenty-hero {
+    /* Remove full width styles on larger screens */
+    left: auto;
+    width: 100%;
+    transform: none;
+  }
+}
+
+.aplenty-hero-no-image {
+  background: #0074bd url(../images/texture.png) repeat center center;
+  background-blend-mode: luminosity;
+}
+
+.no-background-blend-mode .aplenty-hero-no-image * {
+  position: relative;
+  z-index: 1;
+}
+
+.no-background-blend-mode .aplenty-hero-no-image:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #009dff;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.aplenty-hero .aplenty-title {
+  margin: 0 0 0.2em;
+  padding: 0;
+  font-weight: 200;
+  line-height: 1.2;
+  font-size: 2.3em;
+}
+
+@media (min-width: 34em) {
+  .aplenty-hero .aplenty-title {
+    font-size: 2.625em;
+  }
 }

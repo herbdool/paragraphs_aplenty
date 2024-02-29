@@ -109,20 +109,21 @@ function _uswds_paragraphs_preprocess_uswds_hero(&$variables) {
   $variables['uswds_grid_class'] = 'row';
   // Set the classes on the link and button.
   $paragraph = $variables['paragraphs_item'];
-  if (!empty($paragraph->field_uswds_link)) {
-    $variables['content']['field_uswds_link'][0]['#element']['attributes']['class'] = 'aplenty-hero-link';
+  if (!empty($paragraph->field_uswds_body)) {
+    $variables['content']['field_uswds_body'][0]['#element']['attributes']['class'] = 'aplenty-hero-body';
   }
   if (!empty($paragraph->field_uswds_button)) {
     $variables['content']['field_uswds_button'][0]['#element']['attributes']['class'] = 'button aplenty-button-big button-secondary';
   }
   // We also need to set the inline CSS for the image.
-  if (!empty($paragraph->field_uswds_image)) {
+  if (!empty($variables['content']['field_uswds_image'])) {
     // Make sure we have a unique ID, in case of multiple Heroes.
     $identifier = 'uswds-hero-' . $variables['content']['field_uswds_image'][0]['#item']['fid'];
     $variables['classes'][] = $identifier;
+    $variables['classes'][] = 'aplenty-hero-image';
     // Inline the CSS background image.
     $img = file_create_url($variables['content']['field_uswds_image'][0]['#item']['uri']);
-    $css = ".$identifier.paragraphs-item-uswds-hero.aplenty-hero { background-image:url($img); }";
+    $css = ".$identifier.paragraphs-item.aplenty-hero { background-image:url($img); }";
     $variables['content']['field_uswds_image'] = array(
       '#attached' => array(
         'css' => array(
@@ -133,6 +134,9 @@ function _uswds_paragraphs_preprocess_uswds_hero(&$variables) {
         ),
       ),
     );
+  }
+  else {
+    $variables['classes'][] = 'aplenty-hero-no-image';
   }
 }
 
@@ -276,8 +280,10 @@ function _uswds_paragraphs_preprocess_uswds_accordion(&$variables) {
 
   // Copy to a separate variable for easy rendering without field markup.
   $variables['uswds_accordion_items'] = array();
-  foreach (element_children($variables['content']['field_uswds_paragraphs']) as $key) {
-    $variables['uswds_accordion_items'][] = $variables['content']['field_uswds_paragraphs'][$key];
+  if (!empty($variables['content']['field_uswds_paragraphs'])){
+    foreach (element_children($variables['content']['field_uswds_paragraphs']) as $key) {
+      $variables['uswds_accordion_items'][] = $variables['content']['field_uswds_paragraphs'][$key];
+    }
   }
 }
 
@@ -339,7 +345,7 @@ function _uswds_paragraphs_get_required_fields() {
     'uswds_hero' => array(
       'field_uswds_image',
       'field_uswds_title',
-      'field_uswds_link',
+      'field_uswds_body',
       'field_uswds_button',
     ),
     'uswds_media_block' => array(

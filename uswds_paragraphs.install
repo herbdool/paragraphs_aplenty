@@ -40,16 +40,17 @@ function uswds_paragraphs_install() {
     'label' => 'Hero background image',
     'description' => 'If provided, this image will appear as the background for the hero.',
     'settings' => array(
-      'min_resolution' => '2000x400',
+      // @todo fix - don't think this gets set.
+      'min_resolution' => '1200x300',
+      'max_resolution' => '3600x600',
     ),
   ));
   _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
     'label' => 'Hero callout title',
     'description' => 'If provided, this title will appear at the top of the hero callout.',
   ));
-  _uswds_paragraphs_add_link_field('field_uswds_link', $bundle, array(
-    'label' => 'Hero callout link',
-    'description' => 'If provided, this link will appear inside the hero callout.',
+  _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
+    'label' => 'Description',
   ));
   _uswds_paragraphs_add_link_field('field_uswds_button', $bundle, array(
     'label' => 'Hero callout button',

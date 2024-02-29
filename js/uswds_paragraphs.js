@@ -5,6 +5,8 @@
 
 (function ($) {
 
+  "use strict";
+
   /**
    * Close sibling details
    */
