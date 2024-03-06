@@ -37,6 +37,9 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
     'paragraphs_item__uswds_column' => $common + array(
       'template' => 'paragraphs-item--uswds-column',
     ),
+    'paragraphs_item__uswds_column_wrapper' => $common + array(
+      'template' => 'paragraphs-item--uswds-column-wrapper',
+    ),
     'paragraphs_item__uswds_accordion' => $common + array(
       'template' => 'paragraphs-item--uswds-accordion',
     ),
@@ -113,7 +116,7 @@ function _uswds_paragraphs_preprocess_uswds_media_block(&$variables) {
 }
 
 /**
- *
+ * Preprocessing code for the Card bundle.
  */
 function _uswds_paragraphs_preprocess_uswds_card(&$variables) {
   $variables['classes'][] = 'aplenty-card';
@@ -309,6 +312,26 @@ function _uswds_paragraphs_preprocess_uswds_column(&$variables) {
 }
 
 /**
+ * Preprocessing code for the Column Wrapper bundle.
+ */
+function _uswds_paragraphs_preprocess_uswds_column_wrapper(&$variables) {
+  if (empty($variables['elements']['#uswds_width_class'])) {
+    $variables['elements']['#uswds_width_class'] = 'col-md-12';
+  }
+  $variables['classes'][] = $variables['elements']['#uswds_width_class'];
+
+  $variables['cards'] = array();
+  if (empty($variables['content']['field_uswds_paragraphs'])) {
+    return;
+  }
+  $content_keys = element_children($variables['content']['field_uswds_paragraphs']);
+  foreach ($content_keys as $key) {
+    $pairs[] = $variables['content']['field_uswds_paragraphs'][$key];
+  }
+  $variables['column_items'] = $pairs;
+}
+
+/**
  * Preprocessing code for the Accordion bundle.
  */
 function _uswds_paragraphs_preprocess_uswds_accordion(&$variables) {
@@ -369,7 +392,7 @@ function _uswds_paragraphs_preprocess_uswds_accordion_item(&$variables) {
 function _uswds_paragraphs_preprocess_uswds_text(&$variables) {
   $parent = $variables['paragraphs_item']->hostEntity();
   if ($parent && !$parent instanceof ParagraphsItemEntity) {
-    // If this text paragraph is not in an other paragraph, we'll need
+    // If this text paragraph is not in another paragraph, we'll need
     // to add the grid class.
     $variables['uswds_grid_class'] = 'row';
   }
@@ -386,12 +409,18 @@ function _uswds_paragraphs_get_required_fields() {
     'uswds_accordion' => array(
       'field_uswds_accordion_multi',
       'field_uswds_accordion_bordered',
-      'field_uswds_accordion_closed',
+      'field_uswds_accordion_expand',
       'field_uswds_paragraphs',
     ),
     'uswds_accordion_item' => array(
       'field_uswds_title',
       'field_uswds_body',
+    ),
+    'uswds_column' => array(
+      'field_uswds_body',
+    ),
+    'uswds_column_wrapper' => array(
+      'field_uswds_paragraphs',
     ),
     'uswds_graphic_list' => array(
       'field_uswds_paragraphs',

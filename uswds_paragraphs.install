@@ -181,6 +181,23 @@ function uswds_paragraphs_install() {
     'label' => 'Text',
   ));
 
+  // Install the Column wrapper paragraph type.
+  $bundle = 'uswds_column_wrapper';
+  _uswds_paragraphs_create_bundle($bundle, 'Column Wrapper');
+  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
+    'label' => 'Column Content',
+    'settings' => array(
+      'allowed_bundles' => array(
+        'uswds_media_block' => 'uswds_media_block',
+        'uswds_text' => 'uswds_text',
+        'uswds_accordion' => 'uswds_accordion',
+      ),
+      'title' => 'Paragraph',
+      'title_multiple' => 'Paragraphs',
+    ),
+    'required' => TRUE,
+  ));
+
   // Install the Grid (aka "Row of columns") paragraph type.
   $bundle = 'uswds_grid';
   _uswds_paragraphs_create_bundle($bundle, 'Row of columns');
@@ -256,8 +273,8 @@ function uswds_paragraphs_install() {
   _uswds_paragraphs_add_boolean_field('field_uswds_accordion_multi', $bundle, array(
     'label' => 'Allow more than one item to expand at a time',
   ));
-  _uswds_paragraphs_add_boolean_field('field_uswds_accordion_closed', $bundle, array(
-    'label' => 'Start closed',
+  _uswds_paragraphs_add_boolean_field('field_uswds_accordion_expand', $bundle, array(
+    'label' => 'Start expanded',
   ));
   _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
     'label' => 'Accordion Items',
@@ -498,13 +515,10 @@ function _uswds_paragraphs_add_paragraphs_field($field_name, $bundle, $instance_
         'allowed_bundles' => array(),
         'bundle_weights' => array(
           'uswds_text' => '1',
-          'uswds_column' => '2',
-          'uswds_grid' => '3',
-          'uswds_graphic_list' => '4',
-          'uswds_hero' => '5',
-          'uswds_media_block' => '6',
-          'uswds_cards' => '7',
-          'uswds_card' => '8',
+          'uswds_grid' => '2',
+          'uswds_graphic_list' => '3',
+          'uswds_hero' => '4',
+          'uswds_cards' => '5',
         ),
         'user_register_form' => false,
       ),
