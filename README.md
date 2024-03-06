@@ -4,6 +4,7 @@ This module, when enabled, installs several Paragraph types:
 
 * Hero with callout
 * Graphic list of media blocks
+* Cards
 * Grid / row of columns with ability to stretch a block.
 * Accordions
 

@@ -45,6 +45,28 @@ function uswds_paragraphs_install() {
       'min_dimensions' => '1200x300',
       'max_dimensions' => '3600x600',
     ),
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array(
+          'image_style' => '',
+          'image_link' => '',
+        ),
+        'module' => 'image',
+        'weight' => 1,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array(
+          'image_style' => 'thumbnail',
+          'image_link' => '',
+        ),
+        'module' => 'image',
+        'weight' => 1,
+      ),
+    ),
   ));
   _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
     'label' => 'Hero callout title',
@@ -67,7 +89,7 @@ function uswds_paragraphs_install() {
     'required' => TRUE,
   ));
 
-  // Install the Image Block paragraph type.
+  // Install the Media Block paragraph type.
   $bundle = 'uswds_media_block';
   _uswds_paragraphs_create_bundle($bundle, 'Media block');
   _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
@@ -77,6 +99,28 @@ function uswds_paragraphs_install() {
   _uswds_paragraphs_add_image_field('field_uswds_image', $bundle, array(
     'label' => 'Media block image',
     'required' => TRUE,
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array(
+          'image_style' => 'medium',
+          'image_link' => '',
+        ),
+        'module' => 'image',
+        'weight' => 1,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array(
+          'image_style' => 'medium',
+          'image_link' => '',
+        ),
+        'module' => 'image',
+        'weight' => 1,
+      ),
+    ),
   ));
   _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
     'label' => 'Media block body',
@@ -94,6 +138,63 @@ function uswds_paragraphs_install() {
       ),
       'title' => 'Media block',
       'title_multiple' => 'Media blocks',
+    ),
+    'required' => TRUE,
+  ));
+
+  // Install the Card paragraph type.
+  $bundle = 'uswds_card';
+  _uswds_paragraphs_create_bundle($bundle, 'Card');
+  _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
+    'label' => 'Card title',
+    'required' => TRUE,
+  ));
+  _uswds_paragraphs_add_image_field('field_uswds_image', $bundle, array(
+    'label' => 'Card image',
+    'required' => TRUE,
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array(
+          'image_style' => 'card',
+          'image_link' => '',
+        ),
+        'module' => 'image',
+        'weight' => 1,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array(
+          'image_style' => 'card',
+          'image_link' => '',
+        ),
+        'module' => 'image',
+        'weight' => 1,
+      ),
+    ),
+  ));
+  _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
+    'label' => 'Card body',
+    'required' => TRUE,
+  ));
+  _uswds_paragraphs_add_link_field('field_uswds_button', $bundle, array(
+    'label' => 'Card button',
+    'description' => 'If provided, this link will appear at the bottom of the card, as a button.',
+  ));
+
+  // Install the Cards paragraph type.
+  $bundle = 'uswds_cards';
+  _uswds_paragraphs_create_bundle($bundle, 'Cards');
+  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
+    'label' => 'Cards',
+    'settings' => array(
+      'allowed_bundles' => array(
+        'uswds_card' => 'uswds_card',
+      ),
+      'title' => 'Card',
+      'title_multiple' => 'Cards',
     ),
     'required' => TRUE,
   ));
@@ -357,7 +458,7 @@ function _uswds_paragraphs_add_number_list_field($field_name, $bundle, $instance
 }
 
 /**
- * Helper function to add a title field to a bundle.
+ * Helper function to add a paragraphs field to a bundle.
  */
 function _uswds_paragraphs_add_paragraphs_field($field_name, $bundle, $instance_overrides) {
 
@@ -392,7 +493,7 @@ function _uswds_paragraphs_add_paragraphs_field($field_name, $bundle, $instance_
       'settings' => array(
         'title' => 'Paragraph',
         'title_multiple' => 'Paragraphs',
-        'default_edit_mode' => 'closed',
+        'default_edit_mode' => 'preview',
         'add_mode' => 'button',
         'allowed_bundles' => array(),
         'bundle_weights' => array(
@@ -402,6 +503,8 @@ function _uswds_paragraphs_add_paragraphs_field($field_name, $bundle, $instance_
           'uswds_graphic_list' => '4',
           'uswds_hero' => '5',
           'uswds_media_block' => '6',
+          'uswds_cards' => '7',
+          'uswds_card' => '8',
         ),
         'user_register_form' => false,
       ),
@@ -416,10 +519,13 @@ function _uswds_paragraphs_add_paragraphs_field($field_name, $bundle, $instance_
           'weight' => 4,
         ),
         'paragraphs_editor_preview' => array(
-          'type' => 'hidden',
-          'label' => 'above',
-          'settings' => array(),
-          'weight' => 0,
+          'label' => 'hidden',
+          'type' => 'paragraphs_view',
+          'settings' => array(
+            'view_mode' => 'full',
+          ),
+          'module' => 'paragraphs',
+          'weight' => 4,
         ),
       ),
       'required' => FALSE,
@@ -484,8 +590,8 @@ function _uswds_paragraphs_add_text_field($field_name, $bundle, $instance_overri
           'weight' => 0,
         ),
         'paragraphs_editor_preview' => array(
-          'type' => 'hidden',
-          'label' => 'above',
+          'label' => 'hidden',
+          'type' => 'text_default',
           'settings' => array(
           ),
           'weight' => 0,
@@ -548,7 +654,7 @@ function _uswds_paragraphs_add_image_field($field_name, $bundle, $instance_overr
         'max_filesize' => '',
         'max_resolution' => '',
         'min_resolution' => '',
-        'alt_field' => 0,
+        'alt_field' => 1,
         'title_field' => 0,
         'default_image' => 0,
         'user_register_form' => false,
@@ -565,10 +671,14 @@ function _uswds_paragraphs_add_image_field($field_name, $bundle, $instance_overr
           'weight' => 1,
         ),
         'paragraphs_editor_preview' => array(
-          'type' => 'hidden',
-          'label' => 'above',
-          'settings' => array(),
-          'weight' => 0,
+          'label' => 'hidden',
+          'type' => 'image',
+          'settings' => array(
+            'image_style' => 'thumbnail',
+            'image_link' => '',
+          ),
+          'module' => 'image',
+          'weight' => 1,
         ),
       ),
       'required' => FALSE,
@@ -630,9 +740,10 @@ function _uswds_paragraphs_add_text_long_field($field_name, $bundle, $instance_o
           'weight' => 0,
         ),
         'paragraphs_editor_preview' => array(
-          'type' => 'hidden',
-          'label' => 'above',
+          'label' => 'hidden',
+          'type' => 'text_default',
           'settings' => array(),
+          'module' => 'text',
           'weight' => 0,
         ),
       ),
@@ -726,10 +837,11 @@ function _uswds_paragraphs_add_link_field($field_name, $bundle, $instance_overri
           'weight' => 2,
         ),
         'paragraphs_editor_preview' => array(
-          'type' => 'hidden',
-          'label' => 'above',
+          'label' => 'hidden',
+          'type' => 'link_default',
           'settings' => array(),
-          'weight' => 0,
+          'module' => 'link',
+          'weight' => 2,
         ),
       ),
       'required' => FALSE,

@@ -111,3 +111,47 @@
 .paragraphs-item .aplenty-media_block h2 {
   margin-top: 0;
 }
+
+/**
+ * Cards
+ */
+.paragraphs-item.aplenty-cards {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.paragraphs-item.aplenty-cards .content {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+@media(min-width: 48em) {
+  .paragraphs-item.aplenty-cards .content {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+.aplenty-card {
+  border-radius: 0.25rem;
+  border: 1px solid #ddd;
+  margin: 1rem 0;
+  padding: 0 0 1rem 0;
+  background: #fff;
+}
+
+.aplenty-card-image {
+  flex-shrink: 0;
+}
+
+.aplenty-card-image img {
+  height: fit-content;
+}
+
+.paragraphs-item .aplenty-card h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.aplenty-card .aplenty-title,
+.aplenty-card .field-name-field-uswds-body,
+.aplenty-card .field-name-field-uswds-button {
+  padding: 0 1rem;
+}

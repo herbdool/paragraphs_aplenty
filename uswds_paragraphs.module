@@ -25,6 +25,12 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
     'paragraphs_item__uswds_media_block' => $common + array(
       'template' => 'paragraphs-item--uswds-media-block',
     ),
+    'paragraphs_item__uswds_cards' => $common + array(
+      'template' => 'paragraphs-item--uswds-cards',
+    ),
+    'paragraphs_item__uswds_card' => $common + array(
+      'template' => 'paragraphs-item--uswds-card',
+    ),
     'paragraphs_item__uswds_grid' => $common + array(
       'template' => 'paragraphs-item--uswds-grid',
     ),
@@ -72,8 +78,8 @@ function uswds_paragraphs_preprocess_paragraphs_item(&$variables) {
 function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
   $variables['classes'][] = 'aplenty-graphic_list';
   $variables['classes'][] = 'aplenty-section';
-  // The "uswds_graphic_list" bundle should always be on the grid.
-  $variables['uswds_grid_class'] = 'row';
+  // The "aplenty_graphic_list" bundle should always be on the grid.
+  $variables['aplenty_grid_class'] = 'row';
   // Here we split the media blocks into pairs.
   $pairs = [];
   $pair = [];
@@ -104,6 +110,42 @@ function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
 function _uswds_paragraphs_preprocess_uswds_media_block(&$variables) {
   $variables['classes'][] = 'aplenty-media_block';
   $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'aplenty-media_block-img';
+}
+
+/**
+ *
+ */
+function _uswds_paragraphs_preprocess_uswds_card(&$variables) {
+  $variables['classes'][] = 'aplenty-card';
+  $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'aplenty-card-img';
+  $paragraph = $variables['paragraphs_item'];
+  if (!empty($paragraph->field_uswds_title)) {
+    $variables['content']['field_uswds_title'][0]['#element']['attributes']['class'] = 'aplenty-card-title';
+  }
+  if (!empty($paragraph->field_uswds_body)) {
+    $variables['content']['field_uswds_body'][0]['#element']['attributes']['class'] = 'aplenty-card-body';
+  }
+  if (!empty($paragraph->field_uswds_button)) {
+    $variables['content']['field_uswds_button'][0]['#element']['attributes']['class'] = 'aplenty-card-button';
+  }
+}
+
+/**
+ * Preprocessing code for the Cards bundle.
+ */
+function _uswds_paragraphs_preprocess_uswds_cards(&$variables) {
+  $variables['classes'][] = 'aplenty-cards';
+  $variables['aplenty_grid_class'] = 'row';
+
+  $variables['cards'] = array();
+  if (empty($variables['content']['field_uswds_paragraphs'])) {
+    return;
+  }
+  $media_block_keys = element_children($variables['content']['field_uswds_paragraphs']);
+  foreach ($media_block_keys as $key) {
+    $pairs[] = $variables['content']['field_uswds_paragraphs'][$key];
+  }
+  $variables['cards'] = $pairs;
 }
 
 /**
@@ -369,6 +411,15 @@ function _uswds_paragraphs_get_required_fields() {
       'field_uswds_title',
       'field_uswds_image',
       'field_uswds_body',
+    ),
+    'uswds_cards' => array(
+      'field_uswds_paragraphs',
+    ),
+    'uswds_card' => array(
+      'field_uswds_title',
+      'field_uswds_image',
+      'field_uswds_body',
+      'field_uswds_button',
     ),
     'uswds_anchor' => array(
       'field_aplenty_anchor',
