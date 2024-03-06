@@ -3,12 +3,16 @@
  * CSS
  */
 
- /* Accordions */
+/**
+ * Accordion
+ */
 .aplenty-accordion.aplenty-accordion-no-border details {
   border: 0;
 }
 
-/* Heros */
+/**
+ * Hero
+ */
 .aplenty-hero {
   /* Positioning, width and transform is to make hero full width on smaller screens */
   position: relative;
@@ -88,4 +92,17 @@
   .aplenty-hero .aplenty-title {
     font-size: 2.625em;
   }
+}
+
+/**
+ * Media block
+ */
+.paragraphs-item-uswds-media-block {
+  display: flex;
+  gap: 1rem;
+  padding: .5rem;
+}
+
+.paragraphs-item-uswds-media-block img {
+  height: fit-content;
 }

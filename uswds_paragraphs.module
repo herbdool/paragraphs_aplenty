@@ -40,6 +40,9 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
     'paragraphs_item__uswds_text' => $common + array(
       'template' => 'paragraphs-item--uswds-text',
     ),
+    'paragraphs_item__uswds_anchor' => $common + array(
+      'template' => 'paragraphs-item--uswds-anchor',
+    ),
   );
 }
 
@@ -47,9 +50,9 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
  * Implements hook_preprocess_paragraphs_item().
  */
 function uswds_paragraphs_preprocess_paragraphs_item(&$variables) {
-  // Always set the USWDS-specific "uswds_grid_class" variable.
-  if (!isset($variables['uswds_grid_class'])) {
-    $variables['uswds_grid_class'] = FALSE;
+  // Always set the Aplenty-specific "aplenty_grid_class" variable.
+  if (!isset($variables['aplenty_grid_class'])) {
+    $variables['aplenty_grid_class'] = FALSE;
   }
   $path = backdrop_get_path('module', 'uswds_paragraphs');
   backdrop_add_css($path . '/css/uswds_paragraphs.css');
@@ -98,6 +101,17 @@ function _uswds_paragraphs_preprocess_uswds_media_block(&$variables) {
   $variables['classes'][] = 'col-md-6';
   $variables['classes'][] = 'aplenty-media_block';
   $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'aplenty-media_block-img';
+}
+
+/**
+ * Preprocessing code for the Anchor bundle.
+ */
+function _uswds_paragraphs_preprocess_uswds_anchor(&$variables) {
+  $variables['classes'][] = 'aplenty-anchor';
+  $variables['anchor_text'] = '';
+  if (!empty($variables['content']['field_uswds_anchor'])) {
+    $variables['anchor_text'] = check_url($variables['content']['field_uswds_anchor']['#items'][0]['safe_value']);
+  }
 }
 
 /**
@@ -325,14 +339,14 @@ function _uswds_paragraphs_preprocess_uswds_text(&$variables) {
 function _uswds_paragraphs_get_required_fields() {
   return array(
     'uswds_accordion' => array(
-      'field_uswds_accordion_expand',
       'field_uswds_accordion_multi',
       'field_uswds_accordion_bordered',
+      'field_uswds_accordion_closed',
       'field_uswds_paragraphs',
     ),
     'uswds_accordion_item' => array(
-      // @todo change this to be a bucket for other paragraphs.
       'field_uswds_title',
+      'field_uswds_body',
     ),
     'uswds_graphic_list' => array(
       'field_uswds_paragraphs',
@@ -352,6 +366,9 @@ function _uswds_paragraphs_get_required_fields() {
       'field_uswds_title',
       'field_uswds_image',
       'field_uswds_body',
+    ),
+    'uswds_anchor' => array(
+      'field_aplenty_anchor',
     ),
   );
 }

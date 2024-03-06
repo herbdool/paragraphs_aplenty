@@ -12,14 +12,11 @@ altering fields. However, try not to remove fields.
 
 ## Todo
 
--[] add description field to hero
--[] rename module - material, stuff,
--[] rename all classes
+-[] rename module
+-[x] rename all classes
 -[] allow container-fluid
--[] increase columns number options
 -[] make column a container of other paragraphs instead of simple text
 -[] make accordion item a container
--[] move accordion settings to the fields (to remove dependency?)
 -[] update install to match the config changes (displays, etc)
 
 ## Install

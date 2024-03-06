@@ -42,9 +42,8 @@ function uswds_paragraphs_install() {
     'label' => 'Hero background image',
     'description' => 'If provided, this image will appear as the background for the hero.',
     'settings' => array(
-      // @todo fix - don't think this gets set.
-      'min_resolution' => '1200x300',
-      'max_resolution' => '3600x600',
+      'min_dimensions' => '1200x300',
+      'max_dimensions' => '3600x600',
     ),
   ));
   _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
@@ -54,10 +53,6 @@ function uswds_paragraphs_install() {
   _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
     'label' => 'Description',
     'required' => FALSE,
-  ));
-  _uswds_paragraphs_add_link_field('field_uswds_link', $bundle, array(
-    'label' => 'Hero callout link',
-    'description' => 'If provided, this link will appear inside the hero callout.',
   ));
   _uswds_paragraphs_add_link_field('field_uswds_button', $bundle, array(
     'label' => 'Hero callout button',
@@ -116,7 +111,7 @@ function uswds_paragraphs_install() {
   _uswds_paragraphs_add_number_list_field('field_uswds_grid_column_width', $bundle,
     array(
       'label' => 'Column width',
-      'description' => 'This sets the width of the columns in this row.',
+      'description' => 'This sets the width of the columns in this row, and the number of columns per row.',
       'required' => TRUE,
       'default_value' => array(
         array('value' => 3),
@@ -136,7 +131,7 @@ function uswds_paragraphs_install() {
   _uswds_paragraphs_add_number_list_field('field_uswds_grid_column_stretch', $bundle,
     array(
       'label' => 'Column to stretch',
-      'description' => 'Choose which column to be wider. If the number of paragraphs is less than the set number of columns, then the column chosen here will stretch to fill the remainder.',
+      'description' => 'Choose which column will stretch to fill the remainder. If the number of paragraphs is less than the set number of columns, then the column chosen here will stretch to fill the remainder.',
       'default_value' => array(
         array('value' => 1),
       ),
@@ -185,8 +180,8 @@ function uswds_paragraphs_install() {
   _uswds_paragraphs_add_boolean_field('field_uswds_accordion_multi', $bundle, array(
     'label' => 'Allow more than one item to expand at a time',
   ));
-  _uswds_paragraphs_add_boolean_field('field_uswds_accordion_expand', $bundle, array(
-    'label' => 'Start expanded',
+  _uswds_paragraphs_add_boolean_field('field_uswds_accordion_closed', $bundle, array(
+    'label' => 'Start closed',
   ));
   _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
     'label' => 'Accordion Items',
@@ -200,18 +195,22 @@ function uswds_paragraphs_install() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'type' => 'paragraphs_jquery_ui_accordion_formatter',
+        'type' => 'paragraphs_view',
         'weight' => 4,
         'settings' => array(
-          'bundle' => 'uswds_accordion_item',
-          'title' => 'field_uswds_title',
-          'content' => 'field_uswds_body',
-          'autoscroll' => 0,
-          'startclosed' => 1,
+          'view_mode' => 'full',
         ),
-        'module' => 'paragraphs_jquery_ui_accordion',
+        'module' => 'paragraphs',
       ),
     ),
+    'required' => TRUE,
+  ));
+
+  // Install the Anchor paragraph type.
+  $bundle = 'uswds_anchor';
+  _uswds_paragraphs_create_bundle($bundle, 'Anchor');
+  _uswds_paragraphs_add_text_field('field_uswds_anchor', $bundle, array(
+    'label' => 'Anchor',
     'required' => TRUE,
   ));
 }
@@ -743,11 +742,4 @@ function _uswds_paragraphs_add_link_field($field_name, $bundle, $instance_overri
     $field_info = array_replace_recursive($field_info, $instance_overrides);
     field_create_instance($field_info);
   }
-}
-
-/**
- * Implements hook_update_last_removed().
- */
-function uswds_paragraphs_update_last_removed() {
-  return 7002;
 }

@@ -1,7 +1,7 @@
 <div class="<?php print implode(' ', $classes); ?>"<?php print backdrop_attributes($attributes); ?>>
   <div class="content container"<?php print backdrop_attributes($content_attributes); ?>>
 
-    <?php if ($uswds_grid_class): ?>
+    <?php if ($aplenty_grid_class): ?>
     <div class="container">
       <div class="row">
     <?php endif; ?>
@@ -25,7 +25,7 @@
       </div>
       <?php endif; ?>
 
-    <?php if ($uswds_grid_class): ?>
+    <?php if ($aplenty_grid_class): ?>
       </div>
     </div>
     <?php endif; ?>
