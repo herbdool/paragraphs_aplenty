@@ -299,12 +299,16 @@ function uswds_paragraphs_install() {
     'required' => TRUE,
   ));
 
-  // Install the Anchor paragraph type.
-  $bundle = 'uswds_anchor';
-  _uswds_paragraphs_create_bundle($bundle, 'Anchor');
+  // Install the Heading paragraph type.
+  $bundle = 'uswds_heading';
+  _uswds_paragraphs_create_bundle($bundle, 'Heading');
+  _uswds_paragraphs_add_text_field('field_uswds_heading', $bundle, array(
+    'label' => 'Heading',
+    'required' => FALSE,
+  ));
   _uswds_paragraphs_add_text_field('field_uswds_anchor', $bundle, array(
     'label' => 'Anchor',
-    'required' => TRUE,
+    'required' => FALSE,
   ));
 }
 

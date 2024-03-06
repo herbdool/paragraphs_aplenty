@@ -7,6 +7,7 @@ This module, when enabled, installs several Paragraph types:
 * Cards
 * Grid / row of columns with ability to stretch a block.
 * Accordions
+* Heading with anchor
 
 After installation, feel free to alter the Paragraph types be adding fields or
 altering fields. However, try not to remove fields.

@@ -49,8 +49,8 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
     'paragraphs_item__uswds_text' => $common + array(
       'template' => 'paragraphs-item--uswds-text',
     ),
-    'paragraphs_item__uswds_anchor' => $common + array(
-      'template' => 'paragraphs-item--uswds-anchor',
+    'paragraphs_item__uswds_heading' => $common + array(
+      'template' => 'paragraphs-item--uswds-heading',
     ),
   );
 }
@@ -152,10 +152,14 @@ function _uswds_paragraphs_preprocess_uswds_cards(&$variables) {
 }
 
 /**
- * Preprocessing code for the Anchor bundle.
+ * Preprocessing code for the Heading bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_anchor(&$variables) {
-  $variables['classes'][] = 'aplenty-anchor';
+function _uswds_paragraphs_preprocess_uswds_heading(&$variables) {
+  $variables['classes'][] = 'aplenty-heading';
+  $variables['heading_text'] = '';
+  if (!empty($variables['content']['field_uswds_heading'])) {
+    $variables['heading_text'] = check_url($variables['content']['field_uswds_heading']['#items'][0]['safe_value']);
+  }
   $variables['anchor_text'] = '';
   if (!empty($variables['content']['field_uswds_anchor'])) {
     $variables['anchor_text'] = check_url($variables['content']['field_uswds_anchor']['#items'][0]['safe_value']);
@@ -450,8 +454,9 @@ function _uswds_paragraphs_get_required_fields() {
       'field_uswds_body',
       'field_uswds_button',
     ),
-    'uswds_anchor' => array(
-      'field_aplenty_anchor',
+    'uswds_heading' => array(
+      'field_uswds_heading',
+      'field_uswds_anchor',
     ),
   );
 }
