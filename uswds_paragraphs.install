@@ -6,31 +6,6 @@
  */
 
 /**
- * Helper function to create a paragraphs bundle (type).
- *
- * @param string $machine
- *   The machine name for the bundle.
- * @param string $human
- *   The human label for the bundle.
- */
-function _uswds_paragraphs_create_bundle($machine, $human) {
-  $existing = paragraphs_bundle_load($machine);
-  if ($existing) {
-    return;
-  }
-
-  $bundle = new stdClass();
-  $bundle->name = $human;
-  $bundle->label = $human;
-  $bundle->description = '';
-  $bundle->bundle = $machine;
-  $bundle->allow_unpublish = 1;
-  $bundle->locked = 0;
-  $bundle->allow_unpublish = 1;
-  paragraphs_bundle_save($bundle);
-}
-
-/**
  * Implements hook_install().
  */
 function uswds_paragraphs_install() {
@@ -314,6 +289,31 @@ function uswds_paragraphs_install() {
     'label' => 'Anchor',
     'required' => TRUE,
   ));
+}
+
+/**
+ * Helper function to create a paragraphs bundle (type).
+ *
+ * @param string $machine
+ *   The machine name for the bundle.
+ * @param string $human
+ *   The human label for the bundle.
+ */
+function _uswds_paragraphs_create_bundle($machine, $human) {
+  $existing = paragraphs_bundle_load($machine);
+  if ($existing) {
+    return;
+  }
+
+  $bundle = new stdClass();
+  $bundle->name = $human;
+  $bundle->label = $human;
+  $bundle->description = '';
+  $bundle->bundle = $machine;
+  $bundle->allow_unpublish = 1;
+  $bundle->locked = 0;
+  $bundle->allow_unpublish = 1;
+  paragraphs_bundle_save($bundle);
 }
 
 /**
