@@ -97,12 +97,17 @@
 /**
  * Media block
  */
-.paragraphs-item-uswds-media-block {
+.paragraphs-item .aplenty-media_block {
   display: flex;
   gap: 1rem;
   padding: .5rem;
 }
-
-.paragraphs-item-uswds-media-block img {
+.aplenty-media_block-image {
+  flex-shrink: 0;
+}
+.aplenty-media_block-image img {
   height: fit-content;
+}
+.paragraphs-item .aplenty-media_block h2 {
+  margin-top: 0;
 }

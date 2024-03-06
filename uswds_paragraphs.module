@@ -77,6 +77,10 @@ function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
   // Here we split the media blocks into pairs.
   $pairs = [];
   $pair = [];
+  $variables['graphic_list_rows'] = array();
+  if (empty($variables['content']['field_uswds_paragraphs'])) {
+    return;
+  }
   $media_block_keys = element_children($variables['content']['field_uswds_paragraphs']);
   foreach ($media_block_keys as $key) {
     if (count($pair) < 2) {
@@ -98,7 +102,6 @@ function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
  * Preprocessing code for the Media Block bundle.
  */
 function _uswds_paragraphs_preprocess_uswds_media_block(&$variables) {
-  $variables['classes'][] = 'col-md-6';
   $variables['classes'][] = 'aplenty-media_block';
   $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'aplenty-media_block-img';
 }
