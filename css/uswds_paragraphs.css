@@ -12,6 +12,7 @@
 
 /**
  * Hero
+ * Largely copied from Backdrop core.
  */
 .aplenty-hero {
   /* Positioning, width and transform is to make hero full width on smaller screens */
@@ -58,6 +59,7 @@
 }
 
 .aplenty-hero-no-image {
+  /* texture image from Backdrop core */
   background: #0074bd url(../images/texture.png) repeat center center;
   background-blend-mode: luminosity;
 }
@@ -120,29 +122,20 @@
   padding-bottom: 2rem;
 }
 @media (min-width: 48em) {
-  .paragraphs-item.aplenty-cards .content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+  .paragraphs-item.aplenty-cards > .content {
     padding: .5rem;
   }
 }
+/* Display flex ensures the content gets full height. */
 .aplenty-card {
+  display: flex;
+}
+.aplenty-card > .content {
   border-radius: 0.25rem;
   border: 1px solid #ddd;
   margin: 1rem 0;
   padding: 0 0 1rem 0;
   background: #fff;
-}
-@media (min-width: 48em) {
-  .aplenty-card {
-    flex: 1 0 26%;
-    max-width: 50%;
-  }
-}
-
-.aplenty-card-image {
-  flex-shrink: 0;
 }
 
 .aplenty-card-image img {

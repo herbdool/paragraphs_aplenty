@@ -209,6 +209,26 @@ function uswds_paragraphs_install() {
   // Install the Cards paragraph type.
   $bundle = 'uswds_cards';
   _uswds_paragraphs_create_bundle($bundle, 'Cards');
+  _uswds_paragraphs_add_number_list_field('field_uswds_column_width', $bundle,
+    array(
+      'label' => 'Column width',
+      'description' => 'This sets the width of the columns in this row, and the number of columns per row.',
+      'required' => TRUE,
+      'default_value' => array(
+        array('value' => 3),
+      ),
+    ),
+    array(
+      'settings' => array(
+        'allowed_values' => array(
+          2 => '½ width (2 columns)',
+          3 => '⅓ width (3 columns)',
+          4 => '¼ width (4 columns)',
+          6 => '⅙ width (6 columns)',
+        ),
+      ),
+    )
+  );
   _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
     'label' => 'Cards',
     'settings' => array(
@@ -248,7 +268,7 @@ function uswds_paragraphs_install() {
   // Install the Grid (aka "Row of columns") paragraph type.
   $bundle = 'uswds_grid';
   _uswds_paragraphs_create_bundle($bundle, 'Row of columns');
-  _uswds_paragraphs_add_number_list_field('field_uswds_grid_column_width', $bundle,
+  _uswds_paragraphs_add_number_list_field('field_uswds_column_width', $bundle,
     array(
       'label' => 'Column width',
       'description' => 'This sets the width of the columns in this row, and the number of columns per row.',
@@ -268,7 +288,7 @@ function uswds_paragraphs_install() {
       ),
     )
   );
-  _uswds_paragraphs_add_number_list_field('field_uswds_grid_column_stretch', $bundle,
+  _uswds_paragraphs_add_number_list_field('field_uswds_column_stretch', $bundle,
     array(
       'label' => 'Column to stretch',
       'description' => 'Choose which column will stretch to fill the remainder. If the number of paragraphs is less than the set number of columns, then the column chosen here will stretch to fill the remainder.',

@@ -120,6 +120,11 @@ function _uswds_paragraphs_preprocess_uswds_media_block(&$variables) {
  */
 function _uswds_paragraphs_preprocess_uswds_card(&$variables) {
   $variables['classes'][] = 'aplenty-card';
+  if (empty($variables['elements']['#uswds_width_class'])) {
+    $variables['elements']['#uswds_width_class'] = 'col-md-12';
+  }
+  $variables['classes'][] = $variables['elements']['#uswds_width_class'];
+
   $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'aplenty-card-img';
   $paragraph = $variables['paragraphs_item'];
   if (!empty($paragraph->field_uswds_title)) {
@@ -140,15 +145,43 @@ function _uswds_paragraphs_preprocess_uswds_cards(&$variables) {
   $variables['classes'][] = 'aplenty-cards';
   $variables['aplenty_grid_class'] = 'row';
 
-  $variables['cards'] = array();
+  $variables['uswds_cards'] = array();
   if (empty($variables['content']['field_uswds_paragraphs'])) {
     return;
   }
-  $media_block_keys = element_children($variables['content']['field_uswds_paragraphs']);
-  foreach ($media_block_keys as $key) {
-    $pairs[] = $variables['content']['field_uswds_paragraphs'][$key];
+  $grid = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
+  $num_columns = (int)$grid->field_uswds_column_width->value();
+  // $cards = element_children($variables['content']['field_uswds_paragraphs']);
+  $columns = $grid->field_uswds_paragraphs;
+  // foreach ($cards as $key) {
+  //   $variables['cards'][] = $variables['content']['field_uswds_paragraphs'][$key];
+  // }
+  // for ($key = 0; $key < $num_columns; $key++) {
+  //   // The numerator is always 1 for cards.
+  //   $numerator = 1;
+  //   // Finally communicate the class.
+  //   $class = _uswds_paragraphs_fraction_to_class($numerator, $num_columns);
+  //   $column_id = $columns[$key]->getIdentifier();
+  //   // @TODO: There is probably a better way to communicate this value to
+  //   // the uswds_column paragraph.
+  //   $variables['content']['field_uswds_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#uswds_width_class'] = $class;
+
+  //   // Copy them to another variable as a quick way to avoid printing
+  //   // the field wrapper.
+  //   $variables['uswds_cards'][] = $variables['content']['field_uswds_paragraphs'][$key];
+  // }
+  // The numerator is always 1 for cards.
+  $class = _uswds_paragraphs_fraction_to_class(1, $num_columns);
+  foreach ($columns as $key => $column) {
+    $column_id = $column->getIdentifier();
+    // @TODO: There is probably a better way to communicate this value to
+    // the uswds_column paragraph.
+    $variables['content']['field_uswds_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#uswds_width_class'] = $class;
+
+    // Copy them to another variable as a quick way to avoid printing
+    // the field wrapper.
+    $variables['uswds_cards'][] = $variables['content']['field_uswds_paragraphs'][$key];
   }
-  $variables['cards'] = $pairs;
 }
 
 /**
@@ -270,7 +303,7 @@ function _uswds_paragraphs_preprocess_uswds_grid(&$variables) {
   $variables['uswds_grid_class'] = 'row';
 
   $grid = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
-  $max_columns = (int)$grid->field_uswds_grid_column_width->value();
+  $max_columns = (int)$grid->field_uswds_column_width->value();
   $columns = $grid->field_uswds_paragraphs;
   $num_columns = count($columns);
 
@@ -282,7 +315,7 @@ function _uswds_paragraphs_preprocess_uswds_grid(&$variables) {
     $num_columns = $max_columns;
   }
 
-  $stretch = (int)$grid->field_uswds_grid_column_stretch->value();
+  $stretch = (int)$grid->field_uswds_column_stretch->value();
   $available_space = $max_columns - $num_columns;
   for ($key = 0; $key < $num_columns; $key++) {
 
@@ -430,8 +463,8 @@ function _uswds_paragraphs_get_required_fields() {
       'field_uswds_paragraphs',
     ),
     'uswds_grid' => array(
-      'field_uswds_grid_column_width',
-      'field_uswds_grid_column_stretch',
+      'field_uswds_column_width',
+      'field_uswds_column_stretch',
       'field_uswds_paragraphs',
     ),
     'uswds_hero' => array(
@@ -446,6 +479,7 @@ function _uswds_paragraphs_get_required_fields() {
       'field_uswds_body',
     ),
     'uswds_cards' => array(
+      'field_uswds_column_width',
       'field_uswds_paragraphs',
     ),
     'uswds_card' => array(
