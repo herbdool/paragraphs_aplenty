@@ -455,6 +455,10 @@ function _uswds_paragraphs_get_required_fields() {
       'field_uswds_heading',
       'field_uswds_anchor',
     ),
+    'uswds_image' => array(
+      'field_uswds_image',
+      'field_uswds_link',
+    ),
   );
 }
 

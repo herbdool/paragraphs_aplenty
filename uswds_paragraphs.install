@@ -275,6 +275,7 @@ function uswds_paragraphs_install() {
         'uswds_heading' => 'uswds_heading',
         'uswds_text' => 'uswds_text',
         'uswds_accordion' => 'uswds_accordion',
+        'uswds_image' => 'uswds_image',
       ),
       'title' => 'Paragraph',
       'title_multiple' => 'Paragraphs',
@@ -394,6 +395,76 @@ function uswds_paragraphs_install() {
   _uswds_paragraphs_add_text_field('field_uswds_anchor', $bundle, array(
     'label' => 'Anchor',
     'required' => FALSE,
+  ));
+
+  // Install the Image paragraph type.
+  $bundle = 'uswds_image';
+  _uswds_paragraphs_create_bundle($bundle, 'Image');
+  _uswds_paragraphs_add_image_field('field_uswds_image', $bundle, array(
+    'label' => 'Image',
+    'required' => TRUE,
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array(
+          'image_style' => 'large',
+          'image_link' => '',
+        ),
+        'module' => 'image',
+        'weight' => 1,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array(
+          'image_style' => 'thumbnail',
+          'image_link' => '',
+        ),
+        'module' => 'image',
+        'weight' => 1,
+      ),
+    ),
+  ));
+  _uswds_paragraphs_add_text_field('field_uswds_caption', $bundle, array(
+    'label' => 'Caption',
+    'required' => TRUE,
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'text_default',
+        'settings' => array(),
+        'module' => 'text',
+        'weight' => 2,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'hidden',
+        'type' => 'text_default',
+        'settings' => array(
+        ),
+        'weight' => 2,
+      ),
+    ),
+  ));
+  _uswds_paragraphs_add_link_field('field_uswds_link', $bundle, array(
+    'label' => 'Link caption',
+    'description' => 'If provided, this link will appear as part of the caption.',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'link_default',
+        'settings' => array(),
+        'module' => 'link',
+        'weight' => 4,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'hidden',
+        'type' => 'link_default',
+        'settings' => array(),
+        'module' => 'link',
+        'weight' => 4,
+      ),
+    ),
   ));
 }
 

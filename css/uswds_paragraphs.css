@@ -165,3 +165,11 @@
 .aplenty-card .field-name-field-uswds-button {
   padding: 0 1rem;
 }
+
+/**
+ * Images
+ */
+.aplenty-image .field-name-field-uswds-caption,
+.aplenty-image .field-name-field-uswds-link {
+  font-style: italic;
+}
