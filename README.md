@@ -16,10 +16,7 @@ altering fields. However, try not to remove fields.
 
 -[] rename module
 -[x] rename all classes
--[] allow container-fluid
--[] make column a container of other paragraphs instead of simple text
--[] make accordion item a container
--[] update install to match the config changes (displays, etc)
+-[] remove `aplenty_grid_class` where it's not used.
 
 ## Install
 

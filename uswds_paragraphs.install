@@ -123,6 +123,22 @@ function uswds_paragraphs_install() {
   _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
     'label' => 'Card title',
     'required' => TRUE,
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'text_default',
+        'settings' => array(),
+        'module' => 'text',
+        'weight' => 2,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'hidden',
+        'type' => 'text_default',
+        'settings' => array(
+        ),
+        'weight' => 2,
+      ),
+    ),
   ));
   _uswds_paragraphs_add_image_field('field_uswds_image', $bundle, array(
     'label' => 'Card image',
@@ -152,11 +168,42 @@ function uswds_paragraphs_install() {
   ));
   _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
     'label' => 'Card body',
-    'required' => TRUE,
+    'required' => FALSE,
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'text_default',
+        'settings' => array(),
+        'module' => 'text',
+        'weight' => 3,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'hidden',
+        'type' => 'text_default',
+        'settings' => array(),
+        'weight' => 3,
+      ),
+    ),
   ));
   _uswds_paragraphs_add_link_field('field_uswds_button', $bundle, array(
     'label' => 'Card button',
     'description' => 'If provided, this link will appear at the bottom of the card, as a button.',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'link_default',
+        'settings' => array(),
+        'module' => 'link',
+        'weight' => 4,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'hidden',
+        'type' => 'link_default',
+        'settings' => array(),
+        'module' => 'link',
+        'weight' => 4,
+      ),
+    ),
   ));
 
   // Install the Cards paragraph type.
