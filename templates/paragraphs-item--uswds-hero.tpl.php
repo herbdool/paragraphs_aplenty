@@ -13,8 +13,8 @@
       <?php print render($content['field_uswds_body']) ?>
       <?php endif; ?>
 
-      <?php if (!empty($content['field_uswds_button'])): ?>
-      <?php print render($content['field_uswds_button']) ?>
+      <?php if (!empty($content['field_uswds_link'])): ?>
+      <?php print render($content['field_uswds_link']) ?>
       <?php endif; ?>
 
     </div>

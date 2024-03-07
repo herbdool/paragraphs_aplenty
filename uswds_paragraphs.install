@@ -51,7 +51,7 @@ function uswds_paragraphs_install() {
     'label' => 'Description',
     'required' => FALSE,
   ));
-  _uswds_paragraphs_add_link_field('field_uswds_button', $bundle, array(
+  _uswds_paragraphs_add_link_field('field_uswds_link', $bundle, array(
     'label' => 'Hero callout button',
     'description' => 'If provided, this link will appear at the bottom of the hero callout, as a button.',
   ));
@@ -202,7 +202,7 @@ function uswds_paragraphs_install() {
       ),
     ),
   ));
-  _uswds_paragraphs_add_link_field('field_uswds_button', $bundle, array(
+  _uswds_paragraphs_add_link_field('field_uswds_link', $bundle, array(
     'label' => 'Card button',
     'description' => 'If provided, this link will appear at the bottom of the card, as a button.',
     'display' => array(

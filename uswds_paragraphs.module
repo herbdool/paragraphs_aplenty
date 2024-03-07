@@ -120,8 +120,8 @@ function _uswds_paragraphs_preprocess_uswds_card(&$variables) {
   if (!empty($paragraph->field_uswds_body)) {
     $variables['content']['field_uswds_body'][0]['#element']['attributes']['class'] = 'aplenty-card-body';
   }
-  if (!empty($paragraph->field_uswds_button)) {
-    $variables['content']['field_uswds_button'][0]['#element']['attributes']['class'] = 'aplenty-card-button';
+  if (!empty($paragraph->field_uswds_link)) {
+    $variables['content']['field_uswds_link'][0]['#element']['attributes']['class'] = 'aplenty-card-button';
   }
 }
 
@@ -177,8 +177,8 @@ function _uswds_paragraphs_preprocess_uswds_hero(&$variables) {
   if (!empty($paragraph->field_uswds_body)) {
     $variables['content']['field_uswds_body'][0]['#element']['attributes']['class'] = 'aplenty-hero-body';
   }
-  if (!empty($paragraph->field_uswds_button)) {
-    $variables['content']['field_uswds_button'][0]['#element']['attributes']['class'] = 'button aplenty-button-big button-secondary';
+  if (!empty($paragraph->field_uswds_link)) {
+    $variables['content']['field_uswds_link'][0]['#element']['attributes']['class'] = 'button aplenty-button-big button-secondary';
   }
   // We also need to set the inline CSS for the image.
   if (!empty($variables['content']['field_uswds_image'])) {
@@ -434,7 +434,7 @@ function _uswds_paragraphs_get_required_fields() {
       'field_uswds_image',
       'field_uswds_title',
       'field_uswds_body',
-      'field_uswds_button',
+      'field_uswds_link',
     ),
     'uswds_media_block' => array(
       'field_uswds_title',
@@ -449,7 +449,7 @@ function _uswds_paragraphs_get_required_fields() {
       'field_uswds_title',
       'field_uswds_image',
       'field_uswds_body',
-      'field_uswds_button',
+      'field_uswds_link',
     ),
     'uswds_heading' => array(
       'field_uswds_heading',
