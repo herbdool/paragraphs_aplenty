@@ -52,6 +52,9 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
     'paragraphs_item__uswds_heading' => $common + array(
       'template' => 'paragraphs-item--uswds-heading',
     ),
+    'paragraphs_item__uswds_image' => $common + array(
+      'template' => 'paragraphs-item--uswds-image',
+    ),
   );
 }
 
@@ -370,9 +373,7 @@ function _uswds_paragraphs_preprocess_uswds_accordion(&$variables) {
  * Preprocessing code for the Accordion Item bundle.
  */
 function _uswds_paragraphs_preprocess_uswds_accordion_item(&$variables) {
-
-  $accordion_item = $variables['paragraphs_item'];
-  $accordion_item = entity_metadata_wrapper('paragraphs_item', $accordion_item);
+  $accordion_item = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
 
   $variables['accordion_title'] = $accordion_item->field_uswds_title->value();
 
@@ -392,6 +393,8 @@ function _uswds_paragraphs_preprocess_uswds_text(&$variables) {
  */
 function _uswds_paragraphs_preprocess_uswds_image(&$variables) {
   $variables['classes_array'][] = 'aplenty-image';
+  $variables['caption'] = $variables['content']['field_uswds_caption'][0];
+  $variables['caption_link'] = $variables['content']['field_uswds_link'][0];
 }
 
 /**
