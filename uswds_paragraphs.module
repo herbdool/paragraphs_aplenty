@@ -378,9 +378,6 @@ function _uswds_paragraphs_preprocess_uswds_accordion_item(&$variables) {
 
   $expanded = (!empty($variables['elements']['#uswds_expand']));
   $variables['expanded'] = ($expanded) ? 'open' : '';
-
-  $controls = 'uswds-paragraph-' . $variables['paragraphs_item']->item_id;
-  $variables['controls'] = $controls;
 }
 
 /**
