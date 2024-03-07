@@ -1,4 +1,4 @@
-<details class="<?php print implode(' ', $classes); ?>"<?php print backdrop_attributes($attributes); ?> <?php print $expanded; ?>>
+<details class="<?php print implode(' ', $classes_array); ?>"<?php print backdrop_attributes($attributes); ?> <?php print $expanded; ?>>
 
   <summary>
     <?php print $accordion_title ?>

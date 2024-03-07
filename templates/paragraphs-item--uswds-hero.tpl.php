@@ -1,4 +1,4 @@
-<div class="<?php print implode(' ', $classes); ?>"<?php print backdrop_attributes($attributes); ?>>
+<div class="<?php print implode(' ', $classes_array); ?>"<?php print backdrop_attributes($attributes); ?>>
   <div class="content container"<?php print backdrop_attributes($content_attributes); ?>>
 
     <?php if (!empty($content['field_uswds_image'])): ?>

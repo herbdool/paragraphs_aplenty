@@ -1,4 +1,4 @@
-<div class="<?php print implode(' ', $classes); ?>"<?php print backdrop_attributes($attributes); ?>>
+<div class="<?php print implode(' ', $classes_array); ?>"<?php print backdrop_attributes($attributes); ?>>
   <div class="content"<?php print backdrop_attributes($content_attributes); ?>>
     <div class="aplenty-media_block-image">
       <?php print render($content['field_uswds_image'][0]) ?>
