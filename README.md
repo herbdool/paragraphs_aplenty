@@ -12,12 +12,6 @@ This module, when enabled, installs several Paragraph types:
 After installation, feel free to alter the Paragraph types be adding fields or
 altering fields. However, try not to remove fields.
 
-## Todo
-
--[] rename module
--[x] rename all classes
--[] remove `aplenty_grid_class` where it's not used.
-
 ## Install
 
 Install this module using the official Backdrop CMS instructions at

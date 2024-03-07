@@ -59,10 +59,6 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
  * Implements hook_preprocess_paragraphs_item().
  */
 function uswds_paragraphs_preprocess_paragraphs_item(&$variables) {
-  // Always set the Aplenty-specific "aplenty_grid_class" variable.
-  if (!isset($variables['aplenty_grid_class'])) {
-    $variables['aplenty_grid_class'] = FALSE;
-  }
   $path = backdrop_get_path('module', 'uswds_paragraphs');
   backdrop_add_css($path . '/css/uswds_paragraphs.css');
   backdrop_add_js($path . '/js/uswds_paragraphs.js');
@@ -81,12 +77,10 @@ function uswds_paragraphs_preprocess_paragraphs_item(&$variables) {
 function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
   $variables['classes'][] = 'aplenty-graphic_list';
   $variables['classes'][] = 'aplenty-section';
-  // The "aplenty_graphic_list" bundle should always be on the grid.
-  $variables['aplenty_grid_class'] = 'row';
   // Here we split the media blocks into pairs.
   $pairs = [];
   $pair = [];
-  $variables['graphic_list_rows'] = array();
+  $variables['uswds_graphic_list_rows'] = array();
   if (empty($variables['content']['field_uswds_paragraphs'])) {
     return;
   }
@@ -104,7 +98,7 @@ function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
   if (!empty($pair)) {
     $pairs[] = $pair;
   }
-  $variables['graphic_list_rows'] = $pairs;
+  $variables['uswds_graphic_list_rows'] = $pairs;
 }
 
 /**
@@ -143,7 +137,6 @@ function _uswds_paragraphs_preprocess_uswds_card(&$variables) {
  */
 function _uswds_paragraphs_preprocess_uswds_cards(&$variables) {
   $variables['classes'][] = 'aplenty-cards';
-  $variables['aplenty_grid_class'] = 'row';
 
   $variables['uswds_cards'] = array();
   if (empty($variables['content']['field_uswds_paragraphs'])) {
@@ -151,25 +144,7 @@ function _uswds_paragraphs_preprocess_uswds_cards(&$variables) {
   }
   $grid = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
   $num_columns = (int)$grid->field_uswds_column_width->value();
-  // $cards = element_children($variables['content']['field_uswds_paragraphs']);
   $columns = $grid->field_uswds_paragraphs;
-  // foreach ($cards as $key) {
-  //   $variables['cards'][] = $variables['content']['field_uswds_paragraphs'][$key];
-  // }
-  // for ($key = 0; $key < $num_columns; $key++) {
-  //   // The numerator is always 1 for cards.
-  //   $numerator = 1;
-  //   // Finally communicate the class.
-  //   $class = _uswds_paragraphs_fraction_to_class($numerator, $num_columns);
-  //   $column_id = $columns[$key]->getIdentifier();
-  //   // @TODO: There is probably a better way to communicate this value to
-  //   // the uswds_column paragraph.
-  //   $variables['content']['field_uswds_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#uswds_width_class'] = $class;
-
-  //   // Copy them to another variable as a quick way to avoid printing
-  //   // the field wrapper.
-  //   $variables['uswds_cards'][] = $variables['content']['field_uswds_paragraphs'][$key];
-  // }
   // The numerator is always 1 for cards.
   $class = _uswds_paragraphs_fraction_to_class(1, $num_columns);
   foreach ($columns as $key => $column) {
@@ -204,8 +179,6 @@ function _uswds_paragraphs_preprocess_uswds_heading(&$variables) {
  */
 function _uswds_paragraphs_preprocess_uswds_hero(&$variables) {
   $variables['classes'][] = 'aplenty-hero';
-  // The "uswds_hero" Paragraph type should always be on the grid.
-  $variables['uswds_grid_class'] = 'row';
   // Set the classes on the link and button.
   $paragraph = $variables['paragraphs_item'];
   if (!empty($paragraph->field_uswds_body)) {
@@ -300,8 +273,6 @@ function _uswds_paragraphs_fraction_to_class($numerator, $denominator) {
  * Preprocessing code for the Grid bundle.
  */
 function _uswds_paragraphs_preprocess_uswds_grid(&$variables) {
-  $variables['uswds_grid_class'] = 'row';
-
   $grid = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
   $max_columns = (int)$grid->field_uswds_column_width->value();
   $columns = $grid->field_uswds_paragraphs;
@@ -372,9 +343,9 @@ function _uswds_paragraphs_preprocess_uswds_column_wrapper(&$variables) {
  * Preprocessing code for the Accordion bundle.
  */
 function _uswds_paragraphs_preprocess_uswds_accordion(&$variables) {
-
   $accordion = $variables['paragraphs_item'];
   $accordion = entity_metadata_wrapper('paragraphs_item', $accordion);
+  $variables['classes'][] = 'aplenty-accordion';
 
   if ($accordion->field_uswds_accordion_multi->value()) {
     $variables['classes'][] = 'aplenty-accordion-multi';
@@ -383,7 +354,6 @@ function _uswds_paragraphs_preprocess_uswds_accordion(&$variables) {
     $variables['classes'][] = 'aplenty-accordion-single';
   }
 
-  $variables['classes'][] = 'aplenty-accordion';
   if ($accordion->field_uswds_accordion_bordered->value()) {
     $variables['classes'][] = 'aplenty-accordion-border';
   }
@@ -427,12 +397,7 @@ function _uswds_paragraphs_preprocess_uswds_accordion_item(&$variables) {
  * Preprocessing code for the Text bundle.
  */
 function _uswds_paragraphs_preprocess_uswds_text(&$variables) {
-  $parent = $variables['paragraphs_item']->hostEntity();
-  if ($parent && !$parent instanceof ParagraphsItemEntity) {
-    // If this text paragraph is not in another paragraph, we'll need
-    // to add the grid class.
-    $variables['uswds_grid_class'] = 'row';
-  }
+  $variables['classes'][] = 'aplenty-text';
 }
 
 /**

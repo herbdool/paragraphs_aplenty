@@ -255,7 +255,7 @@ function uswds_paragraphs_install() {
     'label' => 'Column Content',
     'settings' => array(
       'allowed_bundles' => array(
-        'uswds_media_block' => 'uswds_media_block',
+        'uswds_heading' => 'uswds_heading',
         'uswds_text' => 'uswds_text',
         'uswds_accordion' => 'uswds_accordion',
       ),
@@ -313,6 +313,7 @@ function uswds_paragraphs_install() {
     'settings' => array(
       'allowed_bundles' => array(
         'uswds_column' => 'uswds_column',
+        'uswds_column_wrapper' => 'uswds_column_wrapper',
       ),
       'title' => 'Column',
       'title_multiple' => 'Columns',
