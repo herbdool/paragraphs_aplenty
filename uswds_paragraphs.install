@@ -79,7 +79,7 @@ function uswds_paragraphs_install() {
         'label' => 'hidden',
         'type' => 'image',
         'settings' => array(
-          'image_style' => 'medium',
+          'image_style' => 'thumbnail',
           'image_link' => '',
         ),
         'module' => 'image',
@@ -89,7 +89,7 @@ function uswds_paragraphs_install() {
         'label' => 'hidden',
         'type' => 'image',
         'settings' => array(
-          'image_style' => 'medium',
+          'image_style' => 'thumbnail',
           'image_link' => '',
         ),
         'module' => 'image',
@@ -102,9 +102,26 @@ function uswds_paragraphs_install() {
     'required' => TRUE,
   ));
 
-  // Install the Graphic List paragraph type.
+  // Install the Media List paragraph type.
   $bundle = 'uswds_graphic_list';
-  _uswds_paragraphs_create_bundle($bundle, 'Graphic list');
+  _uswds_paragraphs_create_bundle($bundle, 'Media list');
+  _uswds_paragraphs_add_text_list_field('field_uswds_media_align', $bundle,
+    array(
+      'label' => 'Media align',
+      'description' => 'Choose whether to align the media image to the left or right.',
+      'default_value' => array(
+        array('value' => 'aplenty-media-left'),
+      ),
+    ),
+    array(
+      'settings' => array(
+        'allowed_values' => array(
+          'aplenty-media-left' => 'Left',
+          'aplenty-media-right' => 'Right',
+        ),
+      ),
+    )
+  );
   _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
     'label' => 'Media blocks',
     'settings' => array(
@@ -497,6 +514,73 @@ function _uswds_paragraphs_add_number_list_field($field_name, $bundle, $instance
       ),
       'field_name' => $field_name,
       'type' => 'list_integer',
+      'module' => 'list',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+    );
+    $field_info = array_replace_recursive($field_info, $base_overrides);
+    $field = field_create_field($field_info);
+  }
+
+  $existing = field_info_instance($entity_type, $field_name, $bundle);
+  if (empty($existing)) {
+    $field_info = array(
+      'label' => 'Replace me',
+      'widget' => array(
+        'weight' => '0',
+        'type' => 'options_select',
+        'module' => 'options',
+        'active' => 1,
+        'settings' => array(),
+      ),
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'type' => 'hidden',
+          'weight' => '1',
+          'settings' => array(),
+        ),
+        'paragraphs_editor_preview' => array(
+          'type' => 'hidden',
+          'label' => 'above',
+          'settings' => array(),
+          'weight' => 0,
+        ),
+      ),
+      'required' => FALSE,
+      'description' => '',
+      'default_value' => array(),
+      'field_name' => $field_name,
+      'entity_type' => $entity_type,
+      'bundle' => $bundle,
+    );
+    $field_info = array_replace_recursive($field_info, $instance_overrides);
+    field_create_instance($field_info);
+  }
+}
+
+/**
+ * Helper function to add a text list field to a bundle.
+ */
+function _uswds_paragraphs_add_text_list_field($field_name, $bundle, $instance_overrides, $base_overrides) {
+
+  $entity_type = 'paragraphs_item';
+
+  $existing = field_info_field($field_name);
+  if (empty($existing)) {
+    $field_info = array(
+      'translatable' => '0',
+      'entity_types' => array(),
+      'settings' => array(
+        'allowed_values' => array(),
+        'allowed_values_function' => '',
+      ),
+      'field_name' => $field_name,
+      'type' => 'list_text',
       'module' => 'list',
       'active' => '1',
       'locked' => '0',

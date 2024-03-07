@@ -76,29 +76,18 @@ function uswds_paragraphs_preprocess_paragraphs_item(&$variables) {
  */
 function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
   $variables['classes'][] = 'aplenty-graphic_list';
-  $variables['classes'][] = 'aplenty-section';
-  // Here we split the media blocks into pairs.
-  $pairs = [];
-  $pair = [];
   $variables['uswds_graphic_list_rows'] = array();
+  $list = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
+  $media_align = $list->field_uswds_media_align->value();
   if (empty($variables['content']['field_uswds_paragraphs'])) {
     return;
   }
-  $media_block_keys = element_children($variables['content']['field_uswds_paragraphs']);
-  foreach ($media_block_keys as $key) {
-    if (count($pair) < 2) {
-      $pair[] = $variables['content']['field_uswds_paragraphs'][$key];
-    }
-    if (count($pair) == 2) {
-      $pairs[] = $pair;
-      $pair = [];
-    }
+  $media_blocks = $list->field_uswds_paragraphs;
+  foreach ($media_blocks as $key => $media_block) {
+    $column_id = $media_block->getIdentifier();
+    $variables['content']['field_uswds_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#uswds_media_class'] = $media_align;
+    $variables['uswds_graphic_list_rows'][] = $variables['content']['field_uswds_paragraphs'][$key];
   }
-  // Catch any stragglers.
-  if (!empty($pair)) {
-    $pairs[] = $pair;
-  }
-  $variables['uswds_graphic_list_rows'] = $pairs;
 }
 
 /**
@@ -106,6 +95,7 @@ function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
  */
 function _uswds_paragraphs_preprocess_uswds_media_block(&$variables) {
   $variables['classes'][] = 'aplenty-media_block';
+  $variables['classes'][] = $variables['elements']['#uswds_media_class'];
   $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'aplenty-media_block-img';
 }
 
@@ -426,6 +416,7 @@ function _uswds_paragraphs_get_required_fields() {
     ),
     'uswds_graphic_list' => array(
       'field_uswds_paragraphs',
+      'field_uswds_media_align',
     ),
     'uswds_grid' => array(
       'field_uswds_column_width',
