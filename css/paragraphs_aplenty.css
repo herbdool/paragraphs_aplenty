@@ -162,11 +162,20 @@
   display: flex;
 }
 .aplenty-card > .content {
-  border-radius: 0.25rem;
-  border: 1px solid #ddd;
+  width: 100%;
   margin: 1rem 0;
   padding: 0 0 1rem 0;
-  background: #fff;
+}
+.aplenty-card-border .aplenty-card > .content {
+  border-radius: 0.25rem;
+  border: 1px solid #ddd;
+}
+.aplenty-card-background > .content {
+  background-color: #f2f2f2;
+}
+.aplenty-card-background .aplenty-card > .content {
+  border-radius: 0.25rem;
+  background-color: #fff;
 }
 
 .aplenty-card img {

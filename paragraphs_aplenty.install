@@ -191,7 +191,7 @@ function paragraphs_aplenty_install() {
   paragraphs_aplenty_create_bundle($bundle, $settings);
   paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
     'label' => 'Card title',
-    'required' => TRUE,
+    'required' => FALSE,
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -211,7 +211,7 @@ function paragraphs_aplenty_install() {
   ));
   paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
     'label' => 'Card image',
-    'required' => TRUE,
+    'required' => FALSE,
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -281,9 +281,28 @@ function paragraphs_aplenty_install() {
   $settings = array(
     'name' => 'Cards',
     'label' => 'Cards',
-    'description' => 'Container for cards.',
+    'description' => 'Container for cards. There are also fields for card styles and the card width. Feel free to add styles or override existing styles in your theme\'s stylesheet.',
   );
   paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_text_list_field('field_aplenty_card_style', $bundle,
+    array(
+      'label' => 'Card style',
+      'description' => 'Choose the card style to apply to each card.',
+      'required' => TRUE,
+      'default_value' => array(
+        array('value' => 'aplenty-card-plain'),
+      ),
+    ),
+    array(
+      'settings' => array(
+        'allowed_values' => array(
+          'aplenty-card-plain' => 'Plain',
+          'aplenty-card-border' => 'Borders',
+          'aplenty-card-background' => 'Background',
+        ),
+      ),
+    )
+  );
   paragraphs_aplenty_add_number_list_field('field_aplenty_card_width', $bundle,
     array(
       'label' => 'Cards width',

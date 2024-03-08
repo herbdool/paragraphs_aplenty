@@ -87,7 +87,7 @@ function _paragraphs_aplenty_preprocess_aplenty_media_list(&$variables) {
   $media_align = $list->field_aplenty_media_align->value();
   $num_columns = (int)$list->field_aplenty_media_width->value();
   $media_blocks = $list->field_aplenty_paragraphs;
-  // The numerator is always 1 for cards.
+  // The numerator is always 1 for media blocks.
   $class = _paragraphs_aplenty_fraction_to_class(1, $num_columns);
   foreach ($media_blocks as $key => $media_block) {
     $column_id = $media_block->getIdentifier();
@@ -148,6 +148,13 @@ function _paragraphs_aplenty_preprocess_aplenty_cards(&$variables) {
   }
   $grid = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
   $num_cards = (int)$grid->field_aplenty_card_width->value();
+  $card_style_class = $grid->field_aplenty_card_style->value();
+
+  if (empty($card_style_class)) {
+    $card_style_class = 'aplenty-card-plain';
+  }
+  $variables['classes_array'][] = $card_style_class;
+
   $cards = $grid->field_aplenty_paragraphs;
   // The numerator is always 1 for cards.
   $class = _paragraphs_aplenty_fraction_to_class(1, $num_cards);
