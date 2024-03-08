@@ -103,12 +103,13 @@ function paragraphs_aplenty_install() {
   ));
 
   // Install the Media List paragraph type.
-  $bundle = 'aplenty_graphic_list';
+  $bundle = 'aplenty_media_list';
   _paragraphs_aplenty_create_bundle($bundle, 'Media list');
   _paragraphs_aplenty_add_text_list_field('field_aplenty_media_align', $bundle,
     array(
       'label' => 'Media align',
-      'description' => 'Choose whether to align the media image to the left or right.',
+      'description' => 'Choose whether to align the media image to the left or right for each child media item.',
+      'required' => TRUE,
       'default_value' => array(
         array('value' => 'aplenty-media-left'),
       ),
@@ -118,6 +119,24 @@ function paragraphs_aplenty_install() {
         'allowed_values' => array(
           'aplenty-media-left' => 'Left',
           'aplenty-media-right' => 'Right',
+        ),
+      ),
+    )
+  );
+  _paragraphs_aplenty_add_number_list_field('field_aplenty_media_width', $bundle,
+    array(
+      'label' => 'Column width',
+      'description' => 'This sets the number of media blocks per row.',
+      'required' => TRUE,
+      'default_value' => array(
+        array('value' => 2),
+      ),
+    ),
+    array(
+      'settings' => array(
+        'allowed_values' => array(
+          1 => '1 block (full width)',
+          2 => '2 blocks (½ width)',
         ),
       ),
     )
@@ -226,10 +245,10 @@ function paragraphs_aplenty_install() {
   // Install the Cards paragraph type.
   $bundle = 'aplenty_cards';
   _paragraphs_aplenty_create_bundle($bundle, 'Cards');
-  _paragraphs_aplenty_add_number_list_field('field_aplenty_column_width', $bundle,
+  _paragraphs_aplenty_add_number_list_field('field_aplenty_card_width', $bundle,
     array(
-      'label' => 'Column width',
-      'description' => 'This sets the width of the columns in this row, and the number of columns per row.',
+      'label' => 'Cards width',
+      'description' => 'This sets the width of the cards per row (the number of cards per row).',
       'required' => TRUE,
       'default_value' => array(
         array('value' => 3),
@@ -238,10 +257,10 @@ function paragraphs_aplenty_install() {
     array(
       'settings' => array(
         'allowed_values' => array(
-          2 => '½ width (2 columns)',
-          3 => '⅓ width (3 columns)',
-          4 => '¼ width (4 columns)',
-          6 => '⅙ width (6 columns)',
+          2 => '½ width (2 cards)',
+          3 => '⅓ width (3 cards)',
+          4 => '¼ width (4 cards)',
+          6 => '⅙ width (6 cards)',
         ),
       ),
     )
@@ -744,7 +763,7 @@ function _paragraphs_aplenty_add_paragraphs_field($field_name, $bundle, $instanc
         'bundle_weights' => array(
           'aplenty_text' => '1',
           'aplenty_grid' => '2',
-          'aplenty_graphic_list' => '3',
+          'aplenty_media_list' => '3',
           'aplenty_hero' => '4',
           'aplenty_cards' => '5',
         ),

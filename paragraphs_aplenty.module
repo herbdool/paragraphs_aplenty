@@ -19,8 +19,8 @@ function paragraphs_aplenty_theme($existing, $type, $theme, $path) {
     'paragraphs_item__aplenty_hero' => $common + array(
       'template' => 'paragraphs-item--aplenty-hero',
     ),
-    'paragraphs_item__aplenty_graphic_list' => $common + array(
-      'template' => 'paragraphs-item--aplenty-graphic-list',
+    'paragraphs_item__aplenty_media_list' => $common + array(
+      'template' => 'paragraphs-item--aplenty-media-list',
     ),
     'paragraphs_item__aplenty_media_block' => $common + array(
       'template' => 'paragraphs-item--aplenty-media-block',
@@ -75,21 +75,25 @@ function paragraphs_aplenty_preprocess_paragraphs_item(&$variables) {
 }
 
 /**
- * Preprocessing code for the Graphic List bundle.
+ * Preprocessing code for the Media List bundle.
  */
-function _paragraphs_aplenty_preprocess_aplenty_graphic_list(&$variables) {
-  $variables['classes_array'][] = 'aplenty-graphic_list';
-  $variables['aplenty_graphic_list_rows'] = array();
-  $list = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
-  $media_align = $list->field_aplenty_media_align->value();
+function _paragraphs_aplenty_preprocess_aplenty_media_list(&$variables) {
+  $variables['classes_array'][] = 'aplenty-media_list';
+  $variables['aplenty_media_list'] = array();
   if (empty($variables['content']['field_aplenty_paragraphs'])) {
     return;
   }
+  $list = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
+  $media_align = $list->field_aplenty_media_align->value();
+  $num_columns = (int)$list->field_aplenty_media_width->value();
   $media_blocks = $list->field_aplenty_paragraphs;
+  // The numerator is always 1 for cards.
+  $class = _paragraphs_aplenty_fraction_to_class(1, $num_columns);
   foreach ($media_blocks as $key => $media_block) {
     $column_id = $media_block->getIdentifier();
     $variables['content']['field_aplenty_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#aplenty_media_class'] = $media_align;
-    $variables['aplenty_graphic_list_rows'][] = $variables['content']['field_aplenty_paragraphs'][$key];
+    $variables['content']['field_aplenty_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#aplenty_width_class'] = $class;
+    $variables['aplenty_media_list'][] = $variables['content']['field_aplenty_paragraphs'][$key];
   }
 }
 
@@ -98,6 +102,13 @@ function _paragraphs_aplenty_preprocess_aplenty_graphic_list(&$variables) {
  */
 function _paragraphs_aplenty_preprocess_aplenty_media_block(&$variables) {
   $variables['classes_array'][] = 'aplenty-media_block';
+  if (empty($variables['elements']['#aplenty_width_class'])) {
+    $variables['elements']['#aplenty_width_class'] = 'col-md-12';
+  }
+  $variables['classes_array'][] = $variables['elements']['#aplenty_width_class'];
+  if (empty($variables['elements']['#aplenty_media_class'])) {
+    $variables['elements']['#aplenty_media_class'] = 'aplenty-media-left';
+  }
   $variables['classes_array'][] = $variables['elements']['#aplenty_media_class'];
   $variables['content']['field_aplenty_image'][0]['#item']['attributes']['class'][] = 'aplenty-media_block-img';
 }
@@ -136,15 +147,15 @@ function _paragraphs_aplenty_preprocess_aplenty_cards(&$variables) {
     return;
   }
   $grid = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
-  $num_columns = (int)$grid->field_aplenty_column_width->value();
-  $columns = $grid->field_aplenty_paragraphs;
+  $num_cards = (int)$grid->field_aplenty_card_width->value();
+  $cards = $grid->field_aplenty_paragraphs;
   // The numerator is always 1 for cards.
-  $class = _paragraphs_aplenty_fraction_to_class(1, $num_columns);
-  foreach ($columns as $key => $column) {
-    $column_id = $column->getIdentifier();
+  $class = _paragraphs_aplenty_fraction_to_class(1, $num_cards);
+  foreach ($cards as $key => $card) {
+    $card_id = $card->getIdentifier();
     // @TODO: There is probably a better way to communicate this value to
     // the aplenty_column paragraph.
-    $variables['content']['field_aplenty_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#aplenty_width_class'] = $class;
+    $variables['content']['field_aplenty_paragraphs'][$key]['entity']['paragraphs_item'][$card_id]['#aplenty_width_class'] = $class;
 
     // Copy them to another variable as a quick way to avoid printing
     // the field wrapper.
@@ -422,10 +433,6 @@ function _paragraphs_aplenty_get_required_fields() {
     'aplenty_column_wrapper' => array(
       'field_aplenty_paragraphs',
     ),
-    'aplenty_graphic_list' => array(
-      'field_aplenty_paragraphs',
-      'field_aplenty_media_align',
-    ),
     'aplenty_grid' => array(
       'field_aplenty_column_width',
       'field_aplenty_column_stretch',
@@ -437,13 +444,18 @@ function _paragraphs_aplenty_get_required_fields() {
       'field_aplenty_body',
       'field_aplenty_link',
     ),
+    'aplenty_media_list' => array(
+      'field_aplenty_paragraphs',
+      'field_aplenty_media_align',
+      'field_aplenty_media_width',
+    ),
     'aplenty_media_block' => array(
       'field_aplenty_title',
       'field_aplenty_image',
       'field_aplenty_body',
     ),
     'aplenty_cards' => array(
-      'field_aplenty_column_width',
+      'field_aplenty_card_width',
       'field_aplenty_paragraphs',
     ),
     'aplenty_card' => array(

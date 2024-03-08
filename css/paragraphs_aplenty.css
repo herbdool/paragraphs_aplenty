@@ -111,7 +111,7 @@
 /**
  * Media block
  */
-.paragraphs-item.aplenty-graphic_list {
+.paragraphs-item.aplenty-media_list {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
@@ -140,6 +140,8 @@
 
   .aplenty-media_block h2 {
     margin-top: 0;
+    font-size: 1.25rem;
+    font-weight: bold;
   }
 }
 
@@ -167,7 +169,7 @@
   background: #fff;
 }
 
-.aplenty-card-image img {
+.aplenty-card img {
   height: fit-content;
 }
 
