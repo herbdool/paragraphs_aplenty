@@ -11,8 +11,15 @@
 function paragraphs_aplenty_install() {
 
   // Install the Hero paragraph type.
+  // Similar to Hero in Backdrop core, or Bootstrap 3.x.
+  // @see https://getbootstrap.com/docs/3.4/components/#jumbotron
   $bundle = 'aplenty_hero';
-  _paragraphs_aplenty_create_bundle($bundle, 'Hero');
+  $settings = array(
+    'name' => 'Hero',
+    'label' => 'Hero',
+    'description' => 'Content container with a title, body text, link, and a background image.',
+  );
+  _paragraphs_aplenty_create_bundle($bundle, $settings);
   _paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
     'label' => 'Hero background image',
     'description' => 'If provided, this image will appear as the background for the hero.',
@@ -58,15 +65,27 @@ function paragraphs_aplenty_install() {
 
   // Install the Text paragraph type.
   $bundle = 'aplenty_text';
-  _paragraphs_aplenty_create_bundle($bundle, 'Text');
+  $settings = array(
+    'name' => 'Text',
+    'label' => 'Text',
+    'description' => 'Simple rich text field.',
+  );
+  _paragraphs_aplenty_create_bundle($bundle, $settings);
   _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Text',
     'required' => TRUE,
   ));
 
   // Install the Media Block paragraph type.
+  // Similar to Media object in Bootstrap 3.x
+  // @see https://getbootstrap.com/docs/3.4/components/#media
   $bundle = 'aplenty_media_block';
-  _paragraphs_aplenty_create_bundle($bundle, 'Media block');
+  $settings = array(
+    'name' => 'Media block',
+    'label' => 'Media block',
+    'description' => 'Content container with a title, image, body text. The image can be aligned left or right.',
+  );
+  _paragraphs_aplenty_create_bundle($bundle, $settings);
   _paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
     'label' => 'Media block title',
     'required' => TRUE,
@@ -103,8 +122,14 @@ function paragraphs_aplenty_install() {
   ));
 
   // Install the Media List paragraph type.
+  // Container of media blocks.
   $bundle = 'aplenty_media_list';
-  _paragraphs_aplenty_create_bundle($bundle, 'Media list');
+  $settings = array(
+    'name' => 'Media list',
+    'label' => 'Media list',
+    'description' => 'Container of media blocks. Can have 1 or 2 columns and assign the image to the left or right.',
+  );
+  _paragraphs_aplenty_create_bundle($bundle, $settings);
   _paragraphs_aplenty_add_text_list_field('field_aplenty_media_align', $bundle,
     array(
       'label' => 'Media align',
@@ -154,8 +179,15 @@ function paragraphs_aplenty_install() {
   ));
 
   // Install the Card paragraph type.
+  // Similar to card in Bootstrap 5.x
+  // @see https://getbootstrap.com/docs/5.3/components/card/
   $bundle = 'aplenty_card';
-  _paragraphs_aplenty_create_bundle($bundle, 'Card');
+  $settings = array(
+    'name' => 'Card',
+    'label' => 'Card',
+    'description' => 'Content container with a title, image, body text and link. Can be extended with new fields.',
+  );
+  _paragraphs_aplenty_create_bundle($bundle, $settings);
   _paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
     'label' => 'Card title',
     'required' => TRUE,
@@ -243,8 +275,14 @@ function paragraphs_aplenty_install() {
   ));
 
   // Install the Cards paragraph type.
+  // Container of cards.
   $bundle = 'aplenty_cards';
-  _paragraphs_aplenty_create_bundle($bundle, 'Cards');
+  $settings = array(
+    'name' => 'Cards',
+    'label' => 'Cards',
+    'description' => 'Container for cards.',
+  );
+  _paragraphs_aplenty_create_bundle($bundle, $settings);
   _paragraphs_aplenty_add_number_list_field('field_aplenty_card_width', $bundle,
     array(
       'label' => 'Cards width',
@@ -278,15 +316,27 @@ function paragraphs_aplenty_install() {
   ));
 
   // Install the Column paragraph type.
+  // Used in the grid.
   $bundle = 'aplenty_column';
-  _paragraphs_aplenty_create_bundle($bundle, 'Column');
+  $settings = array(
+    'name' => 'Column',
+    'label' => 'Column',
+    'description' => 'Rich text field displayed in the row of columns.',
+  );
+  _paragraphs_aplenty_create_bundle($bundle, $settings);
   _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Text',
   ));
 
   // Install the Column wrapper paragraph type.
+  // Used in the grid.
   $bundle = 'aplenty_column_wrapper';
-  _paragraphs_aplenty_create_bundle($bundle, 'Column Wrapper');
+  $settings = array(
+    'name' => 'Column Wrapper',
+    'label' => 'Column Wrapper',
+    'description' => 'Displayed in the row of columns. Contains other paragraph types.',
+  );
+  _paragraphs_aplenty_create_bundle($bundle, $settings);
   _paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
     'label' => 'Column Content',
     'settings' => array(
@@ -303,12 +353,19 @@ function paragraphs_aplenty_install() {
   ));
 
   // Install the Grid (aka "Row of columns") paragraph type.
+  // Uses the core grid, similar to Bootstrap v3.x.
+  // @see https://getbootstrap.com/docs/3.4/css/#grid
   $bundle = 'aplenty_grid';
-  _paragraphs_aplenty_create_bundle($bundle, 'Row of columns');
+  $settings = array(
+    'name' => 'Row of columns',
+    'label' => 'Row of columns',
+    'description' => 'This is a container of columns displayed in a row. If there are more columns assigned to a row than allowed, the extra columns will not be displayed.',
+  );
+  _paragraphs_aplenty_create_bundle($bundle, $settings);
   _paragraphs_aplenty_add_number_list_field('field_aplenty_column_width', $bundle,
     array(
       'label' => 'Column width',
-      'description' => 'This sets the width of the columns in this row, and the number of columns per row.',
+      'description' => 'This sets the width of the columns in this row, and the number of columns per row. Any extra columns assigned will not be displayed.',
       'required' => TRUE,
       'default_value' => array(
         array('value' => 3),
@@ -360,7 +417,12 @@ function paragraphs_aplenty_install() {
 
   // Install the Accordion Item paragraph type.
   $bundle = 'aplenty_accordion_item';
-  _paragraphs_aplenty_create_bundle($bundle, 'Accordion Item');
+  $settings = array(
+    'name' => 'Accordion item',
+    'label' => 'Accordion item',
+    'description' => 'A single accordion with a title and body.',
+  );
+  _paragraphs_aplenty_create_bundle($bundle, $settings);
   _paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
     'label' => 'Accordion item title',
     'required' => TRUE,
@@ -371,7 +433,12 @@ function paragraphs_aplenty_install() {
 
   // Install the Accordion paragraph type.
   $bundle = 'aplenty_accordion';
-  _paragraphs_aplenty_create_bundle($bundle, 'Accordion');
+  $settings = array(
+    'name' => 'Accordion',
+    'label' => 'Accordion',
+    'description' => 'Container for accordions.',
+  );
+  _paragraphs_aplenty_create_bundle($bundle, $settings);
   _paragraphs_aplenty_add_boolean_field('field_aplenty_accordion_bordered', $bundle, array(
     'label' => 'Add border around items',
   ));
@@ -406,7 +473,12 @@ function paragraphs_aplenty_install() {
 
   // Install the Heading paragraph type.
   $bundle = 'aplenty_heading';
-  _paragraphs_aplenty_create_bundle($bundle, 'Heading');
+  $settings = array(
+    'name' => 'Heading',
+    'label' => 'Heading',
+    'description' => 'A heading and anchor. Both are optional.',
+  );
+  _paragraphs_aplenty_create_bundle($bundle, $settings);
   _paragraphs_aplenty_add_text_field('field_aplenty_heading', $bundle, array(
     'label' => 'Heading',
     'required' => FALSE,
@@ -419,7 +491,12 @@ function paragraphs_aplenty_install() {
 
   // Install the Image paragraph type.
   $bundle = 'aplenty_image';
-  _paragraphs_aplenty_create_bundle($bundle, 'Image');
+  $settings = array(
+    'name' => 'Image',
+    'label' => 'Image',
+    'description' => 'An image field with a caption: of text and link.',
+  );
+  _paragraphs_aplenty_create_bundle($bundle, $settings);
   _paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
     'label' => 'Image',
     'required' => TRUE,
@@ -493,24 +570,30 @@ function paragraphs_aplenty_install() {
  *
  * @param string $machine
  *   The machine name for the bundle.
- * @param string $human
- *   The human label for the bundle.
+ * @param array $settings
+ *   The settings for the bundle. Required:
+ *     - name
+ *     - label
+ *   Optional:
+ *     - description
+ *     - allow_unpublish
+ *     - locked
  */
-function _paragraphs_aplenty_create_bundle($machine, $human) {
+function _paragraphs_aplenty_create_bundle($machine, $settings) {
   $existing = paragraphs_bundle_load($machine);
   if ($existing) {
     return;
   }
 
-  $bundle = new stdClass();
-  $bundle->name = $human;
-  $bundle->label = $human;
-  $bundle->description = '';
-  $bundle->bundle = $machine;
-  $bundle->allow_unpublish = 1;
-  $bundle->locked = 0;
-  $bundle->allow_unpublish = 1;
-  paragraphs_bundle_save($bundle);
+  $common = array(
+    'bundle' => $machine,
+    'description' => '',
+    'allow_unpublish' => 1,
+    'locked' => 0,
+  );
+
+  $bundle_settings = $settings + $common;
+  paragraphs_bundle_save((object) $bundle_settings);
 }
 
 /**
