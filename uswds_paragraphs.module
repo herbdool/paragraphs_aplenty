@@ -172,7 +172,7 @@ function _uswds_paragraphs_preprocess_uswds_heading(&$variables) {
  */
 function _uswds_paragraphs_preprocess_uswds_hero(&$variables) {
   $variables['classes_array'][] = 'aplenty-hero';
-  // Set the classes on the link and button.
+  // Set the classes on the button.
   $paragraph = $variables['paragraphs_item'];
   if (!empty($paragraph->field_uswds_body)) {
     $variables['content']['field_uswds_body'][0]['#element']['attributes']['class'] = 'aplenty-hero-body';
@@ -266,6 +266,7 @@ function _uswds_paragraphs_fraction_to_class($numerator, $denominator) {
  * Preprocessing code for the Grid bundle.
  */
 function _uswds_paragraphs_preprocess_uswds_grid(&$variables) {
+  $variables['classes_array'][] = 'aplenty-grid';
   $grid = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
   $max_columns = (int)$grid->field_uswds_column_width->value();
   $columns = $grid->field_uswds_paragraphs;

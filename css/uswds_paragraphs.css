@@ -6,6 +6,10 @@
 /**
  * Accordion
  */
+.paragraphs-item.aplenty-accordion {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 .aplenty-accordion.aplenty-accordion-no-border details {
   border: 0;
 }
@@ -97,8 +101,20 @@
 }
 
 /**
+ * Grid
+ */
+.paragraphs-item.aplenty-grid {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/**
  * Media block
  */
+.paragraphs-item.aplenty-graphic_list {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 @media (min-width: 48em) {
   .aplenty-media_block .content {
     display: flex;
@@ -131,8 +147,8 @@
  * Cards
  */
 .paragraphs-item.aplenty-cards {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 @media (min-width: 48em) {
   .paragraphs-item.aplenty-cards > .content {
@@ -162,7 +178,7 @@
 
 .aplenty-card .field-name-field-uswds-title,
 .aplenty-card .field-name-field-uswds-body,
-.aplenty-card .field-name-field-uswds-button {
+.aplenty-card .field-name-field-uswds-link {
   padding: 0 1rem;
 }
 
@@ -172,4 +188,12 @@
 .aplenty-image .field-name-field-uswds-caption,
 .aplenty-image .field-name-field-uswds-link {
   font-style: italic;
+}
+
+/**
+ * Fix nested paragraphs when editing
+ * @see https: //github.com/backdrop-contrib/paragraphs/issues/169
+ */
+form .field-type-paragraphs table {
+  font-size: 0.923rem;
 }

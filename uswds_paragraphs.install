@@ -395,6 +395,7 @@ function uswds_paragraphs_install() {
   _uswds_paragraphs_add_text_field('field_uswds_anchor', $bundle, array(
     'label' => 'Anchor',
     'required' => FALSE,
+    'description' => 'Provide a string with no spaces. If provided, the anchor can be a destination for a relative link that begins with a hash. For example, a link like <code>#bicycle</code> would link to an anchor <code>bicycle</code>.'
   ));
 
   // Install the Image paragraph type.
@@ -428,7 +429,7 @@ function uswds_paragraphs_install() {
   ));
   _uswds_paragraphs_add_text_field('field_uswds_caption', $bundle, array(
     'label' => 'Caption',
-    'required' => TRUE,
+    'required' => FALSE,
     'display' => array(
       'default' => array(
         'label' => 'hidden',
