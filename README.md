@@ -8,14 +8,15 @@ This module, when enabled, installs several Paragraph types:
 * Grid / row of columns with ability to stretch a block.
 * Accordions
 * Heading with anchor
+* Image
 
-After installation, feel free to alter the Paragraph types be adding fields or
-altering fields. However, try not to remove fields.
+After installation, feel free to alter the Paragraph types by adding fields,
+and altering fields. You can also customize templates by copying them from the
+module and placing in your theme. However, try not to remove the default fields.
 
 ## Install
 
-Install this module using the official Backdrop CMS instructions at
-<https://backdropcms.org/guide/modules>.
+Install this module using the official [Backdrop CMS instructions](https://backdropcms.org/guide/modules).
 
 ## License
 
@@ -29,9 +30,7 @@ directory for complete text.
 
 ## Credit
 
-Adapted from <https://www.drupal.org/project/uswds_paragraphs>.
-
-* <https://www.drupal.org/u/brockfanning>
-* <https://www.drupal.org/u/daniel_j>
-* <https://www.drupal.org/u/fskreuz>
-* <https://www.drupal.org/u/jrglasgow>
+Adapted from [USWDS Paragraphs](https://www.drupal.org/project/uswds_paragraphs),
+which was developed and maintained by [brockfanning](https://www.drupal.org/u/brockfanning),
+[daniel_j](https://www.drupal.org/u/daniel_j), [fskreuz](https://www.drupal.org/u/fskreuz),
+and [jrglasgow](https://www.drupal.org/u/jrglasgow).

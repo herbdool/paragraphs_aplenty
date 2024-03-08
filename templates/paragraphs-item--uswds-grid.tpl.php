@@ -2,7 +2,7 @@
   <div class="content"<?php print backdrop_attributes($content_attributes); ?>>
     <div class="container">
       <div class="row">
-        <?php foreach ($uswds_columns as $column): ?>
+        <?php foreach ($aplenty_columns as $column): ?>
         <?php print render($column); ?>
         <?php endforeach; ?>
       </div>

@@ -8,12 +8,12 @@
 /**
  * Implements hook_install().
  */
-function uswds_paragraphs_install() {
+function paragraphs_aplenty_install() {
 
   // Install the Hero paragraph type.
-  $bundle = 'uswds_hero';
-  _uswds_paragraphs_create_bundle($bundle, 'Hero');
-  _uswds_paragraphs_add_image_field('field_uswds_image', $bundle, array(
+  $bundle = 'aplenty_hero';
+  _paragraphs_aplenty_create_bundle($bundle, 'Hero');
+  _paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
     'label' => 'Hero background image',
     'description' => 'If provided, this image will appear as the background for the hero.',
     'settings' => array(
@@ -43,35 +43,35 @@ function uswds_paragraphs_install() {
       ),
     ),
   ));
-  _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
+  _paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
     'label' => 'Hero callout title',
     'description' => 'If provided, this title will appear at the top of the hero callout.',
   ));
-  _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
+  _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Description',
     'required' => FALSE,
   ));
-  _uswds_paragraphs_add_link_field('field_uswds_link', $bundle, array(
+  _paragraphs_aplenty_add_link_field('field_aplenty_link', $bundle, array(
     'label' => 'Hero callout button',
     'description' => 'If provided, this link will appear at the bottom of the hero callout, as a button.',
   ));
 
   // Install the Text paragraph type.
-  $bundle = 'uswds_text';
-  _uswds_paragraphs_create_bundle($bundle, 'Text');
-  _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
+  $bundle = 'aplenty_text';
+  _paragraphs_aplenty_create_bundle($bundle, 'Text');
+  _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Text',
     'required' => TRUE,
   ));
 
   // Install the Media Block paragraph type.
-  $bundle = 'uswds_media_block';
-  _uswds_paragraphs_create_bundle($bundle, 'Media block');
-  _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
+  $bundle = 'aplenty_media_block';
+  _paragraphs_aplenty_create_bundle($bundle, 'Media block');
+  _paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
     'label' => 'Media block title',
     'required' => TRUE,
   ));
-  _uswds_paragraphs_add_image_field('field_uswds_image', $bundle, array(
+  _paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
     'label' => 'Media block image',
     'required' => TRUE,
     'display' => array(
@@ -97,15 +97,15 @@ function uswds_paragraphs_install() {
       ),
     ),
   ));
-  _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
+  _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Media block body',
     'required' => TRUE,
   ));
 
   // Install the Media List paragraph type.
-  $bundle = 'uswds_graphic_list';
-  _uswds_paragraphs_create_bundle($bundle, 'Media list');
-  _uswds_paragraphs_add_text_list_field('field_uswds_media_align', $bundle,
+  $bundle = 'aplenty_graphic_list';
+  _paragraphs_aplenty_create_bundle($bundle, 'Media list');
+  _paragraphs_aplenty_add_text_list_field('field_aplenty_media_align', $bundle,
     array(
       'label' => 'Media align',
       'description' => 'Choose whether to align the media image to the left or right.',
@@ -122,11 +122,11 @@ function uswds_paragraphs_install() {
       ),
     )
   );
-  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
+  _paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
     'label' => 'Media blocks',
     'settings' => array(
       'allowed_bundles' => array(
-        'uswds_media_block' => 'uswds_media_block',
+        'aplenty_media_block' => 'aplenty_media_block',
       ),
       'title' => 'Media block',
       'title_multiple' => 'Media blocks',
@@ -135,9 +135,9 @@ function uswds_paragraphs_install() {
   ));
 
   // Install the Card paragraph type.
-  $bundle = 'uswds_card';
-  _uswds_paragraphs_create_bundle($bundle, 'Card');
-  _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
+  $bundle = 'aplenty_card';
+  _paragraphs_aplenty_create_bundle($bundle, 'Card');
+  _paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
     'label' => 'Card title',
     'required' => TRUE,
     'display' => array(
@@ -157,7 +157,7 @@ function uswds_paragraphs_install() {
       ),
     ),
   ));
-  _uswds_paragraphs_add_image_field('field_uswds_image', $bundle, array(
+  _paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
     'label' => 'Card image',
     'required' => TRUE,
     'display' => array(
@@ -183,7 +183,7 @@ function uswds_paragraphs_install() {
       ),
     ),
   ));
-  _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
+  _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Card body',
     'required' => FALSE,
     'display' => array(
@@ -202,7 +202,7 @@ function uswds_paragraphs_install() {
       ),
     ),
   ));
-  _uswds_paragraphs_add_link_field('field_uswds_link', $bundle, array(
+  _paragraphs_aplenty_add_link_field('field_aplenty_link', $bundle, array(
     'label' => 'Card button',
     'description' => 'If provided, this link will appear at the bottom of the card, as a button.',
     'display' => array(
@@ -224,9 +224,9 @@ function uswds_paragraphs_install() {
   ));
 
   // Install the Cards paragraph type.
-  $bundle = 'uswds_cards';
-  _uswds_paragraphs_create_bundle($bundle, 'Cards');
-  _uswds_paragraphs_add_number_list_field('field_uswds_column_width', $bundle,
+  $bundle = 'aplenty_cards';
+  _paragraphs_aplenty_create_bundle($bundle, 'Cards');
+  _paragraphs_aplenty_add_number_list_field('field_aplenty_column_width', $bundle,
     array(
       'label' => 'Column width',
       'description' => 'This sets the width of the columns in this row, and the number of columns per row.',
@@ -246,11 +246,11 @@ function uswds_paragraphs_install() {
       ),
     )
   );
-  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
+  _paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
     'label' => 'Cards',
     'settings' => array(
       'allowed_bundles' => array(
-        'uswds_card' => 'uswds_card',
+        'aplenty_card' => 'aplenty_card',
       ),
       'title' => 'Card',
       'title_multiple' => 'Cards',
@@ -259,23 +259,23 @@ function uswds_paragraphs_install() {
   ));
 
   // Install the Column paragraph type.
-  $bundle = 'uswds_column';
-  _uswds_paragraphs_create_bundle($bundle, 'Column');
-  _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
+  $bundle = 'aplenty_column';
+  _paragraphs_aplenty_create_bundle($bundle, 'Column');
+  _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Text',
   ));
 
   // Install the Column wrapper paragraph type.
-  $bundle = 'uswds_column_wrapper';
-  _uswds_paragraphs_create_bundle($bundle, 'Column Wrapper');
-  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
+  $bundle = 'aplenty_column_wrapper';
+  _paragraphs_aplenty_create_bundle($bundle, 'Column Wrapper');
+  _paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
     'label' => 'Column Content',
     'settings' => array(
       'allowed_bundles' => array(
-        'uswds_heading' => 'uswds_heading',
-        'uswds_text' => 'uswds_text',
-        'uswds_accordion' => 'uswds_accordion',
-        'uswds_image' => 'uswds_image',
+        'aplenty_heading' => 'aplenty_heading',
+        'aplenty_text' => 'aplenty_text',
+        'aplenty_accordion' => 'aplenty_accordion',
+        'aplenty_image' => 'aplenty_image',
       ),
       'title' => 'Paragraph',
       'title_multiple' => 'Paragraphs',
@@ -284,9 +284,9 @@ function uswds_paragraphs_install() {
   ));
 
   // Install the Grid (aka "Row of columns") paragraph type.
-  $bundle = 'uswds_grid';
-  _uswds_paragraphs_create_bundle($bundle, 'Row of columns');
-  _uswds_paragraphs_add_number_list_field('field_uswds_column_width', $bundle,
+  $bundle = 'aplenty_grid';
+  _paragraphs_aplenty_create_bundle($bundle, 'Row of columns');
+  _paragraphs_aplenty_add_number_list_field('field_aplenty_column_width', $bundle,
     array(
       'label' => 'Column width',
       'description' => 'This sets the width of the columns in this row, and the number of columns per row.',
@@ -306,7 +306,7 @@ function uswds_paragraphs_install() {
       ),
     )
   );
-  _uswds_paragraphs_add_number_list_field('field_uswds_column_stretch', $bundle,
+  _paragraphs_aplenty_add_number_list_field('field_aplenty_column_stretch', $bundle,
     array(
       'label' => 'Column to stretch',
       'description' => 'Choose which column will stretch to fill the remainder. If the number of paragraphs is less than the set number of columns, then the column chosen here will stretch to fill the remainder.',
@@ -326,12 +326,12 @@ function uswds_paragraphs_install() {
       ),
     )
   );
-  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
+  _paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
     'label' => 'Columns',
     'settings' => array(
       'allowed_bundles' => array(
-        'uswds_column' => 'uswds_column',
-        'uswds_column_wrapper' => 'uswds_column_wrapper',
+        'aplenty_column' => 'aplenty_column',
+        'aplenty_column_wrapper' => 'aplenty_column_wrapper',
       ),
       'title' => 'Column',
       'title_multiple' => 'Columns',
@@ -340,33 +340,33 @@ function uswds_paragraphs_install() {
   ));
 
   // Install the Accordion Item paragraph type.
-  $bundle = 'uswds_accordion_item';
-  _uswds_paragraphs_create_bundle($bundle, 'Accordion Item');
-  _uswds_paragraphs_add_text_field('field_uswds_title', $bundle, array(
+  $bundle = 'aplenty_accordion_item';
+  _paragraphs_aplenty_create_bundle($bundle, 'Accordion Item');
+  _paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
     'label' => 'Accordion item title',
     'required' => TRUE,
   ));
-  _uswds_paragraphs_add_text_long_field('field_uswds_body', $bundle, array(
+  _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Accordion item content',
   ));
 
   // Install the Accordion paragraph type.
-  $bundle = 'uswds_accordion';
-  _uswds_paragraphs_create_bundle($bundle, 'Accordion');
-  _uswds_paragraphs_add_boolean_field('field_uswds_accordion_bordered', $bundle, array(
+  $bundle = 'aplenty_accordion';
+  _paragraphs_aplenty_create_bundle($bundle, 'Accordion');
+  _paragraphs_aplenty_add_boolean_field('field_aplenty_accordion_bordered', $bundle, array(
     'label' => 'Add border around items',
   ));
-  _uswds_paragraphs_add_boolean_field('field_uswds_accordion_multi', $bundle, array(
+  _paragraphs_aplenty_add_boolean_field('field_aplenty_accordion_multi', $bundle, array(
     'label' => 'Allow more than one item to expand at a time',
   ));
-  _uswds_paragraphs_add_boolean_field('field_uswds_accordion_expand', $bundle, array(
+  _paragraphs_aplenty_add_boolean_field('field_aplenty_accordion_expand', $bundle, array(
     'label' => 'Start expanded',
   ));
-  _uswds_paragraphs_add_paragraphs_field('field_uswds_paragraphs', $bundle, array(
+  _paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
     'label' => 'Accordion Items',
     'settings' => array(
       'allowed_bundles' => array(
-        'uswds_accordion_item' => 'uswds_accordion_item',
+        'aplenty_accordion_item' => 'aplenty_accordion_item',
       ),
       'title' => 'Accordion item',
       'title_multiple' => 'Accordion items',
@@ -386,22 +386,22 @@ function uswds_paragraphs_install() {
   ));
 
   // Install the Heading paragraph type.
-  $bundle = 'uswds_heading';
-  _uswds_paragraphs_create_bundle($bundle, 'Heading');
-  _uswds_paragraphs_add_text_field('field_uswds_heading', $bundle, array(
+  $bundle = 'aplenty_heading';
+  _paragraphs_aplenty_create_bundle($bundle, 'Heading');
+  _paragraphs_aplenty_add_text_field('field_aplenty_heading', $bundle, array(
     'label' => 'Heading',
     'required' => FALSE,
   ));
-  _uswds_paragraphs_add_text_field('field_uswds_anchor', $bundle, array(
+  _paragraphs_aplenty_add_text_field('field_aplenty_anchor', $bundle, array(
     'label' => 'Anchor',
     'required' => FALSE,
     'description' => 'Provide a string with no spaces. If provided, the anchor can be a destination for a relative link that begins with a hash. For example, a link like <code>#bicycle</code> would link to an anchor <code>bicycle</code>.'
   ));
 
   // Install the Image paragraph type.
-  $bundle = 'uswds_image';
-  _uswds_paragraphs_create_bundle($bundle, 'Image');
-  _uswds_paragraphs_add_image_field('field_uswds_image', $bundle, array(
+  $bundle = 'aplenty_image';
+  _paragraphs_aplenty_create_bundle($bundle, 'Image');
+  _paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
     'label' => 'Image',
     'required' => TRUE,
     'display' => array(
@@ -427,7 +427,7 @@ function uswds_paragraphs_install() {
       ),
     ),
   ));
-  _uswds_paragraphs_add_text_field('field_uswds_caption', $bundle, array(
+  _paragraphs_aplenty_add_text_field('field_aplenty_caption', $bundle, array(
     'label' => 'Caption',
     'required' => FALSE,
     'display' => array(
@@ -447,7 +447,7 @@ function uswds_paragraphs_install() {
       ),
     ),
   ));
-  _uswds_paragraphs_add_link_field('field_uswds_link', $bundle, array(
+  _paragraphs_aplenty_add_link_field('field_aplenty_link', $bundle, array(
     'label' => 'Link caption',
     'description' => 'If provided, this link will appear as part of the caption.',
     'display' => array(
@@ -477,7 +477,7 @@ function uswds_paragraphs_install() {
  * @param string $human
  *   The human label for the bundle.
  */
-function _uswds_paragraphs_create_bundle($machine, $human) {
+function _paragraphs_aplenty_create_bundle($machine, $human) {
   $existing = paragraphs_bundle_load($machine);
   if ($existing) {
     return;
@@ -497,7 +497,7 @@ function _uswds_paragraphs_create_bundle($machine, $human) {
 /**
  * Helper function to add a boolean field to a bundle.
  */
-function _uswds_paragraphs_add_boolean_field($field_name, $bundle, $instance_overrides) {
+function _paragraphs_aplenty_add_boolean_field($field_name, $bundle, $instance_overrides) {
 
   $entity_type = 'paragraphs_item';
 
@@ -571,7 +571,7 @@ function _uswds_paragraphs_add_boolean_field($field_name, $bundle, $instance_ove
 /**
  * Helper function to add a number list field to a bundle.
  */
-function _uswds_paragraphs_add_number_list_field($field_name, $bundle, $instance_overrides, $base_overrides) {
+function _paragraphs_aplenty_add_number_list_field($field_name, $bundle, $instance_overrides, $base_overrides) {
 
   $entity_type = 'paragraphs_item';
 
@@ -638,7 +638,7 @@ function _uswds_paragraphs_add_number_list_field($field_name, $bundle, $instance
 /**
  * Helper function to add a text list field to a bundle.
  */
-function _uswds_paragraphs_add_text_list_field($field_name, $bundle, $instance_overrides, $base_overrides) {
+function _paragraphs_aplenty_add_text_list_field($field_name, $bundle, $instance_overrides, $base_overrides) {
 
   $entity_type = 'paragraphs_item';
 
@@ -705,7 +705,7 @@ function _uswds_paragraphs_add_text_list_field($field_name, $bundle, $instance_o
 /**
  * Helper function to add a paragraphs field to a bundle.
  */
-function _uswds_paragraphs_add_paragraphs_field($field_name, $bundle, $instance_overrides) {
+function _paragraphs_aplenty_add_paragraphs_field($field_name, $bundle, $instance_overrides) {
 
   $entity_type = 'paragraphs_item';
 
@@ -742,11 +742,11 @@ function _uswds_paragraphs_add_paragraphs_field($field_name, $bundle, $instance_
         'add_mode' => 'button',
         'allowed_bundles' => array(),
         'bundle_weights' => array(
-          'uswds_text' => '1',
-          'uswds_grid' => '2',
-          'uswds_graphic_list' => '3',
-          'uswds_hero' => '4',
-          'uswds_cards' => '5',
+          'aplenty_text' => '1',
+          'aplenty_grid' => '2',
+          'aplenty_graphic_list' => '3',
+          'aplenty_hero' => '4',
+          'aplenty_cards' => '5',
         ),
         'user_register_form' => false,
       ),
@@ -786,7 +786,7 @@ function _uswds_paragraphs_add_paragraphs_field($field_name, $bundle, $instance_
 /**
  * Helper function to add a text field to a bundle.
  */
-function _uswds_paragraphs_add_text_field($field_name, $bundle, $instance_overrides) {
+function _paragraphs_aplenty_add_text_field($field_name, $bundle, $instance_overrides) {
 
   $entity_type = 'paragraphs_item';
 
@@ -854,7 +854,7 @@ function _uswds_paragraphs_add_text_field($field_name, $bundle, $instance_overri
 /**
  * Helper function to add an image field to a paragraph type.
  */
-function _uswds_paragraphs_add_image_field($field_name, $bundle, $instance_overrides) {
+function _paragraphs_aplenty_add_image_field($field_name, $bundle, $instance_overrides) {
 
   $entity_type = 'paragraphs_item';
 
@@ -891,7 +891,7 @@ function _uswds_paragraphs_add_image_field($field_name, $bundle, $instance_overr
         ),
       ),
       'settings' => array(
-        'file_directory' => 'uswds-paragraphs',
+        'file_directory' => 'aplenty-paragraphs',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
         'max_resolution' => '',
@@ -937,7 +937,7 @@ function _uswds_paragraphs_add_image_field($field_name, $bundle, $instance_overr
 /**
  * Helper function to add a long text field to a paragraph type.
  */
-function _uswds_paragraphs_add_text_long_field($field_name, $bundle, $instance_overrides) {
+function _paragraphs_aplenty_add_text_long_field($field_name, $bundle, $instance_overrides) {
 
   $entity_type = 'paragraphs_item';
 
@@ -1003,7 +1003,7 @@ function _uswds_paragraphs_add_text_long_field($field_name, $bundle, $instance_o
 /**
  * Helper function to add a link field to a paragraph type.
  */
-function _uswds_paragraphs_add_link_field($field_name, $bundle, $instance_overrides) {
+function _paragraphs_aplenty_add_link_field($field_name, $bundle, $instance_overrides) {
 
   $entity_type = 'paragraphs_item';
 

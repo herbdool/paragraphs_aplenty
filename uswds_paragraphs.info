@@ -1,5 +1,5 @@
 name = Paragraphs Aplenty
-description = Several Paragraph types for use.
+description = Several Paragraph types for use, including cards, accordion, hero, columns.
 backdrop = 1.x
 type = module
 package = Paragraphs

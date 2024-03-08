@@ -8,7 +8,7 @@
 /**
  * Implements hook_theme().
  */
-function uswds_paragraphs_theme($existing, $type, $theme, $path) {
+function paragraphs_aplenty_theme($existing, $type, $theme, $path) {
 
   $common = array(
     'path' => $path . '/templates',
@@ -16,44 +16,44 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
   );
 
   return array(
-    'paragraphs_item__uswds_hero' => $common + array(
-      'template' => 'paragraphs-item--uswds-hero',
+    'paragraphs_item__aplenty_hero' => $common + array(
+      'template' => 'paragraphs-item--aplenty-hero',
     ),
-    'paragraphs_item__uswds_graphic_list' => $common + array(
-      'template' => 'paragraphs-item--uswds-graphic-list',
+    'paragraphs_item__aplenty_graphic_list' => $common + array(
+      'template' => 'paragraphs-item--aplenty-graphic-list',
     ),
-    'paragraphs_item__uswds_media_block' => $common + array(
-      'template' => 'paragraphs-item--uswds-media-block',
+    'paragraphs_item__aplenty_media_block' => $common + array(
+      'template' => 'paragraphs-item--aplenty-media-block',
     ),
-    'paragraphs_item__uswds_cards' => $common + array(
-      'template' => 'paragraphs-item--uswds-cards',
+    'paragraphs_item__aplenty_cards' => $common + array(
+      'template' => 'paragraphs-item--aplenty-cards',
     ),
-    'paragraphs_item__uswds_card' => $common + array(
-      'template' => 'paragraphs-item--uswds-card',
+    'paragraphs_item__aplenty_card' => $common + array(
+      'template' => 'paragraphs-item--aplenty-card',
     ),
-    'paragraphs_item__uswds_grid' => $common + array(
-      'template' => 'paragraphs-item--uswds-grid',
+    'paragraphs_item__aplenty_grid' => $common + array(
+      'template' => 'paragraphs-item--aplenty-grid',
     ),
-    'paragraphs_item__uswds_column' => $common + array(
-      'template' => 'paragraphs-item--uswds-column',
+    'paragraphs_item__aplenty_column' => $common + array(
+      'template' => 'paragraphs-item--aplenty-column',
     ),
-    'paragraphs_item__uswds_column_wrapper' => $common + array(
-      'template' => 'paragraphs-item--uswds-column-wrapper',
+    'paragraphs_item__aplenty_column_wrapper' => $common + array(
+      'template' => 'paragraphs-item--aplenty-column-wrapper',
     ),
-    'paragraphs_item__uswds_accordion' => $common + array(
-      'template' => 'paragraphs-item--uswds-accordion',
+    'paragraphs_item__aplenty_accordion' => $common + array(
+      'template' => 'paragraphs-item--aplenty-accordion',
     ),
-    'paragraphs_item__uswds_accordion_item' => $common + array(
-      'template' => 'paragraphs-item--uswds-accordion-item',
+    'paragraphs_item__aplenty_accordion_item' => $common + array(
+      'template' => 'paragraphs-item--aplenty-accordion-item',
     ),
-    'paragraphs_item__uswds_text' => $common + array(
-      'template' => 'paragraphs-item--uswds-text',
+    'paragraphs_item__aplenty_text' => $common + array(
+      'template' => 'paragraphs-item--aplenty-text',
     ),
-    'paragraphs_item__uswds_heading' => $common + array(
-      'template' => 'paragraphs-item--uswds-heading',
+    'paragraphs_item__aplenty_heading' => $common + array(
+      'template' => 'paragraphs-item--aplenty-heading',
     ),
-    'paragraphs_item__uswds_image' => $common + array(
-      'template' => 'paragraphs-item--uswds-image',
+    'paragraphs_item__aplenty_image' => $common + array(
+      'template' => 'paragraphs-item--aplenty-image',
     ),
   );
 }
@@ -61,14 +61,14 @@ function uswds_paragraphs_theme($existing, $type, $theme, $path) {
 /**
  * Implements hook_preprocess_paragraphs_item().
  */
-function uswds_paragraphs_preprocess_paragraphs_item(&$variables) {
-  $path = backdrop_get_path('module', 'uswds_paragraphs');
-  backdrop_add_css($path . '/css/uswds_paragraphs.css');
-  backdrop_add_js($path . '/js/uswds_paragraphs.js');
+function paragraphs_aplenty_preprocess_paragraphs_item(&$variables) {
+  $path = backdrop_get_path('module', 'paragraphs_aplenty');
+  backdrop_add_css($path . '/css/paragraphs_aplenty.css');
+  backdrop_add_js($path . '/js/paragraphs_aplenty.js');
 
   // Do any extra preprocessing.
   $bundle = $variables['paragraphs_item']->bundle();
-  $func = '_uswds_paragraphs_preprocess_' . $bundle;
+  $func = '_paragraphs_aplenty_preprocess_' . $bundle;
   if (function_exists($func)) {
     $func($variables);
   }
@@ -77,119 +77,119 @@ function uswds_paragraphs_preprocess_paragraphs_item(&$variables) {
 /**
  * Preprocessing code for the Graphic List bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_graphic_list(&$variables) {
+function _paragraphs_aplenty_preprocess_aplenty_graphic_list(&$variables) {
   $variables['classes_array'][] = 'aplenty-graphic_list';
-  $variables['uswds_graphic_list_rows'] = array();
+  $variables['aplenty_graphic_list_rows'] = array();
   $list = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
-  $media_align = $list->field_uswds_media_align->value();
-  if (empty($variables['content']['field_uswds_paragraphs'])) {
+  $media_align = $list->field_aplenty_media_align->value();
+  if (empty($variables['content']['field_aplenty_paragraphs'])) {
     return;
   }
-  $media_blocks = $list->field_uswds_paragraphs;
+  $media_blocks = $list->field_aplenty_paragraphs;
   foreach ($media_blocks as $key => $media_block) {
     $column_id = $media_block->getIdentifier();
-    $variables['content']['field_uswds_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#uswds_media_class'] = $media_align;
-    $variables['uswds_graphic_list_rows'][] = $variables['content']['field_uswds_paragraphs'][$key];
+    $variables['content']['field_aplenty_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#aplenty_media_class'] = $media_align;
+    $variables['aplenty_graphic_list_rows'][] = $variables['content']['field_aplenty_paragraphs'][$key];
   }
 }
 
 /**
  * Preprocessing code for the Media Block bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_media_block(&$variables) {
+function _paragraphs_aplenty_preprocess_aplenty_media_block(&$variables) {
   $variables['classes_array'][] = 'aplenty-media_block';
-  $variables['classes_array'][] = $variables['elements']['#uswds_media_class'];
-  $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'aplenty-media_block-img';
+  $variables['classes_array'][] = $variables['elements']['#aplenty_media_class'];
+  $variables['content']['field_aplenty_image'][0]['#item']['attributes']['class'][] = 'aplenty-media_block-img';
 }
 
 /**
  * Preprocessing code for the Card bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_card(&$variables) {
+function _paragraphs_aplenty_preprocess_aplenty_card(&$variables) {
   $variables['classes_array'][] = 'aplenty-card';
-  if (empty($variables['elements']['#uswds_width_class'])) {
-    $variables['elements']['#uswds_width_class'] = 'col-md-12';
+  if (empty($variables['elements']['#aplenty_width_class'])) {
+    $variables['elements']['#aplenty_width_class'] = 'col-md-12';
   }
-  $variables['classes_array'][] = $variables['elements']['#uswds_width_class'];
+  $variables['classes_array'][] = $variables['elements']['#aplenty_width_class'];
 
-  $variables['content']['field_uswds_image'][0]['#item']['attributes']['class'][] = 'aplenty-card-img';
+  $variables['content']['field_aplenty_image'][0]['#item']['attributes']['class'][] = 'aplenty-card-img';
   $paragraph = $variables['paragraphs_item'];
-  if (!empty($paragraph->field_uswds_title)) {
-    $variables['content']['field_uswds_title'][0]['#element']['attributes']['class'] = 'aplenty-card-title';
+  if (!empty($paragraph->field_aplenty_title)) {
+    $variables['content']['field_aplenty_title'][0]['#element']['attributes']['class'] = 'aplenty-card-title';
   }
-  if (!empty($paragraph->field_uswds_body)) {
-    $variables['content']['field_uswds_body'][0]['#element']['attributes']['class'] = 'aplenty-card-body';
+  if (!empty($paragraph->field_aplenty_body)) {
+    $variables['content']['field_aplenty_body'][0]['#element']['attributes']['class'] = 'aplenty-card-body';
   }
-  if (!empty($paragraph->field_uswds_link)) {
-    $variables['content']['field_uswds_link'][0]['#element']['attributes']['class'] = 'aplenty-card-button';
+  if (!empty($paragraph->field_aplenty_link)) {
+    $variables['content']['field_aplenty_link'][0]['#element']['attributes']['class'] = 'aplenty-card-button';
   }
 }
 
 /**
  * Preprocessing code for the Cards bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_cards(&$variables) {
+function _paragraphs_aplenty_preprocess_aplenty_cards(&$variables) {
   $variables['classes_array'][] = 'aplenty-cards';
 
-  $variables['uswds_cards'] = array();
-  if (empty($variables['content']['field_uswds_paragraphs'])) {
+  $variables['aplenty_cards'] = array();
+  if (empty($variables['content']['field_aplenty_paragraphs'])) {
     return;
   }
   $grid = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
-  $num_columns = (int)$grid->field_uswds_column_width->value();
-  $columns = $grid->field_uswds_paragraphs;
+  $num_columns = (int)$grid->field_aplenty_column_width->value();
+  $columns = $grid->field_aplenty_paragraphs;
   // The numerator is always 1 for cards.
-  $class = _uswds_paragraphs_fraction_to_class(1, $num_columns);
+  $class = _paragraphs_aplenty_fraction_to_class(1, $num_columns);
   foreach ($columns as $key => $column) {
     $column_id = $column->getIdentifier();
     // @TODO: There is probably a better way to communicate this value to
-    // the uswds_column paragraph.
-    $variables['content']['field_uswds_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#uswds_width_class'] = $class;
+    // the aplenty_column paragraph.
+    $variables['content']['field_aplenty_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#aplenty_width_class'] = $class;
 
     // Copy them to another variable as a quick way to avoid printing
     // the field wrapper.
-    $variables['uswds_cards'][] = $variables['content']['field_uswds_paragraphs'][$key];
+    $variables['aplenty_cards'][] = $variables['content']['field_aplenty_paragraphs'][$key];
   }
 }
 
 /**
  * Preprocessing code for the Heading bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_heading(&$variables) {
+function _paragraphs_aplenty_preprocess_aplenty_heading(&$variables) {
   $variables['classes_array'][] = 'aplenty-heading';
   $variables['heading_text'] = '';
-  if (!empty($variables['content']['field_uswds_heading'])) {
-    $variables['heading_text'] = check_url($variables['content']['field_uswds_heading']['#items'][0]['safe_value']);
+  if (!empty($variables['content']['field_aplenty_heading'])) {
+    $variables['heading_text'] = check_url($variables['content']['field_aplenty_heading']['#items'][0]['safe_value']);
   }
   $variables['anchor_text'] = '';
-  if (!empty($variables['content']['field_uswds_anchor'])) {
-    $variables['anchor_text'] = check_url($variables['content']['field_uswds_anchor']['#items'][0]['safe_value']);
+  if (!empty($variables['content']['field_aplenty_anchor'])) {
+    $variables['anchor_text'] = check_url($variables['content']['field_aplenty_anchor']['#items'][0]['safe_value']);
   }
 }
 
 /**
  * Preprocessing code for the Hero bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_hero(&$variables) {
+function _paragraphs_aplenty_preprocess_aplenty_hero(&$variables) {
   $variables['classes_array'][] = 'aplenty-hero';
   // Set the classes on the button.
   $paragraph = $variables['paragraphs_item'];
-  if (!empty($paragraph->field_uswds_body)) {
-    $variables['content']['field_uswds_body'][0]['#element']['attributes']['class'] = 'aplenty-hero-body';
+  if (!empty($paragraph->field_aplenty_body)) {
+    $variables['content']['field_aplenty_body'][0]['#element']['attributes']['class'] = 'aplenty-hero-body';
   }
-  if (!empty($paragraph->field_uswds_link)) {
-    $variables['content']['field_uswds_link'][0]['#element']['attributes']['class'] = 'button aplenty-button-big button-secondary';
+  if (!empty($paragraph->field_aplenty_link)) {
+    $variables['content']['field_aplenty_link'][0]['#element']['attributes']['class'] = 'button aplenty-button-big button-secondary';
   }
   // We also need to set the inline CSS for the image.
-  if (!empty($variables['content']['field_uswds_image'])) {
+  if (!empty($variables['content']['field_aplenty_image'])) {
     // Make sure we have a unique ID, in case of multiple Heroes.
-    $identifier = 'uswds-hero-' . $variables['content']['field_uswds_image'][0]['#item']['fid'];
+    $identifier = 'aplenty-hero-' . $variables['content']['field_aplenty_image'][0]['#item']['fid'];
     $variables['classes_array'][] = $identifier;
     $variables['classes_array'][] = 'aplenty-hero-image';
     // Inline the CSS background image.
-    $img = file_create_url($variables['content']['field_uswds_image'][0]['#item']['uri']);
+    $img = file_create_url($variables['content']['field_aplenty_image'][0]['#item']['uri']);
     $css = ".$identifier.paragraphs-item.aplenty-hero { background-image:url($img); }";
-    $variables['content']['field_uswds_image'] = array(
+    $variables['content']['field_aplenty_image'] = array(
       '#attached' => array(
         'css' => array(
           array(
@@ -214,7 +214,7 @@ function _uswds_paragraphs_preprocess_uswds_hero(&$variables) {
  * @param int $denominator
  *   The bottom part of the fraction.
  */
-function _uswds_paragraphs_fraction_to_class($numerator, $denominator) {
+function _paragraphs_aplenty_fraction_to_class($numerator, $denominator) {
   if ($numerator == $denominator) {
     return 'col-md-12';
   }
@@ -265,22 +265,22 @@ function _uswds_paragraphs_fraction_to_class($numerator, $denominator) {
 /**
  * Preprocessing code for the Grid bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_grid(&$variables) {
+function _paragraphs_aplenty_preprocess_aplenty_grid(&$variables) {
   $variables['classes_array'][] = 'aplenty-grid';
   $grid = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
-  $max_columns = (int)$grid->field_uswds_column_width->value();
-  $columns = $grid->field_uswds_paragraphs;
+  $max_columns = (int)$grid->field_aplenty_column_width->value();
+  $columns = $grid->field_aplenty_paragraphs;
   $num_columns = count($columns);
 
   // Drop excess columns.
   if ($num_columns > $max_columns) {
     for ($key = $max_columns; $key < $num_columns; $key++) {
-      unset($variables['content']['field_uswds_paragraphs'][$key]);
+      unset($variables['content']['field_aplenty_paragraphs'][$key]);
     }
     $num_columns = $max_columns;
   }
 
-  $stretch = (int)$grid->field_uswds_column_stretch->value();
+  $stretch = (int)$grid->field_aplenty_column_stretch->value();
   $available_space = $max_columns - $num_columns;
   for ($key = 0; $key < $num_columns; $key++) {
 
@@ -291,44 +291,44 @@ function _uswds_paragraphs_preprocess_uswds_grid(&$variables) {
       $numerator += $available_space;
     }
     // Finally communicate the class.
-    $class = _uswds_paragraphs_fraction_to_class($numerator, $max_columns);
+    $class = _paragraphs_aplenty_fraction_to_class($numerator, $max_columns);
     $column_id = $columns[$key]->getIdentifier();
     // @TODO: There is probably a better way to communicate this value to
-    // the uswds_column paragraph.
-    $variables['content']['field_uswds_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#uswds_width_class'] = $class;
+    // the aplenty_column paragraph.
+    $variables['content']['field_aplenty_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#aplenty_width_class'] = $class;
 
     // Copy them to another variable as a quick way to avoid printing
     // the field wrapper.
-    $variables['uswds_columns'][] = $variables['content']['field_uswds_paragraphs'][$key];
+    $variables['aplenty_columns'][] = $variables['content']['field_aplenty_paragraphs'][$key];
   }
 }
 
 /**
  * Preprocessing code for the Column bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_column(&$variables) {
-  if (empty($variables['elements']['#uswds_width_class'])) {
-    $variables['elements']['#uswds_width_class'] = 'col-md-12';
+function _paragraphs_aplenty_preprocess_aplenty_column(&$variables) {
+  if (empty($variables['elements']['#aplenty_width_class'])) {
+    $variables['elements']['#aplenty_width_class'] = 'col-md-12';
   }
-  $variables['classes_array'][] = $variables['elements']['#uswds_width_class'];
+  $variables['classes_array'][] = $variables['elements']['#aplenty_width_class'];
 }
 
 /**
  * Preprocessing code for the Column Wrapper bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_column_wrapper(&$variables) {
-  if (empty($variables['elements']['#uswds_width_class'])) {
-    $variables['elements']['#uswds_width_class'] = 'col-md-12';
+function _paragraphs_aplenty_preprocess_aplenty_column_wrapper(&$variables) {
+  if (empty($variables['elements']['#aplenty_width_class'])) {
+    $variables['elements']['#aplenty_width_class'] = 'col-md-12';
   }
-  $variables['classes_array'][] = $variables['elements']['#uswds_width_class'];
+  $variables['classes_array'][] = $variables['elements']['#aplenty_width_class'];
 
   $variables['cards'] = array();
-  if (empty($variables['content']['field_uswds_paragraphs'])) {
+  if (empty($variables['content']['field_aplenty_paragraphs'])) {
     return;
   }
-  $content_keys = element_children($variables['content']['field_uswds_paragraphs']);
+  $content_keys = element_children($variables['content']['field_aplenty_paragraphs']);
   foreach ($content_keys as $key) {
-    $pairs[] = $variables['content']['field_uswds_paragraphs'][$key];
+    $pairs[] = $variables['content']['field_aplenty_paragraphs'][$key];
   }
   $variables['column_items'] = $pairs;
 }
@@ -336,36 +336,36 @@ function _uswds_paragraphs_preprocess_uswds_column_wrapper(&$variables) {
 /**
  * Preprocessing code for the Accordion bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_accordion(&$variables) {
+function _paragraphs_aplenty_preprocess_aplenty_accordion(&$variables) {
   $accordion = $variables['paragraphs_item'];
   $accordion = entity_metadata_wrapper('paragraphs_item', $accordion);
   $variables['classes_array'][] = 'aplenty-accordion';
 
-  if ($accordion->field_uswds_accordion_multi->value()) {
+  if ($accordion->field_aplenty_accordion_multi->value()) {
     $variables['classes_array'][] = 'aplenty-accordion-multi';
   }
   else {
     $variables['classes_array'][] = 'aplenty-accordion-single';
   }
 
-  if ($accordion->field_uswds_accordion_bordered->value()) {
+  if ($accordion->field_aplenty_accordion_bordered->value()) {
     $variables['classes_array'][] = 'aplenty-accordion-border';
   }
   else {
     $variables['classes_array'][] = 'aplenty-accordion-no-border';
   }
 
-  if ($accordion->field_uswds_accordion_expand->value()) {
+  if ($accordion->field_aplenty_accordion_expand->value()) {
     // @TODO: Presumably there is a more proper way to communicate to the item?
-    $first_id = $accordion->field_uswds_paragraphs[0]->getIdentifier();
-    $variables['content']['field_uswds_paragraphs'][0]['entity']['paragraphs_item'][$first_id]['#uswds_expand'] = TRUE;
+    $first_id = $accordion->field_aplenty_paragraphs[0]->getIdentifier();
+    $variables['content']['field_aplenty_paragraphs'][0]['entity']['paragraphs_item'][$first_id]['#aplenty_expand'] = TRUE;
   }
 
   // Copy to a separate variable for easy rendering without field markup.
-  $variables['uswds_accordion_items'] = array();
-  if (!empty($variables['content']['field_uswds_paragraphs'])){
-    foreach (element_children($variables['content']['field_uswds_paragraphs']) as $key) {
-      $variables['uswds_accordion_items'][] = $variables['content']['field_uswds_paragraphs'][$key];
+  $variables['aplenty_accordion_items'] = array();
+  if (!empty($variables['content']['field_aplenty_paragraphs'])){
+    foreach (element_children($variables['content']['field_aplenty_paragraphs']) as $key) {
+      $variables['aplenty_accordion_items'][] = $variables['content']['field_aplenty_paragraphs'][$key];
     }
   }
 }
@@ -373,29 +373,29 @@ function _uswds_paragraphs_preprocess_uswds_accordion(&$variables) {
 /**
  * Preprocessing code for the Accordion Item bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_accordion_item(&$variables) {
+function _paragraphs_aplenty_preprocess_aplenty_accordion_item(&$variables) {
   $accordion_item = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
 
-  $variables['accordion_title'] = $accordion_item->field_uswds_title->value();
+  $variables['accordion_title'] = $accordion_item->field_aplenty_title->value();
 
-  $expanded = (!empty($variables['elements']['#uswds_expand']));
+  $expanded = (!empty($variables['elements']['#aplenty_expand']));
   $variables['expanded'] = ($expanded) ? 'open' : '';
 }
 
 /**
  * Preprocessing code for the Text bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_text(&$variables) {
+function _paragraphs_aplenty_preprocess_aplenty_text(&$variables) {
   $variables['classes_array'][] = 'aplenty-text';
 }
 
 /**
  * Preprocessing code for the Image bundle.
  */
-function _uswds_paragraphs_preprocess_uswds_image(&$variables) {
+function _paragraphs_aplenty_preprocess_aplenty_image(&$variables) {
   $variables['classes_array'][] = 'aplenty-image';
-  $variables['caption'] = $variables['content']['field_uswds_caption'][0];
-  $variables['caption_link'] = $variables['content']['field_uswds_link'][0];
+  $variables['caption'] = $variables['content']['field_aplenty_caption'][0];
+  $variables['caption_link'] = $variables['content']['field_aplenty_link'][0];
 }
 
 /**
@@ -404,61 +404,61 @@ function _uswds_paragraphs_preprocess_uswds_image(&$variables) {
  * @return
  *   A nested array of bundles to required field names.
  */
-function _uswds_paragraphs_get_required_fields() {
+function _paragraphs_aplenty_get_required_fields() {
   return array(
-    'uswds_accordion' => array(
-      'field_uswds_accordion_multi',
-      'field_uswds_accordion_bordered',
-      'field_uswds_accordion_expand',
-      'field_uswds_paragraphs',
+    'aplenty_accordion' => array(
+      'field_aplenty_accordion_multi',
+      'field_aplenty_accordion_bordered',
+      'field_aplenty_accordion_expand',
+      'field_aplenty_paragraphs',
     ),
-    'uswds_accordion_item' => array(
-      'field_uswds_title',
-      'field_uswds_body',
+    'aplenty_accordion_item' => array(
+      'field_aplenty_title',
+      'field_aplenty_body',
     ),
-    'uswds_column' => array(
-      'field_uswds_body',
+    'aplenty_column' => array(
+      'field_aplenty_body',
     ),
-    'uswds_column_wrapper' => array(
-      'field_uswds_paragraphs',
+    'aplenty_column_wrapper' => array(
+      'field_aplenty_paragraphs',
     ),
-    'uswds_graphic_list' => array(
-      'field_uswds_paragraphs',
-      'field_uswds_media_align',
+    'aplenty_graphic_list' => array(
+      'field_aplenty_paragraphs',
+      'field_aplenty_media_align',
     ),
-    'uswds_grid' => array(
-      'field_uswds_column_width',
-      'field_uswds_column_stretch',
-      'field_uswds_paragraphs',
+    'aplenty_grid' => array(
+      'field_aplenty_column_width',
+      'field_aplenty_column_stretch',
+      'field_aplenty_paragraphs',
     ),
-    'uswds_hero' => array(
-      'field_uswds_image',
-      'field_uswds_title',
-      'field_uswds_body',
-      'field_uswds_link',
+    'aplenty_hero' => array(
+      'field_aplenty_image',
+      'field_aplenty_title',
+      'field_aplenty_body',
+      'field_aplenty_link',
     ),
-    'uswds_media_block' => array(
-      'field_uswds_title',
-      'field_uswds_image',
-      'field_uswds_body',
+    'aplenty_media_block' => array(
+      'field_aplenty_title',
+      'field_aplenty_image',
+      'field_aplenty_body',
     ),
-    'uswds_cards' => array(
-      'field_uswds_column_width',
-      'field_uswds_paragraphs',
+    'aplenty_cards' => array(
+      'field_aplenty_column_width',
+      'field_aplenty_paragraphs',
     ),
-    'uswds_card' => array(
-      'field_uswds_title',
-      'field_uswds_image',
-      'field_uswds_body',
-      'field_uswds_link',
+    'aplenty_card' => array(
+      'field_aplenty_title',
+      'field_aplenty_image',
+      'field_aplenty_body',
+      'field_aplenty_link',
     ),
-    'uswds_heading' => array(
-      'field_uswds_heading',
-      'field_uswds_anchor',
+    'aplenty_heading' => array(
+      'field_aplenty_heading',
+      'field_aplenty_anchor',
     ),
-    'uswds_image' => array(
-      'field_uswds_image',
-      'field_uswds_link',
+    'aplenty_image' => array(
+      'field_aplenty_image',
+      'field_aplenty_link',
     ),
   );
 }
@@ -466,20 +466,20 @@ function _uswds_paragraphs_get_required_fields() {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function uswds_paragraphs_form_field_ui_field_delete_form_alter(&$form) {
+function paragraphs_aplenty_form_field_ui_field_delete_form_alter(&$form) {
   $entity_type = $form['entity_type']['#value'];
   $bundle = $form['bundle']['#value'];
   $field_name = $form['field_name']['#value'];
   if ('paragraphs_item' != $entity_type) {
     return;
   }
-  $required = _uswds_paragraphs_get_required_fields();
+  $required = _paragraphs_aplenty_get_required_fields();
   if (empty($required[$bundle])) {
     return;
   }
   if (!in_array($field_name, $required[$bundle])) {
     return;
   }
-  $form['uswds_paragraphs']['#markup'] = t('NOTE: This field is required by Paragraphs Aplenty, and cannot be deleted.');
+  $form['paragraphs_aplenty']['#markup'] = t('NOTE: This field is required by Paragraphs Aplenty, and cannot be deleted.');
   $form['actions']['submit']['#access'] = FALSE;
 }

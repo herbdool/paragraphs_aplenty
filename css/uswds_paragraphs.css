@@ -171,22 +171,22 @@
   height: fit-content;
 }
 
-.aplenty-card .field-name-field-uswds-title {
+.aplenty-card .field-name-field-aplenty-title {
   font-size: 1.25rem;
   font-weight: bold;
 }
 
-.aplenty-card .field-name-field-uswds-title,
-.aplenty-card .field-name-field-uswds-body,
-.aplenty-card .field-name-field-uswds-link {
+.aplenty-card .field-name-field-aplenty-title,
+.aplenty-card .field-name-field-aplenty-body,
+.aplenty-card .field-name-field-aplenty-link {
   padding: 0 1rem;
 }
 
 /**
  * Images
  */
-.aplenty-image .field-name-field-uswds-caption,
-.aplenty-image .field-name-field-uswds-link {
+.aplenty-image .field-name-field-aplenty-caption,
+.aplenty-image .field-name-field-aplenty-link {
   font-style: italic;
 }
 
