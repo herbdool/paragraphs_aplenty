@@ -199,3 +199,6 @@
 form .field-type-paragraphs table {
   font-size: 0.923rem;
 }
+form .field-type-paragraphs table .paragraphs-item {
+  white-space: normal;
+}
