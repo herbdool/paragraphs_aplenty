@@ -9,6 +9,7 @@
  * Implements hook_install().
  */
 function paragraphs_aplenty_install() {
+  module_load_include('inc', 'paragraphs_aplenty', 'includes/paragraphs_aplenty.crud');
 
   // Install the Hero paragraph type.
   // Similar to Hero in Backdrop core, or Bootstrap 3.x.
@@ -19,8 +20,8 @@ function paragraphs_aplenty_install() {
     'label' => 'Hero',
     'description' => 'Content container with a title, body text, link, and a background image.',
   );
-  _paragraphs_aplenty_create_bundle($bundle, $settings);
-  _paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
+  paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
     'label' => 'Hero background image',
     'description' => 'If provided, this image will appear as the background for the hero.',
     'settings' => array(
@@ -50,15 +51,15 @@ function paragraphs_aplenty_install() {
       ),
     ),
   ));
-  _paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
+  paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
     'label' => 'Hero callout title',
     'description' => 'If provided, this title will appear at the top of the hero callout.',
   ));
-  _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
+  paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Description',
     'required' => FALSE,
   ));
-  _paragraphs_aplenty_add_link_field('field_aplenty_link', $bundle, array(
+  paragraphs_aplenty_add_link_field('field_aplenty_link', $bundle, array(
     'label' => 'Hero callout button',
     'description' => 'If provided, this link will appear at the bottom of the hero callout, as a button.',
   ));
@@ -70,8 +71,8 @@ function paragraphs_aplenty_install() {
     'label' => 'Text',
     'description' => 'Simple rich text field.',
   );
-  _paragraphs_aplenty_create_bundle($bundle, $settings);
-  _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
+  paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Text',
     'required' => TRUE,
   ));
@@ -85,12 +86,12 @@ function paragraphs_aplenty_install() {
     'label' => 'Media block',
     'description' => 'Content container with a title, image, body text. The image can be aligned left or right.',
   );
-  _paragraphs_aplenty_create_bundle($bundle, $settings);
-  _paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
+  paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
     'label' => 'Media block title',
     'required' => TRUE,
   ));
-  _paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
+  paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
     'label' => 'Media block image',
     'required' => TRUE,
     'display' => array(
@@ -116,7 +117,7 @@ function paragraphs_aplenty_install() {
       ),
     ),
   ));
-  _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
+  paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Media block body',
     'required' => TRUE,
   ));
@@ -129,8 +130,8 @@ function paragraphs_aplenty_install() {
     'label' => 'Media list',
     'description' => 'Container of media blocks. Can have 1 or 2 columns and assign the image to the left or right.',
   );
-  _paragraphs_aplenty_create_bundle($bundle, $settings);
-  _paragraphs_aplenty_add_text_list_field('field_aplenty_media_align', $bundle,
+  paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_text_list_field('field_aplenty_media_align', $bundle,
     array(
       'label' => 'Media align',
       'description' => 'Choose whether to align the media image to the left or right for each child media item.',
@@ -148,7 +149,7 @@ function paragraphs_aplenty_install() {
       ),
     )
   );
-  _paragraphs_aplenty_add_number_list_field('field_aplenty_media_width', $bundle,
+  paragraphs_aplenty_add_number_list_field('field_aplenty_media_width', $bundle,
     array(
       'label' => 'Column width',
       'description' => 'This sets the number of media blocks per row.',
@@ -166,7 +167,7 @@ function paragraphs_aplenty_install() {
       ),
     )
   );
-  _paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
+  paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
     'label' => 'Media blocks',
     'settings' => array(
       'allowed_bundles' => array(
@@ -187,8 +188,8 @@ function paragraphs_aplenty_install() {
     'label' => 'Card',
     'description' => 'Content container with a title, image, body text and link. Can be extended with new fields.',
   );
-  _paragraphs_aplenty_create_bundle($bundle, $settings);
-  _paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
+  paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
     'label' => 'Card title',
     'required' => TRUE,
     'display' => array(
@@ -208,7 +209,7 @@ function paragraphs_aplenty_install() {
       ),
     ),
   ));
-  _paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
+  paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
     'label' => 'Card image',
     'required' => TRUE,
     'display' => array(
@@ -234,7 +235,7 @@ function paragraphs_aplenty_install() {
       ),
     ),
   ));
-  _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
+  paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Card body',
     'required' => FALSE,
     'display' => array(
@@ -253,7 +254,7 @@ function paragraphs_aplenty_install() {
       ),
     ),
   ));
-  _paragraphs_aplenty_add_link_field('field_aplenty_link', $bundle, array(
+  paragraphs_aplenty_add_link_field('field_aplenty_link', $bundle, array(
     'label' => 'Card button',
     'description' => 'If provided, this link will appear at the bottom of the card, as a button.',
     'display' => array(
@@ -282,8 +283,8 @@ function paragraphs_aplenty_install() {
     'label' => 'Cards',
     'description' => 'Container for cards.',
   );
-  _paragraphs_aplenty_create_bundle($bundle, $settings);
-  _paragraphs_aplenty_add_number_list_field('field_aplenty_card_width', $bundle,
+  paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_number_list_field('field_aplenty_card_width', $bundle,
     array(
       'label' => 'Cards width',
       'description' => 'This sets the width of the cards per row (the number of cards per row).',
@@ -303,7 +304,7 @@ function paragraphs_aplenty_install() {
       ),
     )
   );
-  _paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
+  paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
     'label' => 'Cards',
     'settings' => array(
       'allowed_bundles' => array(
@@ -323,8 +324,8 @@ function paragraphs_aplenty_install() {
     'label' => 'Column',
     'description' => 'Rich text field displayed in the row of columns.',
   );
-  _paragraphs_aplenty_create_bundle($bundle, $settings);
-  _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
+  paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Text',
   ));
 
@@ -336,8 +337,8 @@ function paragraphs_aplenty_install() {
     'label' => 'Column Wrapper',
     'description' => 'Displayed in the row of columns. Contains other paragraph types.',
   );
-  _paragraphs_aplenty_create_bundle($bundle, $settings);
-  _paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
+  paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
     'label' => 'Column Content',
     'settings' => array(
       'allowed_bundles' => array(
@@ -361,8 +362,8 @@ function paragraphs_aplenty_install() {
     'label' => 'Row of columns',
     'description' => 'This is a container of columns displayed in a row. If there are more columns assigned to a row than allowed, the extra columns will not be displayed.',
   );
-  _paragraphs_aplenty_create_bundle($bundle, $settings);
-  _paragraphs_aplenty_add_number_list_field('field_aplenty_column_width', $bundle,
+  paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_number_list_field('field_aplenty_column_width', $bundle,
     array(
       'label' => 'Column width',
       'description' => 'This sets the width of the columns in this row, and the number of columns per row. Any extra columns assigned will not be displayed.',
@@ -382,7 +383,7 @@ function paragraphs_aplenty_install() {
       ),
     )
   );
-  _paragraphs_aplenty_add_number_list_field('field_aplenty_column_stretch', $bundle,
+  paragraphs_aplenty_add_number_list_field('field_aplenty_column_stretch', $bundle,
     array(
       'label' => 'Column to stretch',
       'description' => 'Choose which column will stretch to fill the remainder. If the number of paragraphs is less than the set number of columns, then the column chosen here will stretch to fill the remainder.',
@@ -402,7 +403,7 @@ function paragraphs_aplenty_install() {
       ),
     )
   );
-  _paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
+  paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
     'label' => 'Columns',
     'settings' => array(
       'allowed_bundles' => array(
@@ -422,12 +423,12 @@ function paragraphs_aplenty_install() {
     'label' => 'Accordion item',
     'description' => 'A single accordion with a title and body.',
   );
-  _paragraphs_aplenty_create_bundle($bundle, $settings);
-  _paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
+  paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
     'label' => 'Accordion item title',
     'required' => TRUE,
   ));
-  _paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
+  paragraphs_aplenty_add_text_long_field('field_aplenty_body', $bundle, array(
     'label' => 'Accordion item content',
   ));
 
@@ -438,17 +439,17 @@ function paragraphs_aplenty_install() {
     'label' => 'Accordion',
     'description' => 'Container for accordions.',
   );
-  _paragraphs_aplenty_create_bundle($bundle, $settings);
-  _paragraphs_aplenty_add_boolean_field('field_aplenty_accordion_bordered', $bundle, array(
+  paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_boolean_field('field_aplenty_accordion_bordered', $bundle, array(
     'label' => 'Add border around items',
   ));
-  _paragraphs_aplenty_add_boolean_field('field_aplenty_accordion_multi', $bundle, array(
+  paragraphs_aplenty_add_boolean_field('field_aplenty_accordion_multi', $bundle, array(
     'label' => 'Allow more than one item to expand at a time',
   ));
-  _paragraphs_aplenty_add_boolean_field('field_aplenty_accordion_expand', $bundle, array(
+  paragraphs_aplenty_add_boolean_field('field_aplenty_accordion_expand', $bundle, array(
     'label' => 'Start expanded',
   ));
-  _paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
+  paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
     'label' => 'Accordion Items',
     'settings' => array(
       'allowed_bundles' => array(
@@ -478,12 +479,12 @@ function paragraphs_aplenty_install() {
     'label' => 'Heading',
     'description' => 'A heading and anchor. Both are optional.',
   );
-  _paragraphs_aplenty_create_bundle($bundle, $settings);
-  _paragraphs_aplenty_add_text_field('field_aplenty_heading', $bundle, array(
+  paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_text_field('field_aplenty_heading', $bundle, array(
     'label' => 'Heading',
     'required' => FALSE,
   ));
-  _paragraphs_aplenty_add_text_field('field_aplenty_anchor', $bundle, array(
+  paragraphs_aplenty_add_text_field('field_aplenty_anchor', $bundle, array(
     'label' => 'Anchor',
     'required' => FALSE,
     'description' => 'Provide a string with no spaces. If provided, the anchor can be a destination for a relative link that begins with a hash. For example, a link like <code>#bicycle</code> would link to an anchor <code>bicycle</code>.'
@@ -496,8 +497,8 @@ function paragraphs_aplenty_install() {
     'label' => 'Image',
     'description' => 'An image field with a caption: of text and link.',
   );
-  _paragraphs_aplenty_create_bundle($bundle, $settings);
-  _paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
+  paragraphs_aplenty_create_bundle($bundle, $settings);
+  paragraphs_aplenty_add_image_field('field_aplenty_image', $bundle, array(
     'label' => 'Image',
     'required' => TRUE,
     'display' => array(
@@ -523,7 +524,7 @@ function paragraphs_aplenty_install() {
       ),
     ),
   ));
-  _paragraphs_aplenty_add_text_field('field_aplenty_caption', $bundle, array(
+  paragraphs_aplenty_add_text_field('field_aplenty_caption', $bundle, array(
     'label' => 'Caption',
     'required' => FALSE,
     'display' => array(
@@ -543,7 +544,7 @@ function paragraphs_aplenty_install() {
       ),
     ),
   ));
-  _paragraphs_aplenty_add_link_field('field_aplenty_link', $bundle, array(
+  paragraphs_aplenty_add_link_field('field_aplenty_link', $bundle, array(
     'label' => 'Link caption',
     'description' => 'If provided, this link will appear as part of the caption.',
     'display' => array(
@@ -563,639 +564,4 @@ function paragraphs_aplenty_install() {
       ),
     ),
   ));
-}
-
-/**
- * Helper function to create a paragraphs bundle (type).
- *
- * @param string $machine
- *   The machine name for the bundle.
- * @param array $settings
- *   The settings for the bundle. Required:
- *     - name
- *     - label
- *   Optional:
- *     - description
- *     - allow_unpublish
- *     - locked
- */
-function _paragraphs_aplenty_create_bundle($machine, $settings) {
-  $existing = paragraphs_bundle_load($machine);
-  if ($existing) {
-    return;
-  }
-
-  $common = array(
-    'bundle' => $machine,
-    'description' => '',
-    'allow_unpublish' => 1,
-    'locked' => 0,
-  );
-
-  $bundle_settings = $settings + $common;
-  paragraphs_bundle_save((object) $bundle_settings);
-}
-
-/**
- * Helper function to add a boolean field to a bundle.
- */
-function _paragraphs_aplenty_add_boolean_field($field_name, $bundle, $instance_overrides) {
-
-  $entity_type = 'paragraphs_item';
-
-  $existing = field_info_field($field_name);
-  if (empty($existing)) {
-    $field_info = array(
-      'translatable' => '0',
-      'entity_types' => array(),
-      'settings' => array(
-        'allowed_values' => array(
-          '',
-          '',
-        ),
-        'allowed_values_function' => '',
-      ),
-      'field_name' => $field_name,
-      'type' => 'list_boolean',
-      'module' => 'list',
-      'active' => '1',
-      'locked' => '0',
-      'cardinality' => '1',
-    );
-    $field = field_create_field($field_info);
-  }
-  $existing = field_info_instance($entity_type, $field_name, $bundle);
-  if (empty($existing)) {
-    $field_info = array(
-      'label' => 'Replace me',
-      'widget' => array(
-        'weight' => '0',
-        'type' => 'options_onoff',
-        'module' => 'options',
-        'active' => 1,
-        'settings' => array(
-          'display_label' => 1,
-        ),
-      ),
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'type' => 'hidden',
-          'weight' => '1',
-          'settings' => array(),
-        ),
-        'paragraphs_editor_preview' => array(
-          'type' => 'hidden',
-          'label' => 'above',
-          'settings' => array(),
-          'weight' => 0,
-        ),
-      ),
-      'required' => FALSE,
-      'description' => '',
-      'default_value' => array(
-        array(
-          'value' => 0,
-        ),
-      ),
-      'field_name' => $field_name,
-      'entity_type' => $entity_type,
-      'bundle' => $bundle,
-    );
-    $field_info = array_replace_recursive($field_info, $instance_overrides);
-    field_create_instance($field_info);
-  }
-}
-
-/**
- * Helper function to add a number list field to a bundle.
- */
-function _paragraphs_aplenty_add_number_list_field($field_name, $bundle, $instance_overrides, $base_overrides) {
-
-  $entity_type = 'paragraphs_item';
-
-  $existing = field_info_field($field_name);
-  if (empty($existing)) {
-    $field_info = array(
-      'translatable' => '0',
-      'entity_types' => array(),
-      'settings' => array(
-        'allowed_values' => array(),
-        'allowed_values_function' => '',
-      ),
-      'field_name' => $field_name,
-      'type' => 'list_integer',
-      'module' => 'list',
-      'active' => '1',
-      'locked' => '0',
-      'cardinality' => '1',
-    );
-    $field_info = array_replace_recursive($field_info, $base_overrides);
-    $field = field_create_field($field_info);
-  }
-
-  $existing = field_info_instance($entity_type, $field_name, $bundle);
-  if (empty($existing)) {
-    $field_info = array(
-      'label' => 'Replace me',
-      'widget' => array(
-        'weight' => '0',
-        'type' => 'options_select',
-        'module' => 'options',
-        'active' => 1,
-        'settings' => array(),
-      ),
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'type' => 'hidden',
-          'weight' => '1',
-          'settings' => array(),
-        ),
-        'paragraphs_editor_preview' => array(
-          'type' => 'hidden',
-          'label' => 'above',
-          'settings' => array(),
-          'weight' => 0,
-        ),
-      ),
-      'required' => FALSE,
-      'description' => '',
-      'default_value' => array(),
-      'field_name' => $field_name,
-      'entity_type' => $entity_type,
-      'bundle' => $bundle,
-    );
-    $field_info = array_replace_recursive($field_info, $instance_overrides);
-    field_create_instance($field_info);
-  }
-}
-
-/**
- * Helper function to add a text list field to a bundle.
- */
-function _paragraphs_aplenty_add_text_list_field($field_name, $bundle, $instance_overrides, $base_overrides) {
-
-  $entity_type = 'paragraphs_item';
-
-  $existing = field_info_field($field_name);
-  if (empty($existing)) {
-    $field_info = array(
-      'translatable' => '0',
-      'entity_types' => array(),
-      'settings' => array(
-        'allowed_values' => array(),
-        'allowed_values_function' => '',
-      ),
-      'field_name' => $field_name,
-      'type' => 'list_text',
-      'module' => 'list',
-      'active' => '1',
-      'locked' => '0',
-      'cardinality' => '1',
-    );
-    $field_info = array_replace_recursive($field_info, $base_overrides);
-    $field = field_create_field($field_info);
-  }
-
-  $existing = field_info_instance($entity_type, $field_name, $bundle);
-  if (empty($existing)) {
-    $field_info = array(
-      'label' => 'Replace me',
-      'widget' => array(
-        'weight' => '0',
-        'type' => 'options_select',
-        'module' => 'options',
-        'active' => 1,
-        'settings' => array(),
-      ),
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'type' => 'hidden',
-          'weight' => '1',
-          'settings' => array(),
-        ),
-        'paragraphs_editor_preview' => array(
-          'type' => 'hidden',
-          'label' => 'above',
-          'settings' => array(),
-          'weight' => 0,
-        ),
-      ),
-      'required' => FALSE,
-      'description' => '',
-      'default_value' => array(),
-      'field_name' => $field_name,
-      'entity_type' => $entity_type,
-      'bundle' => $bundle,
-    );
-    $field_info = array_replace_recursive($field_info, $instance_overrides);
-    field_create_instance($field_info);
-  }
-}
-
-/**
- * Helper function to add a paragraphs field to a bundle.
- */
-function _paragraphs_aplenty_add_paragraphs_field($field_name, $bundle, $instance_overrides) {
-
-  $entity_type = 'paragraphs_item';
-
-  $existing = field_info_field($field_name);
-  if (empty($existing)) {
-    $field_info = array(
-      'translatable' => '0',
-      'entity_types' => array(),
-      'settings' => array(),
-      'field_name' => $field_name,
-      'type' => 'paragraphs',
-      'module' => 'paragraphs',
-      'active' => '1',
-      'locked' => '0',
-      'cardinality' => '-1',
-    );
-    $field = field_create_field($field_info);
-  }
-
-  $existing = field_info_instance($entity_type, $field_name, $bundle);
-  if (empty($existing)) {
-    $field_info = array(
-      'label' => 'Replace me',
-      'widget' => array(
-        'type' => 'paragraphs_embed',
-        'module' => 'paragraphs',
-        'active' => 0,
-        'settings' => array(),
-      ),
-      'settings' => array(
-        'title' => 'Paragraph',
-        'title_multiple' => 'Paragraphs',
-        'default_edit_mode' => 'preview',
-        'add_mode' => 'button',
-        'allowed_bundles' => array(),
-        'bundle_weights' => array(
-          'aplenty_text' => '1',
-          'aplenty_grid' => '2',
-          'aplenty_media_list' => '3',
-          'aplenty_hero' => '4',
-          'aplenty_cards' => '5',
-        ),
-        'user_register_form' => false,
-      ),
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'type' => 'paragraphs_view',
-          'settings' => array(
-            'view_mode' => 'full',
-          ),
-          'module' => 'paragraphs',
-          'weight' => 4,
-        ),
-        'paragraphs_editor_preview' => array(
-          'label' => 'hidden',
-          'type' => 'paragraphs_view',
-          'settings' => array(
-            'view_mode' => 'full',
-          ),
-          'module' => 'paragraphs',
-          'weight' => 4,
-        ),
-      ),
-      'required' => FALSE,
-      'description' => '',
-      'default_value' => NULL,
-      'field_name' => $field_name,
-      'entity_type' => $entity_type,
-      'bundle' => $bundle,
-    );
-
-    $field_info = array_replace_recursive($field_info, $instance_overrides);
-    field_create_instance($field_info);
-  }
-}
-
-/**
- * Helper function to add a text field to a bundle.
- */
-function _paragraphs_aplenty_add_text_field($field_name, $bundle, $instance_overrides) {
-
-  $entity_type = 'paragraphs_item';
-
-  $existing = field_info_field($field_name);
-  if (empty($existing)) {
-    $field_info = array(
-      'translatable' => '0',
-      'entity_types' => array(),
-      'settings' => array(
-        'max_length' => '255',
-      ),
-      'field_name' => $field_name,
-      'type' => 'text',
-      'module' => 'text',
-      'active' => '1',
-      'cardinality' => '1',
-    );
-    $field = field_create_field($field_info);
-  }
-
-  $existing = field_info_instance($entity_type, $field_name, $bundle);
-  if (empty($existing)) {
-    $field_info = array(
-      'label' => 'Replace me',
-      'widget' => array(
-        'weight' => '1',
-        'type' => 'text_textfield',
-        'module' => 'text',
-        'active' => 1,
-        'settings' => array(
-          'size' => '60',
-        ),
-      ),
-      'settings' => array(
-        'text_processing' => '0',
-      ),
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'type' => 'text_default',
-          'settings' => array(),
-          'module' => 'text',
-          'weight' => 0,
-        ),
-        'paragraphs_editor_preview' => array(
-          'label' => 'hidden',
-          'type' => 'text_default',
-          'settings' => array(
-          ),
-          'weight' => 0,
-        ),
-      ),
-      'required' => FALSE,
-      'description' => '',
-      'default_value' => NULL,
-      'field_name' => $field_name,
-      'entity_type' => $entity_type,
-      'bundle' => $bundle,
-    );
-    $field_info = array_replace_recursive($field_info, $instance_overrides);
-    field_create_instance($field_info);
-  }
-}
-
-/**
- * Helper function to add an image field to a paragraph type.
- */
-function _paragraphs_aplenty_add_image_field($field_name, $bundle, $instance_overrides) {
-
-  $entity_type = 'paragraphs_item';
-
-  $existing = field_info_field($field_name);
-  if (empty($existing)) {
-    $field_info = array(
-      'translatable' => '0',
-      'entity_types' => array(),
-      'settings' => array(
-        'uri_scheme' => 'public',
-        'default_image' => 0,
-      ),
-      'field_name' => $field_name,
-      'type' => 'image',
-      'module' => 'image',
-      'active' => '1',
-      'locked' => '0',
-      'cardinality' => '1',
-    );
-    $field = field_create_field($field_info);
-  }
-
-  $existing = field_info_instance($entity_type, $field_name, $bundle);
-  if (empty($existing)) {
-    $field_info = array(
-      'label' => 'Replace Me',
-      'widget' => array(
-        'type' => 'image_image',
-        'module' => 'image',
-        'active' => 1,
-        'settings' => array(
-          'progress_indicator' => 'throbber',
-          'preview_image_style' => 'thumbnail',
-        ),
-      ),
-      'settings' => array(
-        'file_directory' => 'aplenty-paragraphs',
-        'file_extensions' => 'png gif jpg jpeg',
-        'max_filesize' => '',
-        'max_resolution' => '',
-        'min_resolution' => '',
-        'alt_field' => 1,
-        'title_field' => 0,
-        'default_image' => 0,
-        'user_register_form' => false,
-      ),
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'type' => 'image',
-          'settings' => array(
-            'image_style' => 'thumbnail',
-            'image_link' => '',
-          ),
-          'module' => 'image',
-          'weight' => 1,
-        ),
-        'paragraphs_editor_preview' => array(
-          'label' => 'hidden',
-          'type' => 'image',
-          'settings' => array(
-            'image_style' => 'thumbnail',
-            'image_link' => '',
-          ),
-          'module' => 'image',
-          'weight' => 1,
-        ),
-      ),
-      'required' => FALSE,
-      'description' => '',
-      'field_name' => $field_name,
-      'entity_type' => $entity_type,
-      'bundle' => $bundle,
-    );
-    $field_info = array_replace_recursive($field_info, $instance_overrides);
-    field_create_instance($field_info);
-  }
-}
-
-/**
- * Helper function to add a long text field to a paragraph type.
- */
-function _paragraphs_aplenty_add_text_long_field($field_name, $bundle, $instance_overrides) {
-
-  $entity_type = 'paragraphs_item';
-
-  $existing = field_info_field($field_name);
-  if (empty($existing)) {
-    $field_info = array(
-      'translatable' => '0',
-      'entity_types' => array(),
-      'settings' => array(),
-      'field_name' => $field_name,
-      'type' => 'text_long',
-      'module' => 'text',
-      'active' => '1',
-      'locked' => '0',
-      'cardinality' => '1',
-    );
-    $field = field_create_field($field_info);
-  }
-
-  $existing = field_info_instance($entity_type, $field_name, $bundle);
-  if (empty($existing)) {
-    $field_info = array(
-      'label' => 'Replace me',
-      'widget' => array(
-        'type' => 'text_textarea',
-        'module' => 'text',
-        'active' => 1,
-        'settings' => array(
-          'rows' => '5',
-        ),
-      ),
-      'settings' => array(
-        'text_processing' => '1',
-        'user_register_form' => false,
-      ),
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'type' => 'text_default',
-          'settings' => array(),
-          'module' => 'text',
-          'weight' => 0,
-        ),
-        'paragraphs_editor_preview' => array(
-          'label' => 'hidden',
-          'type' => 'text_default',
-          'settings' => array(),
-          'module' => 'text',
-          'weight' => 0,
-        ),
-      ),
-      'required' => FALSE,
-      'description' => '',
-      'default_value' => NULL,
-      'field_name' => $field_name,
-      'entity_type' => $entity_type,
-      'bundle' => $bundle,
-    );
-    $field_info = array_replace_recursive($field_info, $instance_overrides);
-    field_create_instance($field_info);
-  }
-}
-/**
- * Helper function to add a link field to a paragraph type.
- */
-function _paragraphs_aplenty_add_link_field($field_name, $bundle, $instance_overrides) {
-
-  $entity_type = 'paragraphs_item';
-
-  $existing = field_info_field($field_name);
-  if (empty($existing)) {
-    $field_info = array(
-      'translatable' => '0',
-      'entity_types' => array(),
-      'settings' => array(
-        'attributes' => array(
-          'target' => 'default',
-          'class' => '',
-          'rel' => '',
-        ),
-        'url' => 0,
-        'title' => 'optional',
-        'title_value' => '',
-        'title_maxlength' => 128,
-        'enable_tokens' => 1,
-        'display' => array(
-          'url_cutoff' => 80,
-        ),
-      ),
-      'field_name' => $field_name,
-      'type' => 'link_field',
-      'module' => 'link',
-      'active' => '1',
-      'locked' => '0',
-      'cardinality' => '1',
-    );
-    $field = field_create_field($field_info);
-  }
-
-  $existing = field_info_instance($entity_type, $field_name, $bundle);
-  if (empty($existing)) {
-    $field_info = array(
-      'label' => 'Replace me',
-      'widget' => array(
-        'type' => 'link_field',
-        'module' => 'link',
-        'active' => 0,
-        'settings' => array(),
-      ),
-      'settings' => array(
-        'absolute_url' => 1,
-        'validate_url' => 1,
-        'url' => 0,
-        'title' => 'required',
-        'title_value' => '',
-        'title_label_use_field_label' => 0,
-        'title_maxlength' => '128',
-        'display' => array(
-          'url_cutoff' => '80',
-        ),
-        'attributes' => array(
-          'target' => 'default',
-          'rel' => '',
-          'configurable_class' => 0,
-          'class' => '',
-          'configurable_title' => 0,
-          'title' => '',
-        ),
-        'rel_remove' => 'default',
-        'enable_tokens' => 1,
-        'user_register_form' => false,
-      ),
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'type' => 'link_default',
-          'settings' => array(),
-          'module' => 'link',
-          'weight' => 2,
-        ),
-        'paragraphs_editor_preview' => array(
-          'label' => 'hidden',
-          'type' => 'link_default',
-          'settings' => array(),
-          'module' => 'link',
-          'weight' => 2,
-        ),
-      ),
-      'required' => FALSE,
-      'description' => '',
-      'default_value' => NULL,
-      'field_name' => $field_name,
-      'entity_type' => $entity_type,
-      'bundle' => $bundle,
-    );
-    $field_info = array_replace_recursive($field_info, $instance_overrides);
-    field_create_instance($field_info);
-  }
 }

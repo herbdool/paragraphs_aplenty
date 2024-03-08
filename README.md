@@ -33,4 +33,4 @@ directory for complete text.
 Adapted from [USWDS Paragraphs](https://www.drupal.org/project/uswds_paragraphs),
 which was developed and maintained by [brockfanning](https://www.drupal.org/u/brockfanning),
 [daniel_j](https://www.drupal.org/u/daniel_j), [fskreuz](https://www.drupal.org/u/fskreuz),
-and [jrglasgow](https://www.drupal.org/u/jrglasgow).
+and [jrglasgow](https://www.drupal.org/u/jrglasgow). And inspired by [Paragraphs pack](https://www.drupal.org/project/paragraphs_pack).
