@@ -36,20 +36,17 @@
   max-width: 100%;
   overflow-wrap: break-word;
 }
-.aplenty-hero .button {
-  font-size: 1rem;
-}
 
 @media (min-width: 25em) {
   .aplenty-hero {
     padding: 2rem 3rem 3rem;
-    font-size: 1.3em;
+    font-size: 1.1em;
   }
 }
 
 @media (min-width: 34em) {
   .aplenty-hero {
-    font-size: 1.5em;
+    font-size: 1.3em;
   }
 }
 
@@ -180,11 +177,13 @@
 
 .aplenty-card img {
   height: fit-content;
+  margin: 0;
 }
 
-.aplenty-card .field-name-field-aplenty-title {
-  font-size: 1.25rem;
+.aplenty-card .field-name-field-aplenty-title h2 {
+  font-size: 1.25em;
   font-weight: bold;
+  margin-top: 1rem;
 }
 
 .aplenty-card .field-name-field-aplenty-title,

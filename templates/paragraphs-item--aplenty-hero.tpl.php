@@ -1,5 +1,5 @@
 <div class="<?php print implode(' ', $classes_array); ?>"<?php print backdrop_attributes($attributes); ?>>
-  <div class="content container"<?php print backdrop_attributes($content_attributes); ?>>
+  <div class="content"<?php print backdrop_attributes($content_attributes); ?>>
 
     <?php if (!empty($content['field_aplenty_image'])): ?>
     <?php print render($content['field_aplenty_image']) ?>
@@ -7,7 +7,7 @@
 
     <?php if (!empty($content['field_aplenty_title'])): ?>
     <div class="aplenty-hero-callout">
-      <h2><?php print render($content['field_aplenty_title']) ?></h2>
+      <?php print render($content['field_aplenty_title']) ?>
 
       <?php if (!empty($content['field_aplenty_body'])): ?>
       <?php print render($content['field_aplenty_body']) ?>

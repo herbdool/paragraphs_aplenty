@@ -66,9 +66,21 @@ function paragraphs_aplenty_preprocess_paragraphs_item(&$variables) {
   backdrop_add_css($path . '/css/paragraphs_aplenty.css');
   backdrop_add_js($path . '/js/paragraphs_aplenty.js');
 
-  // Do any extra preprocessing.
+  // Do any extra preprocessing in bundle specific functions.
   $bundle = $variables['paragraphs_item']->bundle();
   $func = '_paragraphs_aplenty_preprocess_' . $bundle;
+  if (function_exists($func)) {
+    $func($variables);
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function paragraphs_aplenty_preprocess_field(&$variables, $hook) {
+  // Do any extra preprocessing in field specific functions.
+  $field_name = $variables['element']['#field_name'] ?? '';
+  $func = '_paragraphs_aplenty_preprocess_' . $field_name;
   if (function_exists($func)) {
     $func($variables);
   }
@@ -131,9 +143,17 @@ function _paragraphs_aplenty_preprocess_aplenty_card(&$variables) {
   if (!empty($paragraph->field_aplenty_body)) {
     $variables['content']['field_aplenty_body'][0]['#element']['attributes']['class'] = 'aplenty-card-body';
   }
-  if (!empty($paragraph->field_aplenty_link)) {
-    $variables['content']['field_aplenty_link'][0]['#element']['attributes']['class'] = 'aplenty-card-button';
+  if (!empty($paragraph->field_aplenty_link) && empty($variables['content']['field_aplenty_link'][0]['#element']['attributes']['class'])) {
+    $link_classes = 'aplenty-button button button-primary btn btn-primary';
+    $variables['content']['field_aplenty_link'][0]['#element']['attributes']['class'] = $link_classes;
   }
+}
+
+/**
+ * Preprocessing code for the Card title.
+ */
+function _paragraphs_aplenty_preprocess_field_aplenty_title(&$variables) {
+  $variables['items'][0]['#markup'] = '<h2>' . $variables['items'][0]['#markup'] . '</h2>';
 }
 
 /**
@@ -195,8 +215,9 @@ function _paragraphs_aplenty_preprocess_aplenty_hero(&$variables) {
   if (!empty($paragraph->field_aplenty_body)) {
     $variables['content']['field_aplenty_body'][0]['#element']['attributes']['class'] = 'aplenty-hero-body';
   }
-  if (!empty($paragraph->field_aplenty_link)) {
-    $variables['content']['field_aplenty_link'][0]['#element']['attributes']['class'] = 'button aplenty-button-big button-secondary';
+  if (!empty($paragraph->field_aplenty_link) && empty($variables['content']['field_aplenty_link'][0]['#element']['attributes']['class'])) {
+    $link_classes = 'aplenty-button button button-primary btn btn-primary';
+    $variables['content']['field_aplenty_link'][0]['#element']['attributes']['class'] = $link_classes;
   }
   // We also need to set the inline CSS for the image.
   if (!empty($variables['content']['field_aplenty_image'])) {
