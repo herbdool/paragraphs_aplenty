@@ -433,7 +433,7 @@ function paragraphs_aplenty_add_image_field($field_name, $bundle, $instance_over
         ),
       ),
       'settings' => array(
-        'file_directory' => 'aplenty-paragraphs',
+        'file_directory' => 'aplenty-image',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '50 MB',
         'max_resolution' => '',
@@ -519,7 +519,7 @@ function paragraphs_aplenty_add_file_field($field_name, $bundle, $instance_overr
         ),
       ),
       'settings' => array(
-        'file_directory' => 'aplenty-paragraphs',
+        'file_directory' => 'aplenty-file',
         'file_extensions' => 'txt pdf rtf',
         'max_filesize' => '50 MB',
         'description_field' => 1,
@@ -633,6 +633,7 @@ function paragraphs_aplenty_add_link_field($field_name, $bundle, $instance_overr
       'settings' => array(
         'attributes' => array(
           'target' => 'default',
+          'configurable_class' => 0,
           'class' => '',
           'rel' => '',
         ),

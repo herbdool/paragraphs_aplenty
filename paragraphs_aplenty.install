@@ -25,6 +25,7 @@ function paragraphs_aplenty_install() {
     'label' => 'Hero background image',
     'description' => 'If provided, this image will appear as the background for the hero.',
     'settings' => array(
+      'file_directory' => 'hero',
       'min_dimensions' => '1200x300',
       'max_dimensions' => '3600x600',
     ),
@@ -62,6 +63,11 @@ function paragraphs_aplenty_install() {
   paragraphs_aplenty_add_link_field('field_aplenty_link', $bundle, array(
     'label' => 'Hero callout button',
     'description' => 'If provided, this link will appear at the bottom of the hero callout, as a button.',
+    'settings' => array(
+      'attributes' => array(
+        'configurable_class' => 1,
+      ),
+    ),
   ));
 
   // Install the Text paragraph type.
@@ -257,6 +263,11 @@ function paragraphs_aplenty_install() {
   paragraphs_aplenty_add_link_field('field_aplenty_link', $bundle, array(
     'label' => 'Card button',
     'description' => 'If provided, this link will appear at the bottom of the card, as a button.',
+    'settings' => array(
+      'attributes' => array(
+        'configurable_class' => 1,
+      ),
+    ),
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -583,4 +594,19 @@ function paragraphs_aplenty_install() {
       ),
     ),
   ));
+}
+
+/**
+ * Update the "Card button" and "Hero button" fields so classes can
+ * be added.
+ */
+function paragraphs_aplenty_update_1001() {
+  foreach (array('aplenty_card.field_aplenty_link', 'aplenty_hero.field_aplenty_link') as $instance) {
+    $config = config('field.instance.paragraphs_item.' . $instance);
+    if ($config->isNew()) {
+      continue;
+    }
+    $config->set('settings.attributes.configurable_class', 1);
+    $config->save();
+  }
 }
