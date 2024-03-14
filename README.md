@@ -1,14 +1,8 @@
 # Paragraphs Aplenty
 
-This module, when enabled, installs several Paragraph types:
-
-* Hero with callout
-* Graphic list of media blocks
-* Cards
-* Grid / row of columns with ability to stretch a block.
-* Accordions
-* Heading with anchor
-* Image
+Provides several useful Paragraph types, including accordions, Hero blocks,
+cards, grids of columns, headings with optional anchors, media blocks, image,
+and simple text paragraph.
 
 After installation, feel free to alter the Paragraph types by adding fields,
 and altering fields. You can also customize templates by copying them from the
@@ -33,4 +27,5 @@ directory for complete text.
 Adapted from [USWDS Paragraphs](https://www.drupal.org/project/uswds_paragraphs),
 which was developed and maintained by [brockfanning](https://www.drupal.org/u/brockfanning),
 [daniel_j](https://www.drupal.org/u/daniel_j), [fskreuz](https://www.drupal.org/u/fskreuz),
-and [jrglasgow](https://www.drupal.org/u/jrglasgow). And inspired by [Paragraphs pack](https://www.drupal.org/project/paragraphs_pack).
+and [jrglasgow](https://www.drupal.org/u/jrglasgow). And inspired by
+[Paragraphs pack](https://www.drupal.org/project/paragraphs_pack).
