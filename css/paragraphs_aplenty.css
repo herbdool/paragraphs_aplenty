@@ -13,6 +13,13 @@
 .aplenty-accordion.aplenty-accordion-no-border details {
   border: 0;
 }
+.aplenty-accordion.aplenty-accordion-border details {
+  border: 2px solid #bbbbbb;
+  background-color: #ffffff;
+  padding: 0.75em;
+  margin: 1em 0;
+  overflow: hidden;
+}
 
 /**
  * Hero
