@@ -610,3 +610,28 @@ function paragraphs_aplenty_update_1001() {
     $config->save();
   }
 }
+
+/**
+ * Update heading fields to be longer when editing.
+ */
+function paragraphs_aplenty_update_1002() {
+  foreach (array('aplenty_heading.field_aplenty_heading', 'aplenty_media_block.field_aplenty_title', 'aplenty_hero.field_aplenty_title', 'aplenty_card.field_aplenty_title', 'aplenty_accordion_item.field_aplenty_title') as $instance) {
+    $config = config('field.instance.paragraphs_item.' . $instance);
+    if ($config->isNew()) {
+      continue;
+    }
+    if ($config->get('widget.settings.size') > 60) {
+      return;
+    }
+    $config->set('widget.settings.size', 100);
+    $config->save();
+  }
+}
+
+/**
+ * Clear any caches of paragraph heading field.
+ */
+function paragraphs_aplenty_update_1003() {
+  // @see https://github.com/backdrop-contrib/paragraphs_aplenty/issues/1
+  backdrop_flush_all_caches();
+}
