@@ -197,7 +197,7 @@ function _paragraphs_aplenty_preprocess_aplenty_heading(&$variables) {
   $variables['classes_array'][] = 'aplenty-heading';
   $variables['heading_text'] = '';
   if (!empty($variables['content']['field_aplenty_heading'])) {
-    $variables['heading_text'] = check_url($variables['content']['field_aplenty_heading']['#items'][0]['safe_value']);
+    $variables['heading_text'] = $variables['content']['field_aplenty_heading']['#items'][0]['safe_value'];
   }
   $variables['anchor_text'] = '';
   if (!empty($variables['content']['field_aplenty_anchor'])) {
