@@ -95,14 +95,12 @@ function _paragraphs_aplenty_preprocess_aplenty_media_list(&$variables) {
   if (empty($variables['content']['field_aplenty_paragraphs'])) {
     return;
   }
-  $list = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
-  $media_align = $list->field_aplenty_media_align->value();
-  $num_columns = (int)$list->field_aplenty_media_width->value();
-  $media_blocks = $list->field_aplenty_paragraphs;
+  $media_align = field_get_value($variables['paragraphs_item'], 'field_aplenty_media_align');
+  $num_columns = (int) field_get_value($variables['paragraphs_item'], 'field_aplenty_media_width');
+  $media_blocks = field_get_values($variables['paragraphs_item'], 'field_aplenty_paragraphs');
   // The numerator is always 1 for media blocks.
   $class = _paragraphs_aplenty_fraction_to_class(1, $num_columns);
-  foreach ($media_blocks as $key => $media_block) {
-    $column_id = $media_block->getIdentifier();
+  foreach ($media_blocks as $key => $column_id) {
     $variables['content']['field_aplenty_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#aplenty_media_class'] = $media_align;
     $variables['content']['field_aplenty_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#aplenty_width_class'] = $class;
     $variables['aplenty_media_list'][] = $variables['content']['field_aplenty_paragraphs'][$key];
@@ -166,22 +164,18 @@ function _paragraphs_aplenty_preprocess_aplenty_cards(&$variables) {
   if (empty($variables['content']['field_aplenty_paragraphs'])) {
     return;
   }
-  $grid = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
-  $num_cards = (int)$grid->field_aplenty_card_width->value();
-  $card_style_class = $grid->field_aplenty_card_style->value();
+  $num_cards = (int) field_get_value($variables['paragraphs_item'], 'field_aplenty_card_width');
+  $card_style_class = field_get_value($variables['paragraphs_item'], 'field_aplenty_card_style');
 
   if (empty($card_style_class)) {
     $card_style_class = 'aplenty-card-plain';
   }
   $variables['classes_array'][] = $card_style_class;
 
-  $cards = $grid->field_aplenty_paragraphs;
+  $cards = field_get_values($variables['paragraphs_item'], 'field_aplenty_paragraphs');
   // The numerator is always 1 for cards.
   $class = _paragraphs_aplenty_fraction_to_class(1, $num_cards);
-  foreach ($cards as $key => $card) {
-    $card_id = $card->getIdentifier();
-    // @TODO: There is probably a better way to communicate this value to
-    // the aplenty_column paragraph.
+  foreach ($cards as $key => $card_id) {
     $variables['content']['field_aplenty_paragraphs'][$key]['entity']['paragraphs_item'][$card_id]['#aplenty_width_class'] = $class;
 
     // Copy them to another variable as a quick way to avoid printing
@@ -195,14 +189,10 @@ function _paragraphs_aplenty_preprocess_aplenty_cards(&$variables) {
  */
 function _paragraphs_aplenty_preprocess_aplenty_heading(&$variables) {
   $variables['classes_array'][] = 'aplenty-heading';
-  $variables['heading_text'] = '';
-  if (!empty($variables['content']['field_aplenty_heading'])) {
-    $variables['heading_text'] = $variables['content']['field_aplenty_heading']['#items'][0]['safe_value'];
-  }
-  $variables['anchor_text'] = '';
-  if (!empty($variables['content']['field_aplenty_anchor'])) {
-    $variables['anchor_text'] = check_url($variables['content']['field_aplenty_anchor']['#items'][0]['safe_value']);
-  }
+  $heading = field_get_value($variables['paragraphs_item'], 'field_aplenty_heading');
+  $variables['heading_text'] = $heading ? $heading : '';
+  $anchor = field_get_value($variables['paragraphs_item'], 'field_aplenty_anchor');
+  $variables['anchor_text'] = $anchor ? check_url($anchor) : '';
 }
 
 /**
@@ -220,13 +210,14 @@ function _paragraphs_aplenty_preprocess_aplenty_hero(&$variables) {
     $variables['content']['field_aplenty_link'][0]['#element']['attributes']['class'] = $link_classes;
   }
   // We also need to set the inline CSS for the image.
-  if (!empty($variables['content']['field_aplenty_image'])) {
+  $image_fid = field_get_value($variables['paragraphs_item'], 'field_aplenty_image', 'fid');
+  if (!empty($image_fid)) {
     // Make sure we have a unique ID, in case of multiple Heroes.
-    $identifier = 'aplenty-hero-' . $variables['content']['field_aplenty_image'][0]['#item']['fid'];
+    $identifier = 'aplenty-hero-' . $image_fid;
     $variables['classes_array'][] = $identifier;
     $variables['classes_array'][] = 'aplenty-hero-image';
     // Inline the CSS background image.
-    $img = file_create_url($variables['content']['field_aplenty_image'][0]['#item']['uri']);
+    $img = file_create_url(field_get_value($variables['paragraphs_item'], 'field_aplenty_image', 'uri'));
     $css = ".$identifier.paragraphs-item.aplenty-hero { background-image:url($img); }";
     $variables['content']['field_aplenty_image'] = array(
       '#attached' => array(
@@ -306,9 +297,8 @@ function _paragraphs_aplenty_fraction_to_class($numerator, $denominator) {
  */
 function _paragraphs_aplenty_preprocess_aplenty_grid(&$variables) {
   $variables['classes_array'][] = 'aplenty-grid';
-  $grid = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
-  $max_columns = (int)$grid->field_aplenty_column_width->value();
-  $columns = $grid->field_aplenty_paragraphs;
+  $max_columns = (int) field_get_value($variables['paragraphs_item'], 'field_aplenty_column_width');
+  $columns = field_get_values($variables['paragraphs_item'], 'field_aplenty_paragraphs');
   $num_columns = count($columns);
 
   // Drop excess columns.
@@ -319,7 +309,7 @@ function _paragraphs_aplenty_preprocess_aplenty_grid(&$variables) {
     $num_columns = $max_columns;
   }
 
-  $stretch = (int)$grid->field_aplenty_column_stretch->value();
+  $stretch = (int) field_get_value($variables['paragraphs_item'], 'field_aplenty_column_stretch');
   $available_space = $max_columns - $num_columns;
   for ($key = 0; $key < $num_columns; $key++) {
 
@@ -331,7 +321,7 @@ function _paragraphs_aplenty_preprocess_aplenty_grid(&$variables) {
     }
     // Finally communicate the class.
     $class = _paragraphs_aplenty_fraction_to_class($numerator, $max_columns);
-    $column_id = $columns[$key]->getIdentifier();
+    $column_id = $columns[$key];
     // @TODO: There is probably a better way to communicate this value to
     // the aplenty_column paragraph.
     $variables['content']['field_aplenty_paragraphs'][$key]['entity']['paragraphs_item'][$column_id]['#aplenty_width_class'] = $class;
@@ -376,27 +366,25 @@ function _paragraphs_aplenty_preprocess_aplenty_column_wrapper(&$variables) {
  * Preprocessing code for the Accordion bundle.
  */
 function _paragraphs_aplenty_preprocess_aplenty_accordion(&$variables) {
-  $accordion = $variables['paragraphs_item'];
-  $accordion = entity_metadata_wrapper('paragraphs_item', $accordion);
   $variables['classes_array'][] = 'aplenty-accordion';
 
-  if ($accordion->field_aplenty_accordion_multi->value()) {
+  if (field_get_value($variables['paragraphs_item'], 'field_aplenty_accordion_multi')) {
     $variables['classes_array'][] = 'aplenty-accordion-multi';
   }
   else {
     $variables['classes_array'][] = 'aplenty-accordion-single';
   }
 
-  if ($accordion->field_aplenty_accordion_bordered->value()) {
+  if (field_get_value($variables['paragraphs_item'], 'field_aplenty_accordion_bordered')) {
     $variables['classes_array'][] = 'aplenty-accordion-border';
   }
   else {
     $variables['classes_array'][] = 'aplenty-accordion-no-border';
   }
 
-  if ($accordion->field_aplenty_accordion_expand->value()) {
-    // @TODO: Presumably there is a more proper way to communicate to the item?
-    $first_id = $accordion->field_aplenty_paragraphs[0]->getIdentifier();
+  if (field_get_value($variables['paragraphs_item'], 'field_aplenty_accordion_expand')) {
+    $accordion_items = field_get_values($variables['paragraphs_item'], 'field_aplenty_paragraphs');
+    $first_id = reset($accordion_items);
     $variables['content']['field_aplenty_paragraphs'][0]['entity']['paragraphs_item'][$first_id]['#aplenty_expand'] = TRUE;
   }
 
@@ -413,9 +401,7 @@ function _paragraphs_aplenty_preprocess_aplenty_accordion(&$variables) {
  * Preprocessing code for the Accordion Item bundle.
  */
 function _paragraphs_aplenty_preprocess_aplenty_accordion_item(&$variables) {
-  $accordion_item = entity_metadata_wrapper('paragraphs_item', $variables['paragraphs_item']);
-
-  $variables['accordion_title'] = $accordion_item->field_aplenty_title->value();
+  $variables['accordion_title'] = field_get_value($variables['paragraphs_item'], 'field_aplenty_title');
 
   $expanded = (!empty($variables['elements']['#aplenty_expand']));
   $variables['expanded'] = ($expanded) ? 'open' : '';
