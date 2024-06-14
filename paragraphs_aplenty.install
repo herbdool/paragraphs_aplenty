@@ -681,3 +681,17 @@ function paragraphs_aplenty_update_1004() {
   $config->save();
 
 }
+
+/**
+ * Update heading paragraph type.
+ */
+function paragraphs_aplenty_update_1005() {
+  // Change order and update help.
+  $config = config('field.instance.paragraphs_item.aplenty_heading.field_aplenty_anchor');
+  if ($config->get('description') == 'Provide a string with no spaces. If provided, the anchor can be a destination for a relative link that begins with a hash. For example, a link like <code>#bicycle</code> would link to an anchor <code>bicycle</code>.') {
+    $config->set('description', 'An anchor is created automatically from the heading text. Override by providing a custom anchor here. The text should only contain letters, digits, underscore, and dashes, and should start with a letter. For example, an anchor defined here like: <code>my-bicycle</code> can be used as a link like <code>#my-bicycle</code>.');
+  }
+  $config->set('widget.weight', '2');
+  $config->set('widget.settings.size', '30');
+  $config->save();
+}

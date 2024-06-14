@@ -189,10 +189,39 @@ function _paragraphs_aplenty_preprocess_aplenty_cards(&$variables) {
  */
 function _paragraphs_aplenty_preprocess_aplenty_heading(&$variables) {
   $variables['classes_array'][] = 'aplenty-heading';
-  $heading = field_get_value($variables['paragraphs_item'], 'field_aplenty_heading');
+  $heading = (string) field_get_value($variables['paragraphs_item'], 'field_aplenty_heading');
   $variables['heading_text'] = $heading ? $heading : '';
-  $anchor = field_get_value($variables['paragraphs_item'], 'field_aplenty_anchor');
-  $variables['anchor_text'] = $anchor ? check_url($anchor) : '';
+  $anchor = (string) field_get_value($variables['paragraphs_item'], 'field_aplenty_anchor');
+  $anchor_text = $anchor ? backdrop_html_id(trim($anchor)) : '';
+  if (!$anchor_text) {
+    $anchor_text = backdrop_html_id($heading);
+  }
+  $variables['anchor_text'] = $anchor_text;
+  $attributes = backdrop_attributes(array('id' => $anchor_text));
+  $prefix = "<h2$attributes>";
+  $suffix = '</h2>';
+  $variables['heading'] = array(
+    '#type' => 'markup',
+    '#prefix' => $prefix,
+    '#markup' => $heading,
+    '#suffix' => $suffix,
+  );
+  if (module_exists('permalink_filter')) {
+    $settings = config_get('permalink_filter.settings');
+    $permalink = theme('permalink', array(
+      'id' => $anchor_text,
+      'text' => check_plain($settings['text']),
+      'position' => $settings['position'],
+      'value' => check_plain($heading),
+      'css' => $settings['css'],
+    ));
+    if ($settings['position'] == 'before') {
+      $variables['heading']['#prefix'] = $prefix . $permalink;
+    }
+    else {
+      $variables['heading']['#suffix'] = $permalink . $suffix;
+    }
+  }
 }
 
 /**
