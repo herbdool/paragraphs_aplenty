@@ -214,6 +214,7 @@
 form .field-type-paragraphs table {
   font-size: 0.923rem;
 }
-form .field-type-paragraphs table .paragraphs-item {
+form .field-type-paragraphs table .paragraphs-item,
+form .field-type-paragraphs table .form-item {
   white-space: normal;
 }
