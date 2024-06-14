@@ -635,3 +635,49 @@ function paragraphs_aplenty_update_1003() {
   // @see https://github.com/backdrop-contrib/paragraphs_aplenty/issues/1
   backdrop_flush_all_caches();
 }
+
+/**
+ * Update help text and labels.
+ */
+function paragraphs_aplenty_update_1004() {
+  // Accordions
+  $config = config('field.instance.paragraphs_item.aplenty_accordion.field_aplenty_accordion_expand');
+  if ($config->get('label') == 'Start expanded') {
+    $config->set('label', 'Start first item expanded');
+  }
+  $config->save();
+
+  // Cards
+  $config = config('field.instance.paragraphs_item.aplenty_cards.field_aplenty_card_style');
+  if ($config->get('description') == 'Choose the card style to apply to each card.') {
+    $config->set('description', 'Choose the style to apply to each card. These are basic styles which can be adapted by the theme\'s stylesheet.');
+  }
+  $config->save();
+
+  $config = config('field.instance.paragraphs_item.aplenty_cards.field_aplenty_card_width');
+  if ($config->get('description') == 'This sets the width of the cards per row (the number of cards per row).') {
+    $config->set('description', 'This sets the width of the cards per row (the number of cards per row). Extra cards will flow to the next row. On narrower screens there will be one card per row.');
+  }
+  $config->save();
+
+  // Row of columns
+  $config = config('field.instance.paragraphs_item.aplenty_grid.field_aplenty_column_stretch');
+  if ($config->get('description') == 'Choose which column will stretch to fill the remainder. If the number of paragraphs is less than the set number of columns, then the column chosen here will stretch to fill the remainder.') {
+    $config->set('description', 'Choose which column will stretch to fill the remaining space. If the number of column items added is less than the set number of columns spaces (via the Column width field), then the column chosen here will stretch to fill two or more column spaces.');
+  }
+  $config->save();
+
+  $config = config('field.instance.paragraphs_item.aplenty_grid.field_aplenty_column_stretch');
+  if ($config->get('description') == 'This sets the width of the columns in this row, and the number of columns per row. Any extra columns assigned will not be displayed.') {
+    $config->set('description', 'This sets the width of the columns in this row (the number of columns per row). Any extra columns assigned will not be displayed.');
+  }
+  $config->save();
+
+  // Media list
+  $config = config('field.instance.paragraphs_item.aplenty_media_list.field_aplenty_media_width');
+  if ($config->get('description') == 'This sets the number of media blocks per row.') {
+    $config->set('description', 'This sets the number of media blocks per row (the width). Extra media blocks will flow to the next row. On narrower screens there will be one media block per row.');
+  }
+  $config->save();
+
+}
