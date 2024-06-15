@@ -538,3 +538,13 @@ function paragraphs_aplenty_form_field_ui_field_delete_form_alter(&$form) {
   $form['paragraphs_aplenty']['#markup'] = t('NOTE: This field is required by Paragraphs Aplenty, and cannot be deleted.');
   $form['actions']['submit']['#access'] = FALSE;
 }
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function paragraphs_aplenty_field_widget_form_alter(&$form, $form_state, $context) {
+  if (isset($form['#entity_type']) && $form['#entity_type'] == 'paragraphs_item') {
+    $path = backdrop_get_path('module', 'paragraphs_aplenty');
+    backdrop_add_css($path . '/css/paragraphs_aplenty.css');
+  }
+}
