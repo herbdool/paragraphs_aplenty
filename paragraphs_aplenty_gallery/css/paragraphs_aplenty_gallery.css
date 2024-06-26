@@ -1,0 +1,7 @@
+/**
+ * Gallery images
+ */
+.field-name-field-aplenty-gallery-image .field-items {
+  display: flex;
+  gap: 10px;
+}

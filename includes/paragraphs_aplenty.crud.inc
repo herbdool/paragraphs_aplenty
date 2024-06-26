@@ -38,8 +38,17 @@ function paragraphs_aplenty_create_bundle($machine, $settings) {
 
 /**
  * Helper function to add a boolean field to a bundle.
+ *
+ * @param string $field_name
+ *   The field name.
+ * @param string $bundle
+ *   The paragraphs bundle.
+ * @param array $instance_overrides
+ *   Nested array of instance overrides
+ * @param array $base_overrides
+ *   Optional nested array of field overrides.
  */
-function paragraphs_aplenty_add_boolean_field($field_name, $bundle, $instance_overrides) {
+function paragraphs_aplenty_add_boolean_field($field_name, $bundle, $instance_overrides, $base_overrides = array()) {
 
   $entity_type = 'paragraphs_item';
 
@@ -62,7 +71,8 @@ function paragraphs_aplenty_add_boolean_field($field_name, $bundle, $instance_ov
       'locked' => '0',
       'cardinality' => '1',
     );
-    $field = field_create_field($field_info);
+    $field_info = array_replace_recursive($field_info, $base_overrides);
+    field_create_field($field_info);
   }
   $existing = field_info_instance($entity_type, $field_name, $bundle);
   if (empty($existing)) {
@@ -112,8 +122,17 @@ function paragraphs_aplenty_add_boolean_field($field_name, $bundle, $instance_ov
 
 /**
  * Helper function to add a number list field to a bundle.
+ *
+ * @param string $field_name
+ *   The field name.
+ * @param string $bundle
+ *   The paragraphs bundle.
+ * @param array $instance_overrides
+ *   Nested array of instance overrides
+ * @param array $base_overrides
+ *   Optional nested array of field overrides.
  */
-function paragraphs_aplenty_add_number_list_field($field_name, $bundle, $instance_overrides, $base_overrides) {
+function paragraphs_aplenty_add_number_list_field($field_name, $bundle, $instance_overrides, $base_overrides = array()) {
 
   $entity_type = 'paragraphs_item';
 
@@ -134,7 +153,7 @@ function paragraphs_aplenty_add_number_list_field($field_name, $bundle, $instanc
       'cardinality' => '1',
     );
     $field_info = array_replace_recursive($field_info, $base_overrides);
-    $field = field_create_field($field_info);
+    field_create_field($field_info);
   }
 
   $existing = field_info_instance($entity_type, $field_name, $bundle);
@@ -179,8 +198,17 @@ function paragraphs_aplenty_add_number_list_field($field_name, $bundle, $instanc
 
 /**
  * Helper function to add a text list field to a bundle.
+ *
+ * @param string $field_name
+ *   The field name.
+ * @param string $bundle
+ *   The paragraphs bundle.
+ * @param array $instance_overrides
+ *   Nested array of instance overrides
+ * @param array $base_overrides
+ *   Optional nested array of field overrides.
  */
-function paragraphs_aplenty_add_text_list_field($field_name, $bundle, $instance_overrides, $base_overrides) {
+function paragraphs_aplenty_add_text_list_field($field_name, $bundle, $instance_overrides, $base_overrides = array()) {
 
   $entity_type = 'paragraphs_item';
 
@@ -201,7 +229,7 @@ function paragraphs_aplenty_add_text_list_field($field_name, $bundle, $instance_
       'cardinality' => '1',
     );
     $field_info = array_replace_recursive($field_info, $base_overrides);
-    $field = field_create_field($field_info);
+    field_create_field($field_info);
   }
 
   $existing = field_info_instance($entity_type, $field_name, $bundle);
@@ -246,8 +274,17 @@ function paragraphs_aplenty_add_text_list_field($field_name, $bundle, $instance_
 
 /**
  * Helper function to add a paragraphs field to a bundle.
+ *
+ * @param string $field_name
+ *   The field name.
+ * @param string $bundle
+ *   The paragraphs bundle.
+ * @param array $instance_overrides
+ *   Nested array of instance overrides
+ * @param array $base_overrides
+ *   Optional nested array of field overrides.
  */
-function paragraphs_aplenty_add_paragraphs_field($field_name, $bundle, $instance_overrides) {
+function paragraphs_aplenty_add_paragraphs_field($field_name, $bundle, $instance_overrides, $base_overrides = array()) {
 
   $entity_type = 'paragraphs_item';
 
@@ -264,7 +301,8 @@ function paragraphs_aplenty_add_paragraphs_field($field_name, $bundle, $instance
       'locked' => '0',
       'cardinality' => '-1',
     );
-    $field = field_create_field($field_info);
+    $field_info = array_replace_recursive($field_info, $base_overrides);
+    field_create_field($field_info);
   }
 
   $existing = field_info_instance($entity_type, $field_name, $bundle);
@@ -327,8 +365,17 @@ function paragraphs_aplenty_add_paragraphs_field($field_name, $bundle, $instance
 
 /**
  * Helper function to add a text field to a bundle.
+ *
+ * @param string $field_name
+ *   The field name.
+ * @param string $bundle
+ *   The paragraphs bundle.
+ * @param array $instance_overrides
+ *   Nested array of instance overrides
+ * @param array $base_overrides
+ *   Optional nested array of field overrides.
  */
-function paragraphs_aplenty_add_text_field($field_name, $bundle, $instance_overrides) {
+function paragraphs_aplenty_add_text_field($field_name, $bundle, $instance_overrides, $base_overrides = array()) {
 
   $entity_type = 'paragraphs_item';
 
@@ -346,7 +393,8 @@ function paragraphs_aplenty_add_text_field($field_name, $bundle, $instance_overr
       'active' => '1',
       'cardinality' => '1',
     );
-    $field = field_create_field($field_info);
+    $field_info = array_replace_recursive($field_info, $base_overrides);
+    field_create_field($field_info);
   }
 
   $existing = field_info_instance($entity_type, $field_name, $bundle);
@@ -395,8 +443,17 @@ function paragraphs_aplenty_add_text_field($field_name, $bundle, $instance_overr
 
 /**
  * Helper function to add an image field to a paragraph type.
+ *
+ * @param string $field_name
+ *   The field name.
+ * @param string $bundle
+ *   The paragraphs bundle.
+ * @param array $instance_overrides
+ *   Nested array of instance overrides
+ * @param array $base_overrides
+ *   Optional nested array of field overrides.
  */
-function paragraphs_aplenty_add_image_field($field_name, $bundle, $instance_overrides) {
+function paragraphs_aplenty_add_image_field($field_name, $bundle, $instance_overrides, $base_overrides = array()) {
 
   $entity_type = 'paragraphs_item';
 
@@ -416,7 +473,8 @@ function paragraphs_aplenty_add_image_field($field_name, $bundle, $instance_over
       'locked' => '0',
       'cardinality' => '1',
     );
-    $field = field_create_field($field_info);
+    $field_info = array_replace_recursive($field_info, $base_overrides);
+    field_create_field($field_info);
   }
 
   $existing = field_info_instance($entity_type, $field_name, $bundle);
@@ -434,7 +492,7 @@ function paragraphs_aplenty_add_image_field($field_name, $bundle, $instance_over
       ),
       'settings' => array(
         'file_directory' => 'aplenty-image',
-        'file_extensions' => 'png gif jpg jpeg',
+        'file_extensions' => 'png gif jpg jpeg svg webm',
         'max_filesize' => '50 MB',
         'max_resolution' => '',
         'min_resolution' => '',
@@ -481,8 +539,17 @@ function paragraphs_aplenty_add_image_field($field_name, $bundle, $instance_over
 
 /**
  * Helper function to add an image field to a paragraph type.
+ *
+ * @param string $field_name
+ *   The field name.
+ * @param string $bundle
+ *   The paragraphs bundle.
+ * @param array $instance_overrides
+ *   Nested array of instance overrides
+ * @param array $base_overrides
+ *   Optional nested array of field overrides.
  */
-function paragraphs_aplenty_add_file_field($field_name, $bundle, $instance_overrides) {
+function paragraphs_aplenty_add_file_field($field_name, $bundle, $instance_overrides, $base_overrides = array()) {
 
   $entity_type = 'paragraphs_item';
 
@@ -503,7 +570,8 @@ function paragraphs_aplenty_add_file_field($field_name, $bundle, $instance_overr
       'locked' => '0',
       'cardinality' => '1',
     );
-    $field = field_create_field($field_info);
+    $field_info = array_replace_recursive($field_info, $base_overrides);
+    field_create_field($field_info);
   }
 
   $existing = field_info_instance($entity_type, $field_name, $bundle);
@@ -554,8 +622,17 @@ function paragraphs_aplenty_add_file_field($field_name, $bundle, $instance_overr
 
 /**
  * Helper function to add a long text field to a paragraph type.
+ *
+ * @param string $field_name
+ *   The field name.
+ * @param string $bundle
+ *   The paragraphs bundle.
+ * @param array $instance_overrides
+ *   Nested array of instance overrides
+ * @param array $base_overrides
+ *   Optional nested array of field overrides.
  */
-function paragraphs_aplenty_add_text_long_field($field_name, $bundle, $instance_overrides) {
+function paragraphs_aplenty_add_text_long_field($field_name, $bundle, $instance_overrides, $base_overrides = array()) {
 
   $entity_type = 'paragraphs_item';
 
@@ -572,7 +649,8 @@ function paragraphs_aplenty_add_text_long_field($field_name, $bundle, $instance_
       'locked' => '0',
       'cardinality' => '1',
     );
-    $field = field_create_field($field_info);
+    $field_info = array_replace_recursive($field_info, $base_overrides);
+    field_create_field($field_info);
   }
 
   $existing = field_info_instance($entity_type, $field_name, $bundle);
@@ -620,8 +698,17 @@ function paragraphs_aplenty_add_text_long_field($field_name, $bundle, $instance_
 }
 /**
  * Helper function to add a link field to a paragraph type.
+ *
+ * @param string $field_name
+ *   The field name.
+ * @param string $bundle
+ *   The paragraphs bundle.
+ * @param array $instance_overrides
+ *   Nested array of instance overrides
+ * @param array $base_overrides
+ *   Optional nested array of field overrides.
  */
-function paragraphs_aplenty_add_link_field($field_name, $bundle, $instance_overrides) {
+function paragraphs_aplenty_add_link_field($field_name, $bundle, $instance_overrides, $base_overrides = array()) {
 
   $entity_type = 'paragraphs_item';
 
@@ -653,7 +740,8 @@ function paragraphs_aplenty_add_link_field($field_name, $bundle, $instance_overr
       'locked' => '0',
       'cardinality' => '1',
     );
-    $field = field_create_field($field_info);
+    $field_info = array_replace_recursive($field_info, $base_overrides);
+    field_create_field($field_info);
   }
 
   $existing = field_info_instance($entity_type, $field_name, $bundle);
