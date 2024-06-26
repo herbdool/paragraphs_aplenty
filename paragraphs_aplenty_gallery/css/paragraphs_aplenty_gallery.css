@@ -3,5 +3,10 @@
  */
 .field-name-field-aplenty-gallery-image .field-items {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+}
+
+.field-name-field-aplenty-gallery-image .field-item img {
+  max-width: fit-content;
 }
