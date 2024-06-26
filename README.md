@@ -8,6 +8,11 @@ After installation, feel free to alter the Paragraph types by adding fields,
 and altering fields. You can also customize templates by copying them from the
 module and placing in your theme. However, try not to remove the default fields.
 
+## Sub-modules
+
+Paragraphs Aplenty Gallery provides a Gallery paragraphs type that uses the
+Colorbox module to provide a way to scroll through a group of images.
+
 ## Install
 
 Install this module using the official [Backdrop CMS instructions](https://backdropcms.org/guide/modules).

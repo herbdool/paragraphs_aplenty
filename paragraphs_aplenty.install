@@ -11,9 +11,28 @@
 function paragraphs_aplenty_install() {
   module_load_include('inc', 'paragraphs_aplenty', 'includes/paragraphs_aplenty.crud');
 
-  // Install the Hero paragraph type.
-  // Similar to Hero in Backdrop core, or Bootstrap 3.x.
-  // @see https://getbootstrap.com/docs/3.4/components/#jumbotron
+  _paragraphs_aplenty_hero();
+
+  _paragraphs_aplenty_media_block();
+
+  _paragraphs_aplenty_card();
+
+  _paragraphs_aplenty_grid();
+
+  _paragraphs_aplenty_accordion();
+
+  _paragraphs_aplenty_heading();
+
+  _paragraphs_aplenty_image();
+}
+
+/**
+ * Hero paragraph type
+ *
+ * Similar to Hero in Backdrop core, or Bootstrap 3.x.
+ * @see https://getbootstrap.com/docs/3.4/components/#jumbotron
+ */
+function _paragraphs_aplenty_hero() {
   $bundle = 'aplenty_hero';
   $settings = array(
     'name' => 'Hero',
@@ -82,10 +101,16 @@ function paragraphs_aplenty_install() {
     'label' => 'Text',
     'required' => TRUE,
   ));
+}
 
+/**
+ * Media Block and Media List paragraph types
+ *
+ * Similar to Media object in Bootstrap 3.x
+ * @see https://getbootstrap.com/docs/3.4/components/#media
+ */
+function _paragraphs_aplenty_media_block() {
   // Install the Media Block paragraph type.
-  // Similar to Media object in Bootstrap 3.x
-  // @see https://getbootstrap.com/docs/3.4/components/#media
   $bundle = 'aplenty_media_block';
   $settings = array(
     'name' => 'Media block',
@@ -184,10 +209,16 @@ function paragraphs_aplenty_install() {
     ),
     'required' => TRUE,
   ));
+}
 
+/**
+ * Cards and Card paragraph types
+ *
+ * Similar to card in Bootstrap 5.x
+ * @see https://getbootstrap.com/docs/5.3/components/card/
+ */
+function _paragraphs_aplenty_card() {
   // Install the Card paragraph type.
-  // Similar to card in Bootstrap 5.x
-  // @see https://getbootstrap.com/docs/5.3/components/card/
   $bundle = 'aplenty_card';
   $settings = array(
     'name' => 'Card',
@@ -345,7 +376,15 @@ function paragraphs_aplenty_install() {
     ),
     'required' => TRUE,
   ));
+}
 
+/**
+ * Grid (Row of columns), columns, and column wrapper paragraph types
+ *
+ * Uses the core grid, similar to Bootstrap v3.x.
+ * @see https://getbootstrap.com/docs/3.4/css/#grid
+ */
+function _paragraphs_aplenty_grid() {
   // Install the Column paragraph type.
   // Used in the grid.
   $bundle = 'aplenty_column';
@@ -384,8 +423,6 @@ function paragraphs_aplenty_install() {
   ));
 
   // Install the Grid (aka "Row of columns") paragraph type.
-  // Uses the core grid, similar to Bootstrap v3.x.
-  // @see https://getbootstrap.com/docs/3.4/css/#grid
   $bundle = 'aplenty_grid';
   $settings = array(
     'name' => 'Row of columns',
@@ -445,7 +482,12 @@ function paragraphs_aplenty_install() {
     ),
     'required' => TRUE,
   ));
+}
 
+/**
+ * Accordion and Accordion Item paragraph types
+ */
+function _paragraphs_aplenty_accordion() {
   // Install the Accordion Item paragraph type.
   $bundle = 'aplenty_accordion_item';
   $settings = array(
@@ -501,8 +543,12 @@ function paragraphs_aplenty_install() {
     ),
     'required' => TRUE,
   ));
+}
 
-  // Install the Heading paragraph type.
+/**
+ * Heading (with anchor) paragraph type
+ */
+function _paragraphs_aplenty_heading() {
   $bundle = 'aplenty_heading';
   $settings = array(
     'name' => 'Heading',
@@ -519,8 +565,12 @@ function paragraphs_aplenty_install() {
     'required' => FALSE,
     'description' => 'Provide a string with no spaces. If provided, the anchor can be a destination for a relative link that begins with a hash. For example, a link like <code>#bicycle</code> would link to an anchor <code>bicycle</code>.'
   ));
+}
 
-  // Install the Image paragraph type.
+/**
+ * Image paragraph type
+ */
+function _paragraphs_aplenty_image() {
   $bundle = 'aplenty_image';
   $settings = array(
     'name' => 'Image',

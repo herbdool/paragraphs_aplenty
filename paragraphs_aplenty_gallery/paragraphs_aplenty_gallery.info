@@ -1,0 +1,8 @@
+name = Paragraphs Aplenty Gallery
+description = Gallery Paragraph type.
+backdrop = 1.x
+type = module
+package = Paragraphs
+dependencies[] = paragraphs
+dependencies[] = image
+dependencies[] = colorbox
