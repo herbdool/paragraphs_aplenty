@@ -448,8 +448,8 @@ function _paragraphs_aplenty_preprocess_aplenty_text(&$variables) {
  */
 function _paragraphs_aplenty_preprocess_aplenty_image(&$variables) {
   $variables['classes_array'][] = 'aplenty-image';
-  $variables['caption'] = $variables['content']['field_aplenty_caption'][0];
-  $variables['caption_link'] = $variables['content']['field_aplenty_link'][0];
+  $variables['caption'] = isset($variables['content']['field_aplenty_caption'][0]) ? $variables['content']['field_aplenty_caption'][0] : '';
+  $variables['caption_link'] = isset($variables['content']['field_aplenty_link'][0]) ? $variables['content']['field_aplenty_link'][0] : '';
 }
 
 /**
