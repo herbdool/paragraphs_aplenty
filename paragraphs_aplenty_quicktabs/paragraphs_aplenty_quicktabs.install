@@ -16,11 +16,11 @@ function paragraphs_aplenty_quicktabs_install() {
   $settings = array(
     'name' => 'Quicktab item',
     'label' => 'Quicktab item',
-    'description' => 'A single quicktab with a title and body.',
+    'description' => 'A single quicktab with a title and content. The content can include other paragraph types.',
   );
   paragraphs_aplenty_create_bundle($bundle, $settings);
   paragraphs_aplenty_add_text_field('field_aplenty_title', $bundle, array(
-    'label' => 'Quicktab item title',
+    'label' => 'Quicktab title',
     'required' => TRUE,
   ));
   paragraphs_aplenty_add_paragraphs_field('field_aplenty_paragraphs', $bundle, array(
@@ -30,7 +30,7 @@ function paragraphs_aplenty_quicktabs_install() {
         'aplenty_text' => 'aplenty_text',
         'aplenty_accordion' => 'aplenty_accordion',
         'aplenty_image' => 'aplenty_image',
-        'aplenty_quicktab' => 'aplenty_quicktab',
+        'aplenty_quicktabs' => 'aplenty_quicktabs',
       ),
       'title' => 'Paragraph',
       'title_multiple' => 'Paragraphs',
@@ -39,7 +39,7 @@ function paragraphs_aplenty_quicktabs_install() {
   ));
 
   // Install the Quicktab paragraph type.
-  $bundle = 'aplenty_quicktab';
+  $bundle = 'aplenty_quicktabs';
   $settings = array(
     'name' => 'Quicktabs',
     'label' => 'Quicktabs',
@@ -47,10 +47,10 @@ function paragraphs_aplenty_quicktabs_install() {
   );
   paragraphs_aplenty_create_bundle($bundle, $settings);
 
-  paragraphs_aplenty_add_text_list_field('field_aplenty_quicktab_style', $bundle,
+  paragraphs_aplenty_add_text_list_field('field_aplenty_quicktabs_style', $bundle,
     array(
       'label' => 'Quicktab style',
-      'description' => 'Choose the quicktab style to apply to quicktabs. Styles provided by Quicktabs Tabstyles module.',
+      'description' => 'Choose the quicktab style to apply to quicktabs.',
       'required' => TRUE,
       'default_value' => 'default',
     ),
