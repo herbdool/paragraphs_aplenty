@@ -1,0 +1,7 @@
+name = Paragraphs Aplenty Quicktabs
+description = Quicktabs Paragraph type.
+backdrop = 1.x
+type = module
+package = Paragraphs
+dependencies[] = paragraphs
+dependencies[] = quicktabs

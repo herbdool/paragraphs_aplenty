@@ -10,8 +10,11 @@ module and placing in your theme. However, try not to remove the default fields.
 
 ## Sub-modules
 
-Paragraphs Aplenty Gallery provides a Gallery paragraphs type that uses the
+*Paragraphs Aplenty Gallery* provides a Gallery paragraphs type that uses the
 Colorbox module to provide a way to scroll through a group of images.
+
+*Paragraphs Aplenty Quicktabs* provides a Quicktabs paragraphs type that uses the
+Quicktabs module to provide a way to display a collection of tabs.
 
 ## Install
 

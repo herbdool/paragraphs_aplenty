@@ -1,0 +1,120 @@
+<?php
+
+/**
+ * @file
+ * Paragraphs Aplenty Quicktabs.
+ */
+
+/**
+ * Implements hook_preprocess_paragraphs_item().
+ */
+function paragraphs_aplenty_quicktabs_preprocess_paragraphs_item(&$variables) {
+  if ($variables['paragraphs_item']->bundle() != 'aplenty_quicktab') {
+    return;
+  }
+
+  $variables['classes_array'][] = 'aplenty-quicktabs';
+
+  $variables['aplenty_quicktab_items'] = array();
+  $quicktab_items = field_get_values($variables['paragraphs_item'], 'field_aplenty_paragraphs');
+
+  $tabs = array();
+  if (!empty($quicktab_items)){
+    foreach ($quicktab_items as $key => $item_id) {
+      $tabs[] = array(
+        'title' => strip_tags(backdrop_render($variables['content']['field_aplenty_paragraphs'][$key]['entity']['paragraphs_item'][$item_id]['field_aplenty_title'])),
+        'contents' => $variables['content']['field_aplenty_paragraphs'][$key]['entity']['paragraphs_item'][$item_id]['field_aplenty_paragraphs'],
+      );
+    }
+    $overrides = array(
+      'hide_empty_tabs' => 1,
+      'ajax' => 0,
+      'default_tab' => 0,
+      'style' => 'nostyle',
+    );
+
+    if (module_exists('quicktabs_tabstyles')) {
+      if ($style = field_get_value($variables['paragraphs_item'], 'field_aplenty_quicktab_style')) {
+        $overrides['style'] = $style;
+      }
+    }
+    $quicktabs = quicktabs_build_quicktabs('paragraphs_item', $overrides, $tabs);
+
+    $variables['aplenty_quicktab_items'] = $quicktabs;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function paragraphs_aplenty_quicktabs_theme($existing, $type, $theme, $path) {
+
+  $common = array(
+    'path' => $path . '/templates',
+    'base hook' => 'paragraphs_item',
+  );
+
+  return array(
+    'paragraphs_item__aplenty_quicktab' => $common + array(
+      'template' => 'paragraphs-item--aplenty-quicktabs',
+    ),
+  );
+}
+
+/**
+ * Tab styles options
+ */
+function paragraphs_aplenty_quicktabs_styles_options() {
+  $options = array('default' => t('Default style'));
+  if (!module_exists('quicktabs_tabstyles')) {
+    return $options;
+  }
+  $more_options = array();
+  $styles = module_invoke_all('quicktabs_tabstyles');
+  foreach ($styles as $style) {
+    $more_options[$style] = $style;
+  }
+  ksort($more_options);
+  return $options + $more_options;
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function paragraphs_aplenty_quicktabs_field_widget_form_alter(&$form, $form_state, $context) {
+  if (isset($form['#entity_type']) && $form['#entity_type'] == 'paragraphs_item') {
+    if (isset($form['#field_name']) && $form['#field_name'] == 'field_aplenty_quicktab_style') {
+      $form['#access'] = module_exists('quicktabs_tabstyles');
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function paragraphs_aplenty_quicktabs_form_field_ui_field_delete_form_alter(&$form) {
+  $entity_type = $form['entity_type']['#value'];
+  $bundle = $form['bundle']['#value'];
+  $field_name = $form['field_name']['#value'];
+  if ('paragraphs_item' != $entity_type) {
+    return;
+  }
+  $required = array(
+    'aplenty_quicktabs' => array(
+      'field_aplenty_quicktabs_style',
+      'field_aplenty_paragraphs',
+    ),
+    'aplenty_quicktab_item' => array(
+      'field_aplenty_title',
+      'field_aplenty_paragraphs',
+    ),
+  );
+  if (empty($required[$bundle])) {
+    return;
+  }
+  if (!in_array($field_name, $required[$bundle])) {
+    return;
+  }
+  $form['paragraphs_aplenty']['#markup'] = t('NOTE: This field is required by Paragraphs Aplenty, and cannot be deleted.');
+  $form['actions']['submit']['#access'] = FALSE;
+}

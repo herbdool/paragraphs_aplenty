@@ -22,3 +22,28 @@ function paragraphs_aplenty_gallery_field_widget_form_alter(&$form, $form_state,
     backdrop_add_css($path . '/css/paragraphs_aplenty_gallery.css');
   }
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function paragraphs_aplenty_gallery_form_field_ui_field_delete_form_alter(&$form) {
+  $entity_type = $form['entity_type']['#value'];
+  $bundle = $form['bundle']['#value'];
+  $field_name = $form['field_name']['#value'];
+  if ('paragraphs_item' != $entity_type) {
+    return;
+  }
+  $required = array(
+    'aplenty_gallery' => array(
+      'field_aplenty_gallery_image',
+    ),
+  );
+  if (empty($required[$bundle])) {
+    return;
+  }
+  if (!in_array($field_name, $required[$bundle])) {
+    return;
+  }
+  $form['paragraphs_aplenty']['#markup'] = t('NOTE: This field is required by Paragraphs Aplenty, and cannot be deleted.');
+  $form['actions']['submit']['#access'] = FALSE;
+}
