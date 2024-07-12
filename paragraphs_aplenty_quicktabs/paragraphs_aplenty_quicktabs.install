@@ -52,6 +52,7 @@ function paragraphs_aplenty_quicktabs_install() {
       'label' => 'Quicktab style',
       'description' => 'Choose the quicktab style to apply to quicktabs.',
       'required' => TRUE,
+      'default_value_function' => 'paragraphs_aplenty_quicktabs_styles_default_value',
     ),
     array(
       'settings' => array(
