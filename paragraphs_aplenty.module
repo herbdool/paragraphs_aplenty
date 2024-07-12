@@ -148,10 +148,10 @@ function _paragraphs_aplenty_preprocess_aplenty_card(&$variables) {
 }
 
 /**
- * Preprocessing code for the Card title.
+ * Preprocessing code for the title.
  */
 function _paragraphs_aplenty_preprocess_field_aplenty_title(&$variables) {
-  $variables['items'][0]['#markup'] = '<h2>' . $variables['items'][0]['#markup'] . '</h2>';
+  $variables['items'][0]['#markup'] = '<h2>' . htmlspecialchars_decode($variables['items'][0]['#markup']) . '</h2>';
 }
 
 /**
