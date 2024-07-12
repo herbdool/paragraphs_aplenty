@@ -507,8 +507,8 @@ function _paragraphs_aplenty_accordion() {
   // Install the Accordion paragraph type.
   $bundle = 'aplenty_accordion';
   $settings = array(
-    'name' => 'Accordion',
-    'label' => 'Accordion',
+    'name' => 'Accordions',
+    'label' => 'Accordions',
     'description' => 'Container for accordions.',
   );
   paragraphs_aplenty_create_bundle($bundle, $settings);
