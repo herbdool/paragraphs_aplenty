@@ -559,11 +559,17 @@ function _paragraphs_aplenty_heading() {
   paragraphs_aplenty_add_text_field('field_aplenty_heading', $bundle, array(
     'label' => 'Heading',
     'required' => FALSE,
+    'widget' => array(
+      'weight' => 0,
+     ),
   ));
   paragraphs_aplenty_add_text_field('field_aplenty_anchor', $bundle, array(
     'label' => 'Anchor',
     'required' => FALSE,
-    'description' => 'Provide a string with no spaces. If provided, the anchor can be a destination for a relative link that begins with a hash. For example, a link like <code>#bicycle</code> would link to an anchor <code>bicycle</code>.'
+    'description' => 'Provide a string with no spaces. If provided, the anchor can be a destination for a relative link that begins with a hash. For example, a link like <code>#bicycle</code> would link to an anchor <code>bicycle</code>.',
+    'widget' => array(
+      'weight' => 10,
+    ),
   ));
 }
 
