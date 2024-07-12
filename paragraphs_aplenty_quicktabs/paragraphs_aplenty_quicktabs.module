@@ -79,6 +79,13 @@ function paragraphs_aplenty_quicktabs_styles_options() {
 }
 
 /**
+ * Tab styles 'default value' callback.
+ */
+function paragraphs_aplenty_quicktabs_styles_default_value($entity_type, $entity, $field, $instance) {
+  return array(array('value' => 'default'));
+}
+
+/**
  * Implements hook_field_widget_form_alter().
  */
 function paragraphs_aplenty_quicktabs_field_widget_form_alter(&$form, $form_state, $context) {
