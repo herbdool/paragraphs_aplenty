@@ -441,7 +441,7 @@ function _paragraphs_aplenty_preprocess_aplenty_image(&$variables) {
  *   The css class.
  */
 function _paragraphs_aplenty_get_media_class($paragraph) {
-  $media_align = &backdrop_static($paragraph->id() . '_media_align');
+  $media_align = &backdrop_static('media_align_' . $paragraph->id());
   if (isset($media_align)) {
     return $media_align;
   }
@@ -459,7 +459,7 @@ function _paragraphs_aplenty_get_media_class($paragraph) {
  *   The css class
  */
 function _paragraphs_aplenty_get_width_class($paragraph, $field_name) {
-  $width_class = &backdrop_static($paragraph->id() . '_width_class');
+  $width_class = &backdrop_static('width_class_' . $paragraph->id());
   if (isset($width_class)) {
     return $width_class;
   }
