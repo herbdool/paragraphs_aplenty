@@ -8,7 +8,9 @@
     <?php print render($content['field_aplenty_image']) ?>
     <?php endif; ?>
 
-    <?php if (!empty($content['field_aplenty_title'])): ?>
+    <?php if (!empty($content['field_aplenty_title'])
+      || !empty($content['field_aplenty_body'])
+      || !empty($content['field_aplenty_link'])): ?>
     <div class="aplenty-hero-callout">
       <?php print render($content['field_aplenty_title']) ?>
 
