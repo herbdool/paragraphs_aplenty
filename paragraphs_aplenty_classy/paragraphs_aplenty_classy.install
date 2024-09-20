@@ -1,0 +1,292 @@
+<?php
+
+/**
+ * @file
+ * Install/update
+ */
+
+/**
+ * Implements hook_install().
+ */
+function paragraphs_aplenty_classy_install() {
+  // Install style fields for each Paragraph Aplenty type.
+  $paragraph_types = array(
+    'aplenty_accordion' => array(
+      'background',
+      'width',
+      'margin',
+      'padding',
+    ),
+    'aplenty_grid' => array(
+      'background',
+      'width',
+      'margin',
+      'padding',
+    ),
+    'aplenty_column' => array(
+      'background',
+    ),
+    'aplenty_column_wrapper' => array(
+      'background',
+    ),
+    // 'aplenty_hero', // Exclude?
+    'aplenty_media_list' => array(
+      'background',
+      'width',
+      'margin',
+      'padding',
+    ),
+    'aplenty_cards' => array(
+      'background',
+      'width',
+      'margin',
+      'padding',
+    ),
+    'aplenty_heading' => array(
+      'background',
+      'width',
+      'margin',
+      'padding',
+    ),
+    'aplenty_image' => array(
+      'background',
+      'width',
+      'margin',
+      'padding',
+    ),
+    'aplenty_text' => array(
+      'background',
+      'width',
+      'margin',
+      'padding',
+    ),
+  );
+  if (module_exists('paragraphs_aplenty_quicktabs')) {
+    $paragraph_types[] = 'aplenty_quicktabs';
+  }
+  if (module_exists('paragraphs_aplenty_gallery')) {
+    $paragraph_types[] = 'aplenty_gallery';
+  }
+  list($sets, $styles) = _paragraphs_aplenty_classy_styles();
+
+  $config_sets = config('classy_paragraphs_ui.sets');
+  foreach ($sets as $set_key => $set_label) {
+    $config_sets->set('pa--' . $set_key, array(
+      'name' => 'pa--' . $set_key,
+      'label' => $set_label,
+    ));
+  }
+  $config_sets->save();
+
+  $config_classes = config('classy_paragraphs_ui.classes');
+  foreach ($styles as $set => $classes) {
+    foreach ($classes as $class_key => $class_label) {
+      $config_classes->set('pa--' . $class_key, array(
+        'name' => 'pa--' . $class_key,
+        'label' => $class_label,
+        'sets' => array(
+          'pa--' . $set => 'pa--' . $set,
+        ),
+      ));
+    }
+  }
+  $config_classes->save();
+
+  foreach ($paragraph_types as $bundle => $paragraph_sets) {
+    foreach ($paragraph_sets as $set_key => $set_label) {
+      $instance_overrides = array(
+        'label' => $set_label,
+        'settings' => array(
+          'classy_paragraphs_set' => 'pa--' . $set_key,
+        ),
+      );
+      _paragraphs_aplenty_classy_add_class_field('field_aplenty_classy_' . $set_key, $bundle, $instance_overrides, array());
+    }
+  }
+}
+
+/**
+ * Helper function to add a class field to a bundle.
+ *
+ * @param string $field_name
+ *   The field name.
+ * @param string $bundle
+ *   The paragraphs bundle.
+ * @param array $instance_overrides
+ *   Nested array of instance overrides
+ * @param array $base_overrides
+ *   Optional nested array of field overrides.
+ */
+function _paragraphs_aplenty_classy_add_class_field($field_name, $bundle, $instance_overrides, $base_overrides = array()) {
+    $entity_type = 'paragraphs_item';
+
+  $existing = field_info_field($field_name);
+  if (empty($existing)) {
+    $field_info = array(
+      'translatable' => '0',
+      'entity_types' => array(),
+      'settings' => array(
+        'allowed_values' => array(),
+        'allowed_values_function' => '',
+      ),
+      'field_name' => $field_name,
+      'type' => 'cp_list',
+      'module' => 'classy_paragraphs',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+    );
+    $field_info = array_replace_recursive($field_info, $base_overrides);
+    field_create_field($field_info);
+  }
+  $existing = field_info_instance($entity_type, $field_name, $bundle);
+  if (empty($existing)) {
+    $field_info = array(
+      'label' => 'Replace me',
+      'widget' => array(
+        'weight' => '99',
+        'type' => 'options_select',
+        'module' => 'options',
+        'active' => 1,
+        'settings' => array(
+          'classy_paragraphs_set' => '',
+          'classy_paragraphs_set_include' => TRUE,
+        ),
+      ),
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'type' => 'hidden',
+          'weight' => 0,
+          'settings' => array(),
+        ),
+        'paragraphs_editor_preview' => array(
+          'type' => 'hidden',
+          'label' => 'hidden',
+          'settings' => array(),
+          'weight' => 0,
+        ),
+      ),
+      'required' => FALSE,
+      'description' => '',
+      'default_value' => NULL,
+      'field_name' => $field_name,
+      'entity_type' => $entity_type,
+      'bundle' => $bundle,
+    );
+    $field_info = array_replace_recursive($field_info, $instance_overrides);
+    field_create_instance($field_info);
+  }
+}
+
+/**
+ * Get styles
+ *
+ * @return array
+ */
+function _paragraphs_aplenty_classy_styles() {
+  $sets = array(
+    'background' => 'Background',
+    'width' => 'Width',
+    'margin' => 'Margin',
+    'padding' => 'Padding',
+  );
+  $styles = array(
+    'background' => array(
+      'b-primary' => 'Brand Primary Color',
+      'b-secondary' => 'Brand Secondary Color',
+      'b-success' => 'Brand Success Color',
+      'b-info' => 'Brand Info Color',
+      'b-warning' => 'Brand Warning Color',
+      'b-danger' => 'Brand Danger Color',
+      'b-rgba-black-slight' => 'Black slight',
+      'b-rgba-black-light' => 'Black light',
+      'b-rgba-black-strong' => 'Black strong',
+      'b-rgba-blue-slight' => 'Blue slight',
+      'b-rgba-blue-light' => 'Blue light',
+      'b-rgba-blue-strong' => 'Blue strong',
+      'b-rgba-bluegrey-slight' => 'Bluegrey slight',
+      'b-rgba-bluegrey-light' => 'Bluegrey light',
+      'b-rgba-bluegrey-strong' => 'Bluegrey strong',
+      'b-rgba-brown-slight' => 'Brown slight',
+      'b-rgba-brown-light' => 'Brown light',
+      'b-rgba-brown-strong' => 'Brown strong',
+      'b-rgba-cyan-slight' => 'Cyan slight',
+      'b-rgba-cyan-light' => 'Cyan light',
+      'b-rgba-cyan-strong' => 'Cyan strong',
+      'b-rgba-green-slight' => 'Green slight',
+      'b-rgba-green-light' => 'Green light',
+      'b-rgba-green-strong' => 'Green strong',
+      'b-rgba-grey-slight' => 'Grey slight',
+      'b-rgba-grey-light' => 'Grey light',
+      'b-rgba-grey-strong' => 'Grey strong',
+      'b-rgba-indigo-slight' => 'Indigo slight',
+      'b-rgba-indigo-light' => 'Indigo light',
+      'b-rgba-indigo-strong' => 'Indigo strong',
+      'b-rgba-lime-slight' => 'Lime slight',
+      'b-rgba-lime-light' => 'Lime light',
+      'b-rgba-lime-strong' => 'Lime strong',
+      'b-rgba-orange-slight' => 'Orange slight',
+      'b-rgba-orange-light' => 'Orange light',
+      'b-rgba-orange-strong' => 'Orange strong',
+      'b-rgba-pink-slight' => 'Pink slight',
+      'b-rgba-pink-light' => 'Pink light',
+      'b-rgba-pink-strong' => 'Pink strong',
+      'b-rgba-purple-slight' => 'Purple slight',
+      'b-rgba-purple-light' => 'Purple light',
+      'b-rgba-purple-strong' => 'Purple strong',
+      'b-rgba-red-slight' => 'Red slight',
+      'b-rgba-red-light' => 'Red light',
+      'b-rgba-red-strong' => 'Red strong',
+      'b-rgba-stylish-slight' => 'Stylish slight',
+      'b-rgba-stylish-light' => 'Stylish light',
+      'b-rgba-stylish-strong' => 'Stylish strong',
+      'b-rgba-teal-slight' => 'Teal slight',
+      'b-rgba-teal-light' => 'Teal light',
+      'b-rgba-teal-strong' => 'Teal strong',
+      'b-rgba-white-slight' => 'White slight',
+      'b-rgba-white-light' => 'White light',
+      'b-rgba-white-strong' => 'White strong',
+      'b-rgba-yellow-slight' => 'Yellow slight',
+      'b-rgba-yellow-light' => 'Yellow light',
+      'b-rgba-yellow-strong' => 'Yellow strong',
+      'b-transparent' => 'Transparent',
+    ),
+    'width' => array(
+      'w-tiny' => 'Tiny',
+      'w-narrow' => 'Narrow',
+      'w-medium' => 'Medium',
+      'w-wide' => 'Large',
+      'w-full' => 'Full'
+    ),
+    'margin' => array(
+      'm-none' => 'None',
+      'm-tb-sm' => 'Top and Bottom Small',
+      'm-tb-md' => 'Top and Bottom Medium',
+      'm-tb-lg' => 'Top and Bottom Large',
+      'm-t-sm' => 'Top Small',
+      'm-t-md' => 'Top Medium',
+      'm-t-lg' => 'Top Large',
+      'm-b-sm' => 'Bottom Small',
+      'm-b-md' => 'Bottom Medium',
+      'm-b-lg' => 'Bottom Large',
+    ),
+    'padding' => array(
+      'p-none' => 'None',
+      'p-tb-sm' => 'Top and Bottom Small',
+      'p-tb-md' => 'Top and Bottom Medium',
+      'p-tb-lg' => 'Top and Bottom Large',
+      'p-t-sm' => 'Top Small',
+      'p-t-md' => 'Top Medium',
+      'p-t-lg' => 'Top Large',
+      'p-b-sm' => 'Bottom Small',
+      'p-b-md' => 'Bottom Medium',
+      'p-b-lg' => 'Bottom Large',
+    ),
+  );
+
+  return array($sets, $styles);
+}

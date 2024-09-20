@@ -13,7 +13,7 @@
 /**
  * Accordion
  */
-.paragraphs-item.aplenty-accordion {
+.aplenty-accordion>.content {
   padding-top: var(--spacer);
   padding-bottom: var(--spacer);
 }
@@ -113,7 +113,7 @@
 /**
  * Grid
  */
-.paragraphs-item.aplenty-grid {
+.aplenty-grid>.content {
   padding-top: var(--spacer);
   padding-bottom: var(--spacer);
 }
@@ -121,7 +121,7 @@
 /**
  * Media block
  */
-.paragraphs-item.aplenty-media_list {
+.aplenty-media_list>.content {
   padding-top: var(--spacer);
   padding-bottom: var(--spacer);
 }
@@ -158,15 +158,11 @@
 /**
  * Cards
  */
-.paragraphs-item.aplenty-cards {
+.aplenty-cards>.content {
   padding-top: var(--spacer);
   padding-bottom: var(--spacer);
 }
-@media (min-width: 48em) {
-  .paragraphs-item.aplenty-cards > .content {
-    padding: .5rem;
-  }
-}
+
 /* Display flex ensures the content gets full height. */
 .aplenty-card {
   display: flex;

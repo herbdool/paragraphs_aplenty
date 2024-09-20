@@ -1,0 +1,230 @@
+/**
+ * @file
+ * Spacing
+ */
+
+/**
+ * Set up so widths and spacing work better
+ */
+.paragraphs-item {
+  display: table;
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  table-layout: fixed;
+}
+
+.paragraphs-item::before,
+.paragraphs-item::after {
+  display: table;
+  table-layout: fixed;
+  content: " ";
+}
+
+.paragraphs-item::after {
+  clear: both;
+}
+
+.paragraphs-item>.content {
+  position: relative;
+  min-height: 1px;
+}
+
+@media (min-width: 48em) {
+  .paragraphs-item>.content {
+    float: left;
+    width: 100%;
+  }
+}
+
+/**
+ * Resets
+ */
+.paragraphs-item.aplenty-accordion>.content,
+.paragraphs-item.aplenty-grid>.content,
+.paragraphs-item.aplenty-media_list>.content,
+.paragraphs-item.aplenty-cards>.content {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.paragraphs-item.aplenty-grid>.content {
+  padding-left: 0;
+  padding-right: 0;
+}
+/* .paragraphs-item.aplenty-grid.container-fluid, */
+.paragraphs-item.aplenty-cards.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+.paragraphs-item.aplenty-grid::not([class*="pa--b-"]) .row,
+.paragraphs-item.aplenty-cards::not([class*="pa--b-"]) .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+/* .paragraphs-item.aplenty-grid [class*=col-], */
+.paragraphs-item.aplenty-grid .row>[class*="pa--b-"] {
+  padding-left: 0;
+  padding-right: 0;
+}
+/* .paragraphs-item.aplenty-cards [class*=col-] {
+  padding-left: 0;
+  padding-right: 0;
+} */
+
+/**
+ * Width
+ */
+.pa--w-tiny>.content {
+  position: relative;
+  min-height: 1px;
+}
+.pa--w-narrow>.content {
+  position: relative;
+  min-height: 1px;
+}
+.pa--w-medium>.content {
+  position: relative;
+  min-height: 1px;
+}
+.pa--w-large>.content {
+  position: relative;
+  min-height: 1px;
+}
+.pa--w-full>.content {
+  position: relative;
+  min-height: 1px;
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (min-width: 48em) {
+  .pa--w-tiny>.content {
+    float: left;
+    width: 33.33333%;
+    margin-left: 33.33333%;
+  }
+
+  .pa--w-narrow>.content {
+    float: left;
+    width: 50%;
+    margin-left: 25%;
+  }
+
+  .pa--w-medium>.content {
+    float: left;
+    width: 66.66667%;
+    margin-left: 16.66667%;
+  }
+
+  .pa--w-large>.content {
+    float: left;
+    width: 83.33333%;
+    margin-left: 8.33333%;
+  }
+
+  .pa--w-full>.content {
+    float: left;
+    width: 100%;
+  }
+}
+
+/**
+ * Nesting Paragraphs.
+ *
+ * Here are some helpers to remove margin/padding when nesting bundles.
+ */
+/* Resets Base Paragraph Styling for Nested Paragraphs. */
+.paragraphs-item .paragraphs-item,
+.paragraphs-item .paragraphs-item .paragraphs-item {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.paragraphs-item>.content .paragraphs-item>.content,
+.paragraphs-item>.content .paragraphs-item>.content .paragraphs-item>.content {
+  float: none;
+  width: auto;
+  margin-left: 0;
+}
+.paragraphs-item>.content .paragraphs-item::not([class*="pa--b-"])>.content,
+.paragraphs-item>.content .paragraphs-item>.content .paragraphs-item::not([class*="pa--b-"])>.content {
+  padding-right: 0;
+  padding-left: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/**
+ * Margin
+ */
+.pa--m-none>.content {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.pa--m-tb-sm>.content {
+  margin-top: calc(var(--spacer) * 0.25);
+  margin-bottom: calc(var(--spacer) * 0.25);
+}
+.pa--m-tb-md>.content {
+  margin-top: var(--spacer);
+  margin-bottom: var(--spacer);
+}
+.pa--m-tb-lg>.content {
+  margin-top: calc(var(--spacer) * 2);
+  margin-bottom: calc(var(--spacer) * 2);
+}
+.pa--m-t-sm>.content {
+  margin-top: calc(var(--spacer) * 0.25);
+}
+.pa--m-t-md>.content {
+  margin-top: var(--spacer);
+}
+.pa--m-t-lg>.content {
+  margin-top: calc(var(--spacer) * 2);
+}
+.pa--m-b-sm>.content {
+  margin-bottom: calc(var(--spacer) * 0.25);
+}
+.pa--m-b-md>.content {
+  margin-bottom: var(--spacer);
+}
+.pa--m-b-lg>.content {
+  margin-bottom: calc(var(--spacer) * 2);
+}
+
+/**
+ * Padding
+ */
+.pa--p-none>.content {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.pa--p-tb-sm>.content {
+  padding-top: calc(var(--spacer) * 0.25);
+  padding-bottom: calc(var(--spacer) * 0.25);
+}
+.pa--p-tb-md>.content {
+  padding-top: var(--spacer);
+  padding-bottom: var(--spacer);
+}
+.pa--p-tb-lg>.content {
+  padding-top: calc(var(--spacer) * 2);
+  padding-bottom: calc(var(--spacer) * 2);
+}
+.pa--p-t-sm>.content {
+  padding-top: calc(var(--spacer) * 0.25);
+}
+.pa--p-t-md>.content {
+  padding-top: var(--spacer);
+}
+.pa--p-t-lg>.content {
+  padding-top: calc(var(--spacer) * 2);
+}
+.pa--p-b-sm>.content {
+  padding-bottom: calc(var(--spacer) * 0.25);
+}
+.pa--p-b-md>.content {
+  padding-bottom: var(--spacer);
+}
+.pa--p-b-lg>.content {
+  padding-bottom: calc(var(--spacer) * 2);
+}
