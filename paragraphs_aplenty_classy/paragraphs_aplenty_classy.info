@@ -1,0 +1,7 @@
+name = Paragraphs Aplenty Classy
+description = Integration with Classy Paragraphs.
+backdrop = 1.x
+type = module
+package = Paragraphs
+dependencies[] = paragraphs
+dependencies[] = classy_paragraphs_ui
