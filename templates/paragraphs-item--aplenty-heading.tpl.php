@@ -2,8 +2,10 @@
   <?php print render($admin_links); ?>
   <?php print render($title_prefix); ?>
   <?php print render($title_suffix); ?>
-  <div class="aplenty-heading">
-    <?php print render($heading); ?>
+  <div class="content"<?php print backdrop_attributes($content_attributes); ?>>
+    <div class="aplenty-heading">
+      <?php print render($heading); ?>
+    </div>
   </div>
 </div>
 
