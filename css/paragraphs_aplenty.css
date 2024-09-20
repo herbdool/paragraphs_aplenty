@@ -4,11 +4,18 @@
  */
 
 /**
+ * Variables
+ */
+.paragraphs-item {
+  --spacer: 0.9375rem;
+}
+
+/**
  * Accordion
  */
 .paragraphs-item.aplenty-accordion {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: var(--spacer);
+  padding-bottom: var(--spacer);
 }
 .aplenty-accordion.aplenty-accordion-no-border details {
   border: 0;
@@ -32,7 +39,6 @@
   width: 100vw;
   min-height: 30vh;
   padding: 1.5rem 2rem 2rem;
-  margin: 0 0 2rem;
   transform: translate(-50%, 0);
   transition: min-height 0.25s;
   will-change: min-height;
@@ -108,21 +114,21 @@
  * Grid
  */
 .paragraphs-item.aplenty-grid {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: var(--spacer);
+  padding-bottom: var(--spacer);
 }
 
 /**
  * Media block
  */
 .paragraphs-item.aplenty-media_list {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: var(--spacer);
+  padding-bottom: var(--spacer);
 }
 @media (min-width: 48em) {
   .aplenty-media_block .content {
     display: flex;
-    gap: 1rem;
+    gap: var(--spacer);
     padding: .5rem;
   }
 
@@ -153,8 +159,8 @@
  * Cards
  */
 .paragraphs-item.aplenty-cards {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: var(--spacer);
+  padding-bottom: var(--spacer);
 }
 @media (min-width: 48em) {
   .paragraphs-item.aplenty-cards > .content {
@@ -167,8 +173,9 @@
 }
 .aplenty-card > .content {
   width: 100%;
-  margin: 1rem 0;
-  padding: 0 0 1rem 0;
+  margin: var(--spacer) 0;
+  padding: 0 0 var(--spacer) 0;
+  background-color: #fff;
 }
 .aplenty-card-border .aplenty-card > .content {
   border-radius: 0.25rem;
@@ -179,7 +186,6 @@
 }
 .aplenty-card-background .aplenty-card > .content {
   border-radius: 0.25rem;
-  background-color: #fff;
 }
 
 .aplenty-card img {
@@ -190,13 +196,13 @@
 .aplenty-card .field-name-field-aplenty-title h2 {
   font-size: 1.25em;
   font-weight: bold;
-  margin-top: 1rem;
+  margin-top: var(--spacer);
 }
 
 .aplenty-card .field-name-field-aplenty-title,
 .aplenty-card .field-name-field-aplenty-body,
 .aplenty-card .field-name-field-aplenty-link {
-  padding: 0 1rem;
+  padding: 0 var(--spacer);
 }
 
 /**
@@ -205,6 +211,9 @@
 .aplenty-image .field-name-field-aplenty-caption,
 .aplenty-image .field-name-field-aplenty-link {
   font-style: italic;
+}
+.aplenty-image figure {
+  text-align: center;
 }
 
 /**
