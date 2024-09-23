@@ -11,6 +11,17 @@
 }
 
 /**
+ * Widget
+ */
+/* Classy Integration */
+.aplenty-classy .details-child-wrapper {
+  display: flex;
+}
+.aplenty-classy .details-child-wrapper .form-item {
+  margin-right: 1rem;
+}
+
+/**
  * Accordion
  */
 .aplenty-accordion>.content {
