@@ -10,8 +10,8 @@
  */
 function paragraphs_aplenty_classy_preprocess_paragraphs_item(&$variables) {
   $path = backdrop_get_path('module', 'paragraphs_aplenty_classy');
-  backdrop_add_css($path . '/css/paragraphs-aplenty-classy-colors.css');
   backdrop_add_css($path . '/css/paragraphs-aplenty-classy-spacing.css');
+  backdrop_add_css($path . '/css/paragraphs-aplenty-classy-colors.css');
 }
 
 /**
@@ -20,8 +20,8 @@ function paragraphs_aplenty_classy_preprocess_paragraphs_item(&$variables) {
 function paragraphs_aplenty_classy_field_widget_form_alter(&$form, $form_state, $context) {
   if (isset($form['#entity_type']) && $form['#entity_type'] == 'paragraphs_item') {
     $path = backdrop_get_path('module', 'paragraphs_aplenty_classy');
-    backdrop_add_css($path . '/css/paragraphs-aplenty-classy-colors.css');
     backdrop_add_css($path . '/css/paragraphs-aplenty-classy-spacing.css');
+    backdrop_add_css($path . '/css/paragraphs-aplenty-classy-colors.css');
   }
 }
 
