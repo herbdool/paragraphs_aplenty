@@ -1,6 +1,6 @@
 /**
  * @file
- * Spacing
+ * Paragraphs Aplenty Spacing
  */
 
 /**
@@ -40,36 +40,17 @@
 /**
  * Resets
  */
-.paragraphs-item.aplenty-accordion>.content,
-.paragraphs-item.aplenty-grid>.content,
-.paragraphs-item.aplenty-media_list>.content,
-.paragraphs-item.aplenty-cards>.content {
+.aplenty-accordion>.content,
+.aplenty-grid>.content,
+.aplenty-media_list>.content,
+.aplenty-cards>.content {
   padding-top: 0;
   padding-bottom: 0;
 }
-.paragraphs-item.aplenty-grid>.content {
+.aplenty-grid>.content {
   padding-left: 0;
   padding-right: 0;
 }
-/* .paragraphs-item.aplenty-grid.container-fluid, */
-.paragraphs-item.aplenty-cards.container-fluid {
-  padding-left: 0;
-  padding-right: 0;
-}
-.paragraphs-item.aplenty-grid::not([class*="pa--b-"]) .row,
-.paragraphs-item.aplenty-cards::not([class*="pa--b-"]) .row {
-  margin-left: 0;
-  margin-right: 0;
-}
-/* .paragraphs-item.aplenty-grid [class*=col-], */
-.paragraphs-item.aplenty-grid .row>[class*="pa--b-"] {
-  padding-left: 0;
-  padding-right: 0;
-}
-/* .paragraphs-item.aplenty-cards [class*=col-] {
-  padding-left: 0;
-  padding-right: 0;
-} */
 
 /**
  * Width

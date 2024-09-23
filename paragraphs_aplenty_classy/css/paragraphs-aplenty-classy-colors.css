@@ -1,20 +1,15 @@
 /**
  * @file
- * The css file for Paragraphs Aplenty Colors.
+ * Paragraphs Aplenty Colors.
  */
 
-/* Adds padding to fill in color. */
-[class*="pa--b-"]>.content {
+/* Adds padding to background color. */
+[class*="pa--b-"] .content {
   padding-top: var(--spacer);
   padding-bottom: var(--spacer);
   padding-left: var(--spacer);
   padding-right: var(--spacer);
 }
-
-/* Fills color on colorless paragraph after color paragraph. */
-/* .paragraphs-item.pa--background+.paragraphs-item::not(.pa--background)>.content {
-  padding-top: 1rem;
-} */
 
 /* RGBA Colors from http://mdbootstrap.com/css/colors/#rgba-colors */
 .pa--b-rgba-blue-light {
