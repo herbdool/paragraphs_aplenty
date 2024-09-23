@@ -10,6 +10,12 @@
   padding-left: var(--spacer);
   padding-right: var(--spacer);
 }
+.paragraphs-item :not([class*="pa--b-"])>.content {
+  padding-right: 0;
+  padding-left: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
 
 /* RGBA Colors from http://mdbootstrap.com/css/colors/#rgba-colors */
 .pa--b-rgba-blue-light {

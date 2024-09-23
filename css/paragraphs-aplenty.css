@@ -179,7 +179,7 @@
 /**
  * Cards
  */
-.aplenty-cards>.content {
+.aplenty-cards > .content {
   padding-top: var(--spacer);
   padding-bottom: var(--spacer);
 }
@@ -202,8 +202,13 @@
   padding: 0 0 var(--spacer) 0;
   background-color: #fff;
 }
+.aplenty-cards.aplenty-card-border > .content,
+.aplenty-cards.aplenty-card-background > .content {
+  padding: var(--spacer);
+}
 .aplenty-card-border .aplenty-card > .content {
   border-radius: 0.25rem;
+  padding: var(--spacer);
   border: 1px solid #ddd;
 }
 
