@@ -28,18 +28,8 @@ function paragraphs_aplenty_classy_field_widget_form_alter(&$form, $form_state, 
 /**
  * Implements hook_paragraphs_field_widget_form_alter().
  */
-function paragraphs_aplenty_classy_paragraphs_field_widget_form_alter(&$element, &$form_state, $context) {
-  $element['aplenty_classy'] = array(
-    '#type' => 'details',
-    '#summary' => t('Styles'),
-    'child' => array(),
-    '#weight' => 99,
-    '#attributes' => array(
-      'class' => array('aplenty-classy'),
-    ),
-  );
-
-  $element['#pre_render'][] = '_paragraphs_aplenty_classy_fields_pre_render';
+function paragraphs_aplenty_classy_paragraphs_field_widget_paragraphs_embed_form_alter(&$element, &$form_state, $context) {
+    $element['#pre_render'][] = '_paragraphs_aplenty_classy_fields_pre_render';
 }
 
 /**
@@ -48,11 +38,23 @@ function paragraphs_aplenty_classy_paragraphs_field_widget_form_alter(&$element,
  * @see paragraphs_aplenty_classy_paragraphs_field_widget_form_alter().
  */
 function _paragraphs_aplenty_classy_fields_pre_render($element) {
+  $children = array();
   foreach ($element as $key => $item) {
-    if (strpos($key, 'field_aplenty_classy_') !== FALSE) {
-      $element['aplenty_classy']['child'][$key] = $item;
+    if (strpos($key, 'field_aplenty_classy_') !== FALSE && !empty($item['#access'])) {
+      $children[$key] = $item;
       unset($element[$key]);
     }
+  }
+  if ($children) {
+    $element['aplenty_classy'] = array(
+      '#type' => 'details',
+      '#summary' => t('Styles'),
+      'child' => $children,
+      '#weight' => 99,
+      '#attributes' => array(
+        'class' => array('aplenty-classy'),
+      ),
+    );
   }
   return $element;
 }
