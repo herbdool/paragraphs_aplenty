@@ -185,7 +185,6 @@
 .aplenty-card-background {
   background-color: #f2f2f2;
 }
-.aplenty-cards.aplenty-card-border > .content,
 .aplenty-cards.aplenty-card-background > .content {
   padding: var(--spacer);
 }
