@@ -63,6 +63,7 @@ function paragraphs_aplenty_theme($existing, $type, $theme, $path) {
  */
 function paragraphs_aplenty_preprocess_paragraphs_item(&$variables) {
   $path = backdrop_get_path('module', 'paragraphs_aplenty');
+  backdrop_add_css($path . '/css/paragraphs-aplenty-grid.css');
   backdrop_add_css($path . '/css/paragraphs_aplenty.css');
   backdrop_add_js($path . '/js/paragraphs_aplenty.js');
 
@@ -645,6 +646,7 @@ function paragraphs_aplenty_form_field_ui_field_delete_form_alter(&$form) {
 function paragraphs_aplenty_field_widget_form_alter(&$form, $form_state, $context) {
   if (isset($form['#entity_type']) && $form['#entity_type'] == 'paragraphs_item') {
     $path = backdrop_get_path('module', 'paragraphs_aplenty');
+    backdrop_add_css($path . '/css/paragraphs-aplenty-grid.css');
     backdrop_add_css($path . '/css/paragraphs_aplenty.css');
   }
 }

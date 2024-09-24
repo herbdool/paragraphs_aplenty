@@ -5,7 +5,7 @@
   <div class="content"<?php print backdrop_attributes($content_attributes); ?>>
     <div class="grid">
       <?php foreach ($aplenty_media_list as $media_item): ?>
-      <?php print render($media_item); ?>
+        <?php print render($media_item); ?>
       <?php endforeach; ?>
     </div>
   </div>

@@ -179,8 +179,6 @@
 .aplenty-card > .content {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin: var(--spacer) 0;
   padding: 0 0 var(--spacer) 0;
   background-color: #fff;
 }
