@@ -20,6 +20,24 @@ Quicktabs module to provide a way to display a collection of tabs.
 
 Install this module using the official [Backdrop CMS instructions](https://backdropcms.org/guide/modules).
 
+## Custom Grid classes
+
+By default, the multi-column paragraphs type use the [CSS Grid](https://getbootstrap.com/docs/5.3/layout/css-grid/)
+from the Bootstrap project. This can be customized by setting the grid class prefix
+(default: `g-col`) and breakpoint (default: `md`) in the settings file. For example,
+to use the default grid layout classes from core:
+
+```
+$settings['paragraphs_aplenty_grid_class_prefix'] = 'col';
+$settings['paragraphs_aplenty_grid_breakpoint'] = 'lg';
+```
+
+If using core's grid, you'll need to also put into your active theme copies of the
+templates that contain a parent class of `grid` (`grid`, `cards`, and `media-list`)
+and change it to `row`. The breakpoint can be changed too. The module uses a simple
+format of using only one breakpoint `md` at `48em`. When the viewport is `48em` or
+wider it will be the chosen number of columns; narrower it will be 1 column.
+
 ## License
 
 This project is GPL v2 software. See the LICENSE.txt file in this
