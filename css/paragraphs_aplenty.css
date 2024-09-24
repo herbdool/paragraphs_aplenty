@@ -6,6 +6,11 @@
 /**
  * Variables
  */
+.grid {
+  --bs-gap: 1.5rem;
+  --bs-rows: 1;
+  --bs-columns: 12;
+}
 .paragraphs-item {
   --spacer: 0.9375rem;
 }
