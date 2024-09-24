@@ -10,6 +10,7 @@
  */
 function paragraphs_aplenty_classy_preprocess_paragraphs_item(&$variables) {
   $path = backdrop_get_path('module', 'paragraphs_aplenty_classy');
+  backdrop_add_css($path . '/css/paragraphs-aplenty-classy.css');
   backdrop_add_css($path . '/css/paragraphs-aplenty-classy-spacing.css');
   backdrop_add_css($path . '/css/paragraphs-aplenty-classy-colors.css');
 }
@@ -20,6 +21,7 @@ function paragraphs_aplenty_classy_preprocess_paragraphs_item(&$variables) {
 function paragraphs_aplenty_classy_field_widget_form_alter(&$form, $form_state, $context) {
   if (isset($form['#entity_type']) && $form['#entity_type'] == 'paragraphs_item') {
     $path = backdrop_get_path('module', 'paragraphs_aplenty_classy');
+    backdrop_add_css($path . '/css/paragraphs-aplenty-classy.css');
     backdrop_add_css($path . '/css/paragraphs-aplenty-classy-spacing.css');
     backdrop_add_css($path . '/css/paragraphs-aplenty-classy-colors.css');
   }
@@ -29,7 +31,7 @@ function paragraphs_aplenty_classy_field_widget_form_alter(&$form, $form_state, 
  * Implements hook_paragraphs_field_widget_form_alter().
  */
 function paragraphs_aplenty_classy_paragraphs_field_widget_paragraphs_embed_form_alter(&$element, &$form_state, $context) {
-    $element['#pre_render'][] = '_paragraphs_aplenty_classy_fields_pre_render';
+  $element['#pre_render'][] = '_paragraphs_aplenty_classy_fields_pre_render';
 }
 
 /**
@@ -50,7 +52,7 @@ function _paragraphs_aplenty_classy_fields_pre_render($element) {
       '#type' => 'details',
       '#summary' => t('Styles'),
       'child' => $children,
-      '#weight' => 99,
+      '#weight' => -99,
       '#attributes' => array(
         'class' => array('aplenty-classy'),
       ),

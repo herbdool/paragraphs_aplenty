@@ -21,17 +21,6 @@
 }
 
 /**
- * Widget
- */
-/* Classy Integration */
-.aplenty-classy .details-child-wrapper {
-  display: flex;
-}
-.aplenty-classy .details-child-wrapper .form-item {
-  margin-right: 1rem;
-}
-
-/**
  * Accordion
  */
 .aplenty-accordion>.content {
@@ -179,7 +168,7 @@
 /**
  * Cards
  */
-.aplenty-cards > .content {
+.aplenty-cards>.content {
   padding-top: var(--spacer);
   padding-bottom: var(--spacer);
 }
@@ -196,17 +185,14 @@
 .aplenty-card {
   display: flex !important;
 }
-
 .aplenty-card > .content {
   display: flex;
   flex-direction: column;
   padding: 0 0 var(--spacer) 0;
   background-color: #fff;
 }
-
 .aplenty-card-border .aplenty-card > .content {
   border-radius: 0.25rem;
-  padding: var(--spacer);
   border: 1px solid #ddd;
 }
 
