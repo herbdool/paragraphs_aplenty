@@ -6,15 +6,14 @@
 
 /**
  * Adaptations:
- * - Set a default full-width column so .
  * - Change breakpoints from px to em to match Backdrop core.
  */
 
 .grid {
   display: grid;
-  grid-template-rows: repeat(var(--bs-rows, 1), 1fr);
-  grid-template-columns: repeat(var(--bs-columns, 12), 1fr);
-  gap: var(--bs-gap, 1.5rem)
+  grid-template-rows: repeat(var(--pa-rows, 1), 1fr);
+  grid-template-columns: repeat(var(--pa-columns, 12), 1fr);
+  gap: var(--pa-gap, 1.5rem)
 }
 
 .grid .g-col-1 {

@@ -6,13 +6,18 @@
 /**
  * Variables
  */
-.grid {
-  --bs-gap: 1.5rem;
-  --bs-rows: 1;
-  --bs-columns: 12;
-}
 .paragraphs-item {
   --spacer: 0.9375rem;
+}
+
+.grid {
+  --pa-gap: 1.40625rem;
+  --pa-rows: 1;
+  --pa-columns: 12;
+}
+.paragraphs-item .row {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 /**
@@ -167,11 +172,7 @@
   padding-top: var(--spacer);
   padding-bottom: var(--spacer);
 }
-@media (min-width: 48em) {
-  .paragraphs-item.aplenty-cards > .content {
-    padding: .5rem;
-  }
-}
+
 /* Display flex ensures the content gets full height. */
 .aplenty-card {
   display: flex;
