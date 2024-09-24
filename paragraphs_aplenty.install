@@ -751,3 +751,22 @@ function paragraphs_aplenty_update_1005() {
   $config->set('widget.settings.size', '30');
   $config->save();
 }
+
+/**
+ * Update help text for the Row of Columns.
+ */
+function paragraphs_aplenty_update_1006() {
+  // Row of columns
+  $config = config('field.instance.paragraphs_item.aplenty_grid.field_aplenty_column_width');
+  if ($config->get('description') == 'This sets the width of the columns in this row, and the number of columns per row. Any extra columns assigned will not be displayed.') {
+    $config->set('description', 'This sets the width of the columns in this row, and the number of columns per row. Any extra columns assigned will wrap to the next line.');
+  }
+  $config->save();
+
+  $config = config('paragraphs.type.aplenty_grid');
+  if ($config->get('description') == 'This is a container of columns displayed in a row. If there are more columns assigned to a row than allowed, the extra columns will not be displayed.') {
+    $config->set('description', 'This is a container of columns displayed in a row. If there are more columns assigned to a row than allowed, the extra columns will wrap to the next line.');
+  }
+  $config->save();
+
+}
