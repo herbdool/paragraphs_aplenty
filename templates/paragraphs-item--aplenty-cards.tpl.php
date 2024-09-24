@@ -3,7 +3,7 @@
   <?php print render($title_prefix); ?>
   <?php print render($title_suffix); ?>
   <div class="content"<?php print backdrop_attributes($content_attributes); ?>>
-    <div class="row">
+    <div class="row grid">
       <?php foreach ($aplenty_cards as $card): ?>
         <?php print render($card); ?>
       <?php endforeach; ?>

@@ -10,6 +10,16 @@
   --spacer: 0.9375rem;
 }
 
+.grid {
+  --pa-gap: 1.40625rem;
+  --pa-rows: 1;
+  --pa-columns: 12;
+}
+.paragraphs-item .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /**
  * Accordion
  */
@@ -162,11 +172,7 @@
   padding-top: var(--spacer);
   padding-bottom: var(--spacer);
 }
-@media (min-width: 48em) {
-  .paragraphs-item.aplenty-cards > .content {
-    padding: .5rem;
-  }
-}
+
 /* Display flex ensures the content gets full height. */
 .aplenty-card {
   display: flex;
@@ -174,8 +180,6 @@
 .aplenty-card > .content {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin: var(--spacer) 0;
   padding: 0 0 var(--spacer) 0;
   background-color: #fff;
 }
