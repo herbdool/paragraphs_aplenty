@@ -32,11 +32,20 @@ $settings['paragraphs_aplenty_grid_class_prefix'] = 'col';
 $settings['paragraphs_aplenty_grid_breakpoint'] = 'lg';
 ```
 
-If using core's grid, you'll need to also put into your active theme copies of the
-templates that contain a parent class of `grid` (`grid`, `cards`, and `media-list`)
-and change it to `row`. The breakpoint can be changed too. The module uses a simple
-format of using only one breakpoint `md` at `48em`. When the viewport is `48em` or
-wider it will be the chosen number of columns; narrower it will be 1 column.
+If switching to core's grid, you'll need to also add the following to your theme's
+css so that column classes will work properly:
+
+```
+.paragraphs-item .row {
+  display: flex;
+  margin-right: -0.9375rem;
+  margin-left: -0.9375rem;
+}
+```
+
+The breakpoint can be changed too. The module uses a simple format of using only
+one breakpoint `md` at `48em`. When the viewport is `48em` or wider it will be the
+chosen number of columns; narrower it will be 1 column.
 
 ## License
 
