@@ -172,6 +172,8 @@
   display: flex;
 }
 .aplenty-card > .content {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   margin: var(--spacer) 0;
   padding: 0 0 var(--spacer) 0;
@@ -186,6 +188,12 @@
 }
 .aplenty-card-background .aplenty-card > .content {
   border-radius: 0.25rem;
+}
+.aplenty-card .field:nth-last-child(2) {
+  flex: 1;
+}
+.aplenty-card .field:last-child {
+  flex: initial;
 }
 
 .aplenty-card img {
