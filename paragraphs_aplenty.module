@@ -499,11 +499,7 @@ function _paragraphs_aplenty_calculate_grid_column($paragraph) {
   $columns = field_get_values($paragraph, 'field_aplenty_paragraphs');
   $num_columns = count($columns);
 
-  // Drop excess columns.
   if ($num_columns > $max_columns) {
-    for ($key = $max_columns; $key < $num_columns; $key++) {
-      unset($variables['content']['field_aplenty_paragraphs'][$key]);
-    }
     $num_columns = $max_columns;
   }
 
