@@ -23,7 +23,7 @@
 /**
  * Accordion
  */
-.paragraphs-item.aplenty-accordion {
+.aplenty-accordion>.content {
   padding-top: var(--spacer);
   padding-bottom: var(--spacer);
 }
@@ -123,7 +123,7 @@
 /**
  * Grid
  */
-.paragraphs-item.aplenty-grid {
+.aplenty-grid>.content {
   padding-top: var(--spacer);
   padding-bottom: var(--spacer);
 }
@@ -131,7 +131,7 @@
 /**
  * Media block
  */
-.paragraphs-item.aplenty-media_list {
+.aplenty-media_list>.content {
   padding-top: var(--spacer);
   padding-bottom: var(--spacer);
 }
@@ -168,14 +168,22 @@
 /**
  * Cards
  */
-.paragraphs-item.aplenty-cards {
+.aplenty-cards>.content {
   padding-top: var(--spacer);
   padding-bottom: var(--spacer);
 }
 
+.aplenty-card-background {
+  background-color: #f2f2f2;
+}
+.aplenty-card-background>.content {
+  padding-left: var(--spacer);
+  padding-right: var(--spacer);
+}
+
 /* Display flex ensures the content gets full height. */
 .aplenty-card {
-  display: flex;
+  display: flex !important;
 }
 .aplenty-card > .content {
   display: flex;
@@ -187,9 +195,7 @@
   border-radius: 0.25rem;
   border: 1px solid #ddd;
 }
-.aplenty-card-background > .content {
-  background-color: #f2f2f2;
-}
+
 .aplenty-card-background .aplenty-card > .content {
   border-radius: 0.25rem;
 }
