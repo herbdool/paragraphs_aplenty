@@ -108,11 +108,12 @@ function _paragraphs_aplenty_preprocess_aplenty_media_list(&$variables) {
 function _paragraphs_aplenty_preprocess_aplenty_media_block(&$variables) {
   $variables['classes_array'][] = 'aplenty-media_block';
   if ($variables['paragraphs_item']->hostEntity()) {
-    $variables['elements']['#aplenty_width_class'] = _paragraphs_aplenty_get_width_class($variables['paragraphs_item']->hostEntity(), 'field_aplenty_media_width');
+    $variables['elements']['#aplenty_width_class'] = 'g-col-md-' . _paragraphs_aplenty_get_width_class($variables['paragraphs_item']->hostEntity(), 'field_aplenty_media_width');
   }
   if (empty($variables['elements']['#aplenty_width_class'])) {
-    $variables['elements']['#aplenty_width_class'] = 'col-md-12';
+    $variables['elements']['#aplenty_width_class'] = 'g-col-md-12';
   }
+  $variables['classes_array'][] = 'g-col-12';
   $variables['classes_array'][] = $variables['elements']['#aplenty_width_class'];
 
   if ($variables['paragraphs_item']->hostEntity()) {
@@ -131,11 +132,12 @@ function _paragraphs_aplenty_preprocess_aplenty_media_block(&$variables) {
 function _paragraphs_aplenty_preprocess_aplenty_card(&$variables) {
   $variables['classes_array'][] = 'aplenty-card';
   if ($variables['paragraphs_item']->hostEntity()) {
-    $variables['elements']['#aplenty_width_class'] = _paragraphs_aplenty_get_width_class($variables['paragraphs_item']->hostEntity(), 'field_aplenty_card_width');
+    $variables['elements']['#aplenty_width_class'] = 'g-col-md-' . _paragraphs_aplenty_get_width_class($variables['paragraphs_item']->hostEntity(), 'field_aplenty_card_width');
   }
   if (empty($variables['elements']['#aplenty_width_class'])) {
-    $variables['elements']['#aplenty_width_class'] = 'col-md-12';
+    $variables['elements']['#aplenty_width_class'] = 'g-col-md-12';
   }
+  $variables['classes_array'][] = 'g-col-12';
   $variables['classes_array'][] = $variables['elements']['#aplenty_width_class'];
 
   $variables['content']['field_aplenty_image'][0]['#item']['attributes']['class'][] = 'aplenty-card-img';
@@ -276,50 +278,50 @@ function _paragraphs_aplenty_preprocess_aplenty_hero(&$variables) {
  */
 function _paragraphs_aplenty_fraction_to_class($numerator, $denominator) {
   if ($numerator == $denominator) {
-    return 'col-md-12';
+    return '12';
   }
   // We could do a lot of fancy math here. But we won't.
   $classes_array = [
     // Denominators first.
     2 => [
       // Then numerators.
-      1 => 'col-md-6',
+      1 => '6',
     ],
     3 => [
-      1 => 'col-md-4',
-      2 => 'col-md-8',
+      1 => '4',
+      2 => '8',
     ],
     4 => [
-      1 => 'col-md-3',
-      2 => 'col-md-6',
-      3 => 'col-md-9',
+      1 => '3',
+      2 => '6',
+      3 => '9',
     ],
     6 => [
-      1 => 'col-md-2',
-      2 => 'col-md-4',
-      3 => 'col-md-6',
-      4 => 'col-md-8',
-      5 => 'col-md-10',
+      1 => '2',
+      2 => '4',
+      3 => '6',
+      4 => '8',
+      5 => '10',
     ],
     12 => [
-      1 => 'col-md-1',
-      2 => 'col-md-2',
-      3 => 'col-md-3',
-      4 => 'col-md-4',
-      5 => 'col-md-5',
-      6 => 'col-md-6',
-      7 => 'col-md-7',
-      8 => 'col-md-8',
-      9 => 'col-md-9',
-      10 => 'col-md-10',
-      11 => 'col-md-11',
+      1 => '1',
+      2 => '2',
+      3 => '3',
+      4 => '4',
+      5 => '5',
+      6 => '6',
+      7 => '7',
+      8 => '8',
+      9 => '9',
+      10 => '10',
+      11 => '11',
     ],
   ];
   if (!empty($classes_array[$denominator][$numerator])) {
     return $classes_array[$denominator][$numerator];
   }
   // If still here, it is some weird non-supported fraction.
-  return 'col-md-12';
+  return '12';
 }
 
 /**
@@ -349,11 +351,12 @@ function _paragraphs_aplenty_preprocess_aplenty_grid(&$variables) {
  */
 function _paragraphs_aplenty_preprocess_aplenty_column(&$variables) {
   if ($variables['paragraphs_item']->hostEntity()) {
-    $variables['elements']['#aplenty_width_class'] = _paragraphs_aplenty_get_grid_width_class($variables['paragraphs_item']->hostEntity());
+    $variables['elements']['#aplenty_width_class'] = 'g-col-md-' . _paragraphs_aplenty_get_grid_width_class($variables['paragraphs_item']->hostEntity());
   }
   if (empty($variables['elements']['#aplenty_width_class'])) {
-    $variables['elements']['#aplenty_width_class'] = 'col-md-12';
+    $variables['elements']['#aplenty_width_class'] = 'g-col-md-12';
   }
+  $variables['classes_array'][] = 'g-col-12';
   $variables['classes_array'][] = $variables['elements']['#aplenty_width_class'];
 }
 
@@ -362,11 +365,12 @@ function _paragraphs_aplenty_preprocess_aplenty_column(&$variables) {
  */
 function _paragraphs_aplenty_preprocess_aplenty_column_wrapper(&$variables) {
   if ($variables['paragraphs_item']->hostEntity()) {
-    $variables['elements']['#aplenty_width_class'] = _paragraphs_aplenty_get_grid_width_class($variables['paragraphs_item']->hostEntity());
+    $variables['elements']['#aplenty_width_class'] = 'g-col-md-' . _paragraphs_aplenty_get_grid_width_class($variables['paragraphs_item']->hostEntity());
   }
   if (empty($variables['elements']['#aplenty_width_class'])) {
-    $variables['elements']['#aplenty_width_class'] = 'col-md-12';
+    $variables['elements']['#aplenty_width_class'] = 'g-col-md-12';
   }
+  $variables['classes_array'][] = 'g-col-12';
   $variables['classes_array'][] = $variables['elements']['#aplenty_width_class'];
 
   $variables['cards'] = array();
@@ -471,7 +475,7 @@ function _paragraphs_aplenty_get_width_class($paragraph, $field_name) {
   if (isset($width_class)) {
     return $width_class;
   }
-  $width_class = 'col-md-12';
+  $width_class = '12';
   $num_cards = (int) field_get_value($paragraph, $field_name);
   // The numerator is always 1.
   if ($num_cards) {
