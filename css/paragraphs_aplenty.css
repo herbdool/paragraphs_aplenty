@@ -180,7 +180,7 @@
  * Cards
  */
 .aplenty-cards > .content {
-  padding-top: var(--spacer);
+  padding-top: 0;
   padding-bottom: var(--spacer);
 }
 
@@ -196,17 +196,15 @@
 .aplenty-card {
   display: flex !important;
 }
+
 .aplenty-card > .content {
   display: flex;
   flex-direction: column;
   padding: 0 0 var(--spacer) 0;
   background-color: #fff;
+  height: 100%;
 }
 
-.aplenty-cards.aplenty-card-border > .content,
-.aplenty-cards.aplenty-card-background > .content {
-  padding: var(--spacer);
-}
 .aplenty-card-border .aplenty-card > .content {
   border-radius: 0.25rem;
   padding: var(--spacer);
