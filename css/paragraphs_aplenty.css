@@ -180,7 +180,7 @@
  * Cards
  */
 .aplenty-cards > .content {
-  padding-top: 0;
+  padding-top: var(--spacer);
   padding-bottom: var(--spacer);
 }
 
@@ -202,7 +202,6 @@
   flex-direction: column;
   padding: 0 0 var(--spacer) 0;
   background-color: #fff;
-  height: 100%;
 }
 
 .aplenty-card-border .aplenty-card > .content {
