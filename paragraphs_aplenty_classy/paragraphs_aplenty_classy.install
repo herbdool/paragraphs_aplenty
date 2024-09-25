@@ -93,16 +93,54 @@ function paragraphs_aplenty_classy_install() {
   $config_classes->save();
 
   foreach ($paragraph_types as $bundle => $paragraph_sets) {
-    foreach ($paragraph_sets as $set_key => $set_label) {
+    $fields = array();
+    foreach ($paragraph_sets as $set_key) {
       $instance_overrides = array(
-        'label' => $set_label,
+        'label' => $sets[$set_key],
         'settings' => array(
           'classy_paragraphs_set' => 'pa--' . $set_key,
         ),
       );
       _paragraphs_aplenty_classy_add_class_field('field_aplenty_classy_' . $set_key, $bundle, $instance_overrides, array());
+      $fields[] = 'field_aplenty_classy_' . $set_key;
     }
+    _paragraphs_aplenty_classy_add_field_group($fields, $bundle);
   }
+}
+
+/**
+ * Create field group to contain classy fields.
+ *
+ * @param array $fields
+ * @param string $bundle
+ */
+function _paragraphs_aplenty_classy_add_field_group($fields, $bundle) {
+  $config = config('field_group.field_group.paragraphs_item.' . $bundle . '.form.group_pa_styles');
+  $config->setData(array(
+    'group_name' => 'group_pa_styles',
+    'entity_type' => 'paragraphs_item',
+    'bundle' => $bundle,
+    'mode' => 'form',
+    'children' => $fields,
+    'parent_name' => '',
+    'weight' => -99,
+    'label' => t('Styles'),
+    'format_type' => 'details',
+    'format_settings' => array(
+      'label' => t('Styles'),
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-pa-styles',
+        'description' => '',
+        'label_element' => 'span',
+      ),
+    ),
+    'collapsible' => TRUE,
+    'collapsed' => FALSE,
+  ));
+  $config->save();
 }
 
 /**
