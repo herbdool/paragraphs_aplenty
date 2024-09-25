@@ -3,5 +3,6 @@ description = Integration with Classy Paragraphs.
 backdrop = 1.x
 type = module
 package = Paragraphs
-dependencies[] = paragraphs
+dependencies[] = paragraphs_aplenty
 dependencies[] = classy_paragraphs_ui
+dependencies[] = field_group
