@@ -101,6 +101,7 @@ function _paragraphs_aplenty_preprocess_aplenty_media_list(&$variables) {
   foreach ($media_blocks as $key => $column_id) {
     $variables['aplenty_media_list'][] = $variables['content']['field_aplenty_paragraphs'][$key];
   }
+  $variables['aplenty_row_class'] = _paragraphs_aplenty_row_class();
 }
 
 /**
@@ -190,6 +191,7 @@ function _paragraphs_aplenty_preprocess_aplenty_cards(&$variables) {
     // the field wrapper.
     $variables['aplenty_cards'][] = $variables['content']['field_aplenty_paragraphs'][$key];
   }
+  $variables['aplenty_row_class'] = _paragraphs_aplenty_row_class();
 }
 
 /**
@@ -349,6 +351,7 @@ function _paragraphs_aplenty_preprocess_aplenty_grid(&$variables) {
     // the field wrapper.
     $variables['aplenty_columns'][] = $variables['content']['field_aplenty_paragraphs'][$key];
   }
+  $variables['aplenty_row_class'] = _paragraphs_aplenty_row_class();
 }
 
 /**
@@ -551,6 +554,19 @@ function _paragraphs_aplenty_get_grid_width_class($paragraph) {
   $column_iteration++;
 
   return _paragraphs_aplenty_fraction_to_class($numerator, $max_columns);
+}
+
+/**
+ * Get the row class
+ *
+ * @return string
+ */
+function _paragraphs_aplenty_row_class() {
+  $row_class = 'row';
+  if (settings_get('paragraphs_aplenty_grid_class_prefix', 'g-col') == 'g-col') {
+    $row_class = 'grid';
+  }
+  return $row_class;
 }
 
 /**
