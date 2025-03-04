@@ -126,6 +126,7 @@ function _paragraphs_aplenty_preprocess_aplenty_media_block(&$variables) {
  * Preprocessing code for the Card bundle.
  */
 function _paragraphs_aplenty_preprocess_aplenty_card(&$variables) {
+  $paragraph = $variables['paragraphs_item'];
   $variables['classes_array'][] = 'aplenty-card';
   $width_class = _paragraphs_aplenty_get_width_class($variables['paragraphs_item']->hostEntity(), 'field_aplenty_card_width');
   _paragraphs_aplenty_preprocess_grid_column_prefixes($variables, $width_class);
@@ -146,7 +147,7 @@ function _paragraphs_aplenty_preprocess_aplenty_card(&$variables) {
   }
 
   $variables['content']['field_aplenty_image'][0]['#item']['attributes']['class'][] = 'aplenty-card-img';
-  $paragraph = $variables['paragraphs_item'];
+
   if (!empty($paragraph->field_aplenty_title)) {
     $variables['content']['field_aplenty_title'][0]['#element']['attributes']['class'] = 'aplenty-card-title';
   }
