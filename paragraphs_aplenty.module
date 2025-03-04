@@ -616,7 +616,11 @@ function _paragraphs_aplenty_get_required_fields() {
       'field_aplenty_body',
     ),
     'aplenty_cards' => array(
+      'field_aplenty_card_style',
       'field_aplenty_card_width',
+      'field_aplenty_card_alignment',
+      'field_aplenty_card_link_style',
+      'field_aplenty_card_link_entire',
       'field_aplenty_paragraphs',
     ),
     'aplenty_card' => array(
