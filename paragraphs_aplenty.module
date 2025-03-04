@@ -136,7 +136,7 @@ function _paragraphs_aplenty_preprocess_aplenty_card(&$variables) {
   }
 
   $link_entire_card = field_get_value($variables['paragraphs_item']->hostEntity(), 'field_aplenty_card_link_entire');
-  if ($link_entire_card) {
+  if ($link_entire_card && !empty($paragraph->field_aplenty_link)) {
     $variables['classes_array'][] = 'aplenty-card-linked';
   }
 
