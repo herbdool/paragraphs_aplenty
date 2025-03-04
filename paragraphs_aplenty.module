@@ -153,9 +153,15 @@ function _paragraphs_aplenty_preprocess_aplenty_card(&$variables) {
   if (!empty($paragraph->field_aplenty_body)) {
     $variables['content']['field_aplenty_body'][0]['#element']['attributes']['class'] = 'aplenty-card-body';
   }
-  if (!empty($paragraph->field_aplenty_link) && empty($variables['content']['field_aplenty_link'][0]['#element']['attributes']['class'])) {
+
+  if (!empty($paragraph->field_aplenty_link)) {
     $link_classes = 'aplenty-button';
-    $link_classes .= ' ' . $link_style;
+    if (!empty($variables['content']['field_aplenty_link'][0]['#element']['attributes']['class'])) {
+      $link_classes .= ' ' . $variables['content']['field_aplenty_link'][0]['#element']['attributes']['class'];
+    }
+    else {
+      $link_classes .= ' ' . $link_style;
+    }
 
     if ($link_entire_card) {
       $link_classes .= ' stretched-link';
