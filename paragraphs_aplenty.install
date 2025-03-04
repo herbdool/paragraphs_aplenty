@@ -950,7 +950,7 @@ function paragraphs_aplenty_update_1008() {
     ),
   ));
 
-  $config = config('field.instance.paragraphs_item.aplenty_card.field_aplenty_paragraphs');
+  $config = config('field.instance.paragraphs_item.aplenty_cards.field_aplenty_paragraphs');
   if ($config->isNew()) {
     return;
   }
