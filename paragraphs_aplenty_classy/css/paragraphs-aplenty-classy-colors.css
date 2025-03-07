@@ -1,0 +1,393 @@
+/**
+ * @file
+ * Paragraphs Aplenty Colors.
+ */
+
+/* Adds padding to background color. */
+.aplenty--background > .content {
+  padding-top: var(--spacer);
+  padding-bottom: var(--spacer);
+  padding-left: var(--spacer);
+  padding-right: var(--spacer);
+}
+.paragraphs-item :not(.aplenty--background)>.content {
+  padding-right: 0;
+  padding-left: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/**
+ * Opacity variables
+ */
+.aplenty--background {
+  --bg-opacity-light: 0.3;
+  --bg-opacity-strong: 0.7;
+  --bg-opacity-full: 1;
+  --bg-opacity-slight: 0.1;
+}
+
+/**
+ * Colour variables
+ */
+.aplenty--background {
+  --rgba-blue: 3, 169, 244;
+  --rgba-red: 244, 67, 54;
+  --rgba-pink: 233, 30, 99;
+  --rgba-purple: 156, 39, 176;
+  --rgba-indigo: 63, 81, 181;
+  --rgba-cyan: 0, 188, 212;
+  --rgba-teal: 0, 150, 136;
+  --rgba-green: 76, 175, 80;
+  --rgba-lime: 205, 220, 57;
+  --rgba-yellow: 255, 235, 59;
+  --rgba-orange: 255, 152, 0;
+  --rgba-brown: 121, 85, 72;
+  --rgba-grey: 158, 158, 158;
+  --rgba-bluegrey: 96, 125, 139;
+  --rgba-black: 0, 0, 0;
+  --rgba-stylish: 62, 69, 81;
+  --rgba-white: 255, 255, 255;
+}
+
+/* RGBA Colors from http://mdbootstrap.com/css/colors/#rgba-colors */
+.aplenty--background.b-rgba-blue-light {
+  background-color: rgba(var(--rgba-blue), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-red-light {
+  background-color: rgba(var(--rgba-red), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-pink-light {
+  background-color: rgba(var(--rgba-pink), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-purple-light {
+  background-color: rgba(var(--rgba-purple), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-indigo-light {
+  background-color: rgba(var(--rgba-indigo), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-cyan-light {
+  background-color: rgba(var(--rgba-cyan), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-teal-light {
+  background-color: rgba(var(--rgba-teal), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-green-light {
+  background-color: rgba(var(--rgba-green), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-lime-light {
+  background-color: rgba(var(--rgba-lime), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-yellow-light {
+  background-color: rgba(var(--rgba-yellow), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-orange-light {
+  background-color: rgba(var(--rgba-orange), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-brown-light {
+  background-color: rgba(var(--rgba-brown), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-grey-light {
+  background-color: rgba(var(--rgba-grey), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-bluegrey-light {
+  background-color: rgba(var(--rgba-bluegrey), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-black-light {
+  background-color: rgba(var(--rgba-black), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-stylish-light {
+  background-color: rgba(var(--rgba-stylish), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-white-light {
+  background-color: rgba(var(--rgba-white), var(--bg-opacity-light)) !important;
+}
+
+.aplenty--background.b-rgba-blue-strong {
+  background-color: rgba(var(--rgba-blue), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-red-strong {
+  background-color: rgba(var(--rgba-red), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-pink-strong {
+  background-color: rgba(var(--rgba-pink), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-purple-strong {
+  background-color: rgba(var(--rgba-purple), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-indigo-strong {
+  background-color: rgba(var(--rgba-indigo), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-cyan-strong {
+  background-color: rgba(var(--rgba-cyan), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-teal-strong {
+  background-color: rgba(var(--rgba-teal), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-green-strong {
+  background-color: rgba(var(--rgba-green), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-lime-strong {
+  background-color: rgba(var(--rgba-lime), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-yellow-strong {
+  background-color: rgba(var(--rgba-yellow), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-orange-strong {
+  background-color: rgba(var(--rgba-orange), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-brown-strong {
+  background-color: rgba(var(--rgba-brown), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-grey-strong {
+  background-color: rgba(var(--rgba-grey), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-bluegrey-strong {
+  background-color: rgba(var(--rgba-bluegrey), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-black-strong {
+  background-color: rgba(var(--rgba-black), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-stylish-strong {
+  background-color: rgba(var(--rgba-stylish), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-white-strong {
+  background-color: rgba(var(--rgba-white), var(--bg-opacity-strong)) !important;
+}
+
+.aplenty--background.b-rgba-red-full {
+  background-color: rgba(var(--rgba-red), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-pink-full {
+  background-color: rgba(var(--rgba-pink), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-purple-full {
+  background-color: rgba(var(--rgba-purple), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-indigo-full {
+  background-color: rgba(var(--rgba-indigo), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-cyan-full {
+  background-color: rgba(var(--rgba-cyan), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-teal-full {
+  background-color: rgba(var(--rgba-teal), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-green-full {
+  background-color: rgba(var(--rgba-green), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-lime-full {
+  background-color: rgba(var(--rgba-lime), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-yellow-full {
+  background-color: rgba(var(--rgba-yellow), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-orange-full {
+  background-color: rgba(var(--rgba-orange), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-brown-full {
+  background-color: rgba(var(--rgba-brown), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-grey-full {
+  background-color: rgba(var(--rgba-grey), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-bluegrey-full {
+  background-color: rgba(var(--rgba-bluegrey), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-black-full {
+  background-color: rgba(var(--rgba-black), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-stylish-full {
+  background-color: rgba(var(--rgba-stylish), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-white-full {
+  background-color: rgba(var(--rgba-white), var(--bg-opacity-full)) !important;
+}
+
+.aplenty--background.b-rgba-blue-slight {
+  background-color: rgba(var(--rgba-blue), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-red-slight {
+  background-color: rgba(var(--rgba-red), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-pink-slight {
+  background-color: rgba(var(--rgba-pink), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-purple-slight {
+  background-color: rgba(var(--rgba-purple), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-indigo-slight {
+  background-color: rgba(var(--rgba-indigo), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-cyan-slight {
+  background-color: rgba(var(--rgba-cyan), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-teal-slight {
+  background-color: rgba(var(--rgba-teal), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-green-slight {
+  background-color: rgba(var(--rgba-green), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-lime-slight {
+  background-color: rgba(var(--rgba-lime), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-yellow-slight {
+  background-color: rgba(var(--rgba-yellow), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-orange-slight {
+  background-color: rgba(var(--rgba-orange), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-brown-slight {
+  background-color: rgba(var(--rgba-brown), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-grey-slight {
+  background-color: rgba(var(--rgba-grey), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-bluegrey-slight {
+  background-color: rgba(var(--rgba-bluegrey), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-black-slight {
+  background-color: rgba(var(--rgba-black), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-stylish-slight {
+  background-color: rgba(var(--rgba-stylish), var(--bg-opacity-slight)) !important;
+}
+
+.aplenty--background.b-rgba-white-slight {
+  background-color: rgba(var(--rgba-white), var(--bg-opacity-slight)) !important;
+}
+
+/**
+ * Brand colours
+ *   Copy into the active theme and customize as needed.
+ */
+.aplenty--background.b-primary {
+  background-color: rgba(var(--rgba-blue), var(--bg-opacity-light)) !important;
+}
+.aplenty--background.b-secondary {
+  background-color: rgba(var(--rgba-grey), var(--bg-opacity-light)) !important;
+}
+.aplenty--background.b-info {
+  background-color: rgba(var(--rgba-cyan), var(--bg-opacity-light)) !important;
+}
+.aplenty--background.b-success {
+  background-color: rgba(var(--rgba-green), var(--bg-opacity-light)) !important;
+}
+.aplenty--background.b-warning {
+  background-color: rgba(var(--rgba-yellow), var(--bg-opacity-light)) !important;
+}
+.aplenty--background.b-danger {
+  background-color: rgba(var(--rgba-red), var(--bg-opacity-light)) !important;
+}
+
+/**
+ * Set text colours
+ *   If the backgrounds are too dark.
+ */
+details.aplenty--background.b-rgba-black-strong,
+.aplenty--background.b-rgba-black-strong>.content,
+details.aplenty--background.b-rgba-black-full,
+.aplenty--background.b-rgba-black-full>.content,
+details.aplenty--background.b-rgba-stylish-strong,
+.aplenty--background.b-rgba-stylish-strong>.content,
+details.aplenty--background.b-rgba-stylish-full,
+.aplenty--background.b-rgba-stylish-full>.content {
+  color: white;
+}
+/* If a child paragraph doesn't have a background, reset text. */
+.aplenty--background .paragraphs-item:not(.aplenty--background) {
+  color: black;
+}
+
+/**
+ * Card customizations
+ */
+
+/**
+ * Card button
+ *   Darker than the background but semi-transparent so it picks up the colour.
+ *
+  * Don't restyle if the card background is default.
+ */
+.paragraphs-item-aplenty-card.aplenty--background .aplenty-button:not(.link-plain) {
+  background-color: rgba(var(--rgba-black), var(--bg-opacity-light)) !important;
+}
+.paragraphs-item-aplenty-card.aplenty--background .aplenty-button:not(.link-plain):hover,
+.paragraphs-item-aplenty-card.aplenty--background .aplenty-button:not(.link-plain):focus {
+  color: white !important;
+  background-color: rgba(var(--rgba-black), var(--bg-opacity-strong)) !important;
+}
+.paragraphs-item-aplenty-card.aplenty--background a:not(.link-plain) {
+  color: white !important;
+}
+
+/**
+ * Make card content transparent if background is set.
+ * And removing padding since the card image should be to the edge.
+ */
+.aplenty-card.aplenty--background>.content {
+  background-color: transparent;
+  padding: 0;
+}

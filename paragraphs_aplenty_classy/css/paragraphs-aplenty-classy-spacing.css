@@ -1,0 +1,172 @@
+/**
+ * @file
+ * Paragraphs Aplenty Spacing and Widths
+ */
+
+/**
+ * Set up so widths and spacing work better
+ */
+.paragraphs-item::after {
+  display: table;
+  content: " ";
+  clear: both;
+}
+
+.paragraphs-item>.content {
+  position: relative;
+  min-height: 1px;
+}
+
+@media (min-width: 48em) {
+  .paragraphs-item>.content {
+    width: 100%;
+  }
+}
+
+/**
+ * Width
+ */
+.aplenty--width {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.aplenty--width.w-tiny>.content,
+.aplenty--width.w-narrow>.content,
+.aplenty--width.w-medium>.content,
+.aplenty--width.w-large>.content,
+.aplenty--width.w-full>.content {
+  position: relative;
+  min-height: 1px;
+  box-sizing: border-box;
+  width: 100%;
+  /**
+   * Fix for Chrome bug.
+   * @see https://bugs.chromium.org/p/chromium/issues/detail?id=546034#c6
+   */
+  min-width: 0;
+}
+.aplenty--width.w-full>.content {
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (min-width: 48em) {
+  .aplenty--width.w-tiny>.content {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+
+  .aplenty--width.w-narrow>.content {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .aplenty--width.w-medium>.content {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+  }
+
+  .aplenty--width.w-large>.content {
+    flex: 0 0 83.333333%;
+    max-width: 83.333333%;
+  }
+
+  .aplenty--width.w-full>.content {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/**
+ * Nesting Paragraphs.
+ *
+ * Here are some helpers to remove margin/padding when nesting bundles.
+ */
+/* Resets Base Paragraph Styling for Nested Paragraphs. */
+.paragraphs-item .paragraphs-item,
+.paragraphs-item .paragraphs-item .paragraphs-item {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.paragraphs-item>.content .paragraphs-item>.content,
+.paragraphs-item>.content .paragraphs-item>.content .paragraphs-item>.content {
+  float: none;
+  width: auto;
+  margin-left: 0;
+}
+
+/**
+ * Margin
+ */
+.aplenty--margin.m-none>.content {
+  margin: 0;
+}
+.aplenty--margin.m-tb-sm>.content {
+  margin-top: calc(var(--spacer) * 0.25);
+  margin-bottom: calc(var(--spacer) * 0.25);
+}
+.aplenty--margin.m-tb-md>.content {
+  margin-top: var(--spacer);
+  margin-bottom: var(--spacer);
+}
+.aplenty--margin.m-tb-lg>.content {
+  margin-top: calc(var(--spacer) * 2);
+  margin-bottom: calc(var(--spacer) * 2);
+}
+.aplenty--margin.m-t-sm>.content {
+  margin-top: calc(var(--spacer) * 0.25);
+}
+.aplenty--margin.m-t-md>.content {
+  margin-top: var(--spacer);
+}
+.aplenty--margin.m-t-lg>.content {
+  margin-top: calc(var(--spacer) * 2);
+}
+.aplenty--margin.m-b-sm>.content {
+  margin-bottom: calc(var(--spacer) * 0.25);
+}
+.aplenty--margin.m-b-md>.content {
+  margin-bottom: var(--spacer);
+}
+.aplenty--margin.m-b-lg>.content {
+  margin-bottom: calc(var(--spacer) * 2);
+}
+
+/**
+ * Padding
+ */
+.aplenty--padding.p-none>.content {
+  padding: 0;
+}
+.aplenty--padding.p-tb-sm>.content {
+  padding-top: calc(var(--spacer) * 0.25);
+  padding-bottom: calc(var(--spacer) * 0.25);
+}
+.aplenty--padding.p-tb-md>.content {
+  padding-top: var(--spacer);
+  padding-bottom: var(--spacer);
+}
+.aplenty--padding.p-tb-lg>.content {
+  padding-top: calc(var(--spacer) * 2);
+  padding-bottom: calc(var(--spacer) * 2);
+}
+.aplenty--padding.p-t-sm>.content {
+  padding-top: calc(var(--spacer) * 0.25);
+}
+.aplenty--padding.p-t-md>.content {
+  padding-top: var(--spacer);
+}
+.aplenty--padding.p-t-lg>.content {
+  padding-top: calc(var(--spacer) * 2);
+}
+.aplenty--padding.p-b-sm>.content {
+  padding-bottom: calc(var(--spacer) * 0.25);
+}
+.aplenty--padding.p-b-md>.content {
+  padding-bottom: var(--spacer);
+}
+.aplenty--padding.p-b-lg>.content {
+  padding-bottom: calc(var(--spacer) * 2);
+}
