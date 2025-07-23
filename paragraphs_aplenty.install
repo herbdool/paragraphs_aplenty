@@ -972,3 +972,34 @@ function paragraphs_aplenty_update_1009() {
   $config->save();
 
 }
+
+/**
+ * Add an alignment field to the Heading.
+ */
+function paragraphs_aplenty_update_1010() {
+  module_load_include('inc', 'paragraphs_aplenty', 'includes/paragraphs_aplenty.crud');
+
+  $bundle = 'aplenty_heading';
+  paragraphs_aplenty_add_text_list_field('field_aplenty_alignment', $bundle,
+    array(
+      'label' => 'Alignment',
+      'widget' => array(
+        'weight' => 2,
+      ),
+      'description' => 'Choose the alignment to apply.',
+      'required' => FALSE,
+      'default_value' => array(
+        array('value' => 'aplenty-align-left'),
+      ),
+    ),
+    array(
+      'settings' => array(
+        'allowed_values' => array(
+          'aplenty-left' => 'Left',
+          'aplenty-center' => 'Center',
+          'aplenty-right' => 'Right',
+        ),
+      ),
+    )
+  );
+}
