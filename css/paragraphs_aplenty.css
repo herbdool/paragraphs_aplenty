@@ -228,14 +228,17 @@
 }
 
 /**
- * Card alignment
+ * Alignment: cards, etc
  */
+.aplenty-left,
 .aplenty-card-align-left {
   text-align: left;
 }
- .aplenty-card-align-center {
+.aplenty-center,
+.aplenty-card-align-center {
   text-align: center;
 }
+.aplenty-right,
 .aplenty-card-align-right {
   text-align: right;
 }
