@@ -995,9 +995,9 @@ function paragraphs_aplenty_update_1010() {
     array(
       'settings' => array(
         'allowed_values' => array(
-          'aplenty-left' => 'Left',
-          'aplenty-center' => 'Center',
-          'aplenty-right' => 'Right',
+          'aplenty-align-left' => 'Left',
+          'aplenty-align-center' => 'Center',
+          'aplenty-align-right' => 'Right',
         ),
       ),
     )

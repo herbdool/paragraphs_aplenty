@@ -230,15 +230,15 @@
 /**
  * Alignment: cards, etc
  */
-.aplenty-left,
+.aplenty-align-left,
 .aplenty-card-align-left {
   text-align: left;
 }
-.aplenty-center,
+.aplenty-align-center,
 .aplenty-card-align-center {
   text-align: center;
 }
-.aplenty-right,
+.aplenty-align-right,
 .aplenty-card-align-right {
   text-align: right;
 }
