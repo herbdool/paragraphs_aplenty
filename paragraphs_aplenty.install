@@ -1003,3 +1003,40 @@ function paragraphs_aplenty_update_1010() {
     )
   );
 }
+
+/**
+ * Add an size field to the Heading.
+ */
+function paragraphs_aplenty_update_1011() {
+  $config = config('field.instance.paragraphs_item.aplenty_heading.field_aplenty_heading_size');
+  if (!$config->isNew()) {
+    return;
+  }
+
+  module_load_include('inc', 'paragraphs_aplenty', 'includes/paragraphs_aplenty.crud');
+
+  $bundle = 'aplenty_heading';
+  paragraphs_aplenty_add_text_list_field('field_aplenty_heading_size', $bundle,
+    array(
+      'label' => 'Heading size',
+      'widget' => array(
+        'weight' => 2,
+      ),
+      'description' => 'Choose the heading size.',
+      'required' => FALSE,
+      'default_value' => array(
+        array('value' => 'h2'),
+      ),
+    ),
+    array(
+      'settings' => array(
+        'allowed_values' => array(
+          'h2' => 'h2',
+          'h3' => 'h3',
+          'h4' => 'h4',
+          'h5' => 'h5',
+        ),
+      ),
+    )
+  );
+}
