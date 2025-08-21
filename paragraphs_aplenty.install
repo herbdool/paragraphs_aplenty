@@ -987,7 +987,7 @@ function paragraphs_aplenty_update_1010() {
         'weight' => 2,
       ),
       'description' => 'Choose the alignment to apply.',
-      'required' => FALSE,
+      'required' => TRUE,
       'default_value' => array(
         array('value' => 'aplenty-align-left'),
       ),
@@ -1023,7 +1023,7 @@ function paragraphs_aplenty_update_1011() {
         'weight' => 2,
       ),
       'description' => 'Choose the heading size.',
-      'required' => FALSE,
+      'required' => TRUE,
       'default_value' => array(
         array('value' => 'h2'),
       ),
