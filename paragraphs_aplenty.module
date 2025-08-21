@@ -219,8 +219,10 @@ function _paragraphs_aplenty_preprocess_aplenty_heading(&$variables) {
   }
   $variables['anchor_text'] = $anchor_text;
   $attributes = backdrop_attributes(array('id' => $anchor_text));
-  $prefix = "<h2$attributes>";
-  $suffix = '</h2>';
+  $size = field_get_value($variables['paragraphs_item'], 'field_aplenty_heading_size') ?? 'h2';
+
+  $prefix = "<$size$attributes>";
+  $suffix = "</$size>";
   $variables['heading'] = array(
     '#type' => 'markup',
     '#prefix' => $prefix,
